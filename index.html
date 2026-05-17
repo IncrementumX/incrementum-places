@@ -32,7 +32,7 @@ body{background:var(--bg);color:var(--text);font-family:var(--font);font-size:14
 .legend-grid{display:flex;flex-wrap:wrap;gap:5px 14px}
 .leg-item{font-size:11px;display:flex;align-items:center;gap:5px;color:var(--text-dim)}
 .leg-badge{font-size:9px;font-weight:700;padding:2px 6px;border-radius:4px;white-space:nowrap;letter-spacing:.02em}
-.b-m3{background:linear-gradient(135deg,#c9a84c,#8a6d1f);color:#fff}
+.b-m3{background:#c9a84c;color:#fff}
 .b-m2{background:#d4a843;color:#fff}
 .b-m1{background:#9a7b2f;color:#fff}
 .b-bib{background:var(--green);color:#fff}
@@ -83,7 +83,7 @@ body{background:var(--bg);color:var(--text);font-family:var(--font);font-size:14
 .card-cuisine{font-size:11px;color:var(--text-muted);margin-top:3px;letter-spacing:-.01em}
 .badges-row{display:flex;flex-wrap:wrap;gap:4px;margin-bottom:8px}
 .badge{font-size:9px;font-weight:700;padding:2px 7px;border-radius:99px;white-space:nowrap;letter-spacing:.02em}
-.badge.b-m3{background:linear-gradient(135deg,#c9a84c,#8a6d1f);color:#fff}
+.badge.b-m3{background:#c9a84c;color:#fff}
 .badge.b-m2{background:#d4a843;color:#fff}
 .badge.b-m1{background:#9a7b2f;color:#fff}
 .badge.b-bib{background:var(--green);color:#fff}
@@ -95,6 +95,9 @@ body{background:var(--bg);color:var(--text);font-family:var(--font);font-size:14
 .badge.b-ny{background:#000;color:#fff}
 .badge.b-bl{background:#0055a4;color:#fff}
 .badge.b-mu{background:var(--red);color:#fff}
+.awards-tip{position:relative;display:inline-flex;align-items:center;font-size:9px;font-weight:600;padding:2px 7px;border-radius:99px;background:rgba(0,0,0,0.06);color:var(--text-muted);cursor:help;white-space:nowrap;letter-spacing:.02em}
+.awards-tip-list{display:none;position:absolute;bottom:calc(100% + 4px);left:50%;transform:translateX(-50%);background:#1a1a1a;color:#fff;font-size:10px;padding:7px 10px;border-radius:6px;white-space:normal;width:200px;max-width:220px;z-index:50;pointer-events:none;font-weight:400;line-height:1.5;box-shadow:0 4px 12px rgba(0,0,0,.2)}
+.awards-tip:hover .awards-tip-list{display:block}
 .card-vibe{font-size:12px;color:var(--text-dim);line-height:1.47;margin-bottom:10px;letter-spacing:-.01em}
 .card-chef{font-size:11px;color:var(--text-muted);margin-bottom:8px;letter-spacing:-.01em}
 .card-bottom{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:8px;flex-wrap:wrap}
@@ -261,10 +264,7 @@ footer{border-top:1px solid var(--border-soft);text-align:center;padding:28px;co
 <div class="leg-item"><span class="leg-badge b-m2">★★</span> 2 Estrelas Michelin</div>
 <div class="leg-item"><span class="leg-badge b-m1">★</span> 1 Estrela Michelin</div>
 <div class="leg-item"><span class="leg-badge b-bib">Bib</span> Bib Gourmand</div>
-<div class="leg-item"><span class="leg-badge b-sel">Sel</span> Selecionado Michelin</div>
-<div class="leg-item"><span class="leg-badge b-50b">50B</span> World's / LatAm 50 Best</div>
-<div class="leg-item"><span class="leg-badge b-vg">VG</span> Vogue · <span class="leg-badge b-vj">VJ</span> VEJA · <span class="leg-badge b-ft">FT</span> FT · <span class="leg-badge b-ny">NYT</span> NYT · <span class="leg-badge b-bl">BL</span> Bloomberg</div>
-<div class="leg-item"><span class="leg-badge b-mu">Must</span> Imperdível — curadoria pessoal</div>
+<div class="leg-item"><span class="awards-tip" style="pointer-events:none">Prêmios</span> Demais distinções (tooltip no card)</div>
 </div></div></div></div>
 <!-- CONTROLS -->
 <div id="controls"><div class="controls-inner">
@@ -735,6 +735,21 @@ function buildBadges(d) {
   return b.join('');
 }
 
+function buildAwardsTip(d) {
+  const a = [];
+  if (d.sel) a.push('Selecionado Michelin');
+  if (d.l50) a.push('LatAm 50 Best #'+d.l50);
+  if (d.w50) a.push("World's 50 Best #"+d.w50);
+  if (d.vg) a.push('Vogue');
+  if (d.vj) a.push('VEJA');
+  if (d.ft) a.push('Financial Times');
+  if (d.ny) a.push('New York Times');
+  if (d.bl) a.push('Bloomberg');
+  if (d.mu) a.push('Must Visit');
+  if (!a.length) return '';
+  return `<span class="awards-tip">Prêmios<span class="awards-tip-list">${a.join('<br>')}</span></span>`;
+}
+
 function priceStr(p) {
   return '<span class="price-dots">'+'$'.repeat(p||2)+'</span><span class="price-dim">'+'$'.repeat(4-(p||2))+'</span>';
 }
@@ -794,6 +809,7 @@ function render() {
   empty.style.display='none';
   grid.innerHTML = visibleData.map((d,i) => {
     const badges = buildBadges(d);
+    const awardsTip = buildAwardsTip(d);
     const occs = buildOcc(d.oc);
     const igUrl = d.ig ? `https://instagram.com/${d.ig}` : '';
     const igHtml = d.ig ? `<a class="card-link" href="${igUrl}" target="_blank" rel="noopener">📸 @${d.ig}</a>` : '';
@@ -813,7 +829,7 @@ function render() {
 <div class="card-top"><div class="card-name-block"><div class="card-name">${escHtml(d.n)}</div>
 <div class="card-meta-row">${hoodTip(d.h)}${cityPill(d.city)}</div>
 <div class="card-cuisine">${escHtml(d.c)}</div></div>${statusPill(d,i)}</div>
-${badges?'<div class="badges-row">'+badges+'</div>':''}
+${(badges||awardsTip)?'<div class="badges-row">'+badges+awardsTip+'</div>':''}
 ${d.vb?'<div class="card-vibe">'+escHtml(d.vb)+'</div>':''}
 <div class="card-chef"><strong style="font-weight:600">Chef</strong> ${escHtml(d.ch||'—')}</div>
 <div class="card-bottom"><div>${priceStr(d.p)}</div>${occs?'<div class="occ-row">'+occs+'</div>':''}</div>
