@@ -1,0 +1,903 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+
+
+  const PASS_HASH = "8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918"; // SHA-256 of "admin"
+  const COOKIE = document.cookie.split('; ').find(r=>r.startsWith('ip_access='));
+  if(COOKIE && COOKIE.split('=')[1] === 'granted') { return; }
+  
+  let pw = '';
+  while(true) {
+    pw = prompt('🔒 Incrementum Places — digite a senha:');
+    if(!pw) { document.body.innerHTML='<div style="display:flex;align-items:center;justify-content:center;height:100vh;font-family:sans-serif;color:#888">Acesso bloqueado</div>'; return; }
+    const enc = new TextEncoder();
+    const buf = await crypto.subtle.digest('SHA-256', enc.encode(pw));
+    const hash = Array.from(new Uint8Array(buf)).map(b=>b.toString(16).padStart(2,'0')).join('');
+    if(hash === PASS_HASH) {
+      document.cookie = 'ip_access=granted;path=/;max-age=86400';
+      document.getElementById('protected-content').style.display = 'block';
+      return;
+    }
+    alert('Senha incorreta.');
+  }
+})();
+</script>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Incrementum Places — Painel Pessoal</title>
+<style>
+:root{--bg:#f4f1ec;--surface:#faf7f2;--card:#fff;--card2:#f5f2ed;--accent:#9a7b2f;--accent-light:#c9a84c;--accent-soft:rgba(154,123,47,0.10);--text:#1a1a1a;--text-dim:#4a4a4a;--text-muted:#888;--border:#d4d0c8;--border-soft:#e8e5de;--green:#1a6b35;--green-soft:rgba(26,107,53,0.10);--amber:#b8860b;--amber-soft:rgba(184,134,11,0.12);--red:#a82828;--red-soft:rgba(168,40,40,0.10);--blue:#1e4d8c;--blue-soft:rgba(30,77,140,0.10);--teal:#1a6b5a;--teal-soft:rgba(26,107,90,0.10);--purple:#5b3b9a;--purple-soft:rgba(91,59,154,0.10);--font:system-ui,-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;--r:10px;--r-sm:6px;--shadow-sm:0 1px 4px rgba(0,0,0,0.06);--shadow-md:0 4px 14px rgba(0,0,0,0.09);--shadow-modal:0 12px 40px rgba(0,0,0,0.18);--t:0.2s ease;}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--text);font-family:var(--font);font-size:14px;line-height:1.5;min-height:100vh}
+/* HEADER */
+#header{position:sticky;top:0;z-index:100;background:rgba(244,241,236,0.96);border-bottom:1px solid var(--border);padding:0;backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}
+.header-inner{display:flex;align-items:center;justify-content:space-between;padding:12px 24px;gap:20px;flex-wrap:wrap}
+.brand{display:flex;align-items:center;gap:10px}
+.brand-mark{width:32px;height:32px;background:var(--accent);border-radius:8px;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800;font-size:16px;box-shadow:0 2px 6px rgba(154,123,47,0.28)}
+.brand-name{font-size:14px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--text)}
+.brand-sub{font-size:10px;color:var(--text-muted);letter-spacing:.04em;margin-top:1px}
+.stats-row{display:flex;gap:6px;flex-wrap:wrap}
+.stat-chip{display:flex;align-items:center;gap:5px;padding:5px 11px;border-radius:99px;font-size:11px;font-weight:600;white-space:nowrap;border:1px solid var(--border);background:var(--surface);transition:border-color var(--t)}
+.stat-chip .sv{font-weight:800;font-size:13px}
+.sc-total .sv{color:var(--accent)}.sc-visited .sv{color:var(--green)}.sc-want .sv{color:var(--amber)}.sc-michelin .sv{color:var(--red)}.sc-50b .sv{color:var(--purple)}
+.sl{font-size:9px;text-transform:uppercase;letter-spacing:.06em;color:var(--text-muted)}
+/* LEGEND */
+#legend-bar{background:var(--surface);border-bottom:1px solid var(--border-soft)}
+.legend-inner{padding:8px 24px;max-width:1400px;margin:0 auto}
+#legend-toggle{background:none;border:none;font-size:11px;font-weight:600;color:var(--text-dim);cursor:pointer;display:flex;align-items:center;gap:6px;padding:5px 8px;border-radius:var(--r-sm);transition:background var(--t)}
+#legend-toggle:hover{background:var(--accent-soft)}
+#legend-toggle .arrow{transition:transform .2s;font-size:9px;color:var(--text-muted)}
+#legend-toggle.open .arrow{transform:rotate(180deg)}
+#legend-content{display:none;padding:12px 0 8px}
+#legend-content.open{display:block}
+.legend-grid{display:flex;flex-wrap:wrap;gap:5px 14px}
+.leg-item{font-size:11px;display:flex;align-items:center;gap:5px;color:var(--text-dim)}
+.leg-badge{font-size:9px;font-weight:700;padding:2px 6px;border-radius:4px;white-space:nowrap;letter-spacing:.02em}
+.b-m3{background:linear-gradient(135deg,#c9a84c,#8a6d1f);color:#fff}
+.b-m2{background:#d4a843;color:#fff}
+.b-m1{background:#9a7b2f;color:#fff}
+.b-bib{background:var(--green);color:#fff}
+.b-sel{background:#999;color:#fff}
+.b-50b{background:var(--purple);color:#fff}
+.b-vg{background:#d4380d;color:#fff}
+.b-vj{background:#e84343;color:#fff}
+.b-ft{background:#1a1a2e;color:#fff}
+.b-ny{background:#000;color:#fff}
+.b-bl{background:#0055a4;color:#fff}
+.b-mu{background:var(--red);color:#fff}
+/* CONTROLS */
+#controls{background:var(--surface);border-bottom:1px solid var(--border-soft)}
+.controls-inner{max-width:1400px;margin:0 auto;padding:8px 24px;display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.tabs-scroll{overflow-x:auto;scrollbar-width:none}
+.tabs-scroll::-webkit-scrollbar{display:none}
+.tabs-row,.status-row{display:flex;gap:4px}
+.tab-btn,.status-btn{background:var(--bg);border:1px solid var(--border);border-radius:99px;padding:4px 13px;font-size:11px;font-weight:600;cursor:pointer;white-space:nowrap;color:var(--text-dim);transition:all var(--t)}
+.tab-btn:hover,.status-btn:hover{background:var(--border-soft);color:var(--text)}
+.tab-btn.active{background:var(--accent);color:#fff;border-color:var(--accent);box-shadow:0 1px 4px rgba(154,123,47,0.25)}
+.status-btn.active-all{background:var(--accent-soft);color:var(--accent);border-color:var(--accent)}
+.status-btn.active-visited{background:var(--green-soft);color:var(--green);border-color:var(--green)}
+.status-btn.active-want{background:var(--amber-soft);color:var(--amber);border-color:var(--amber)}
+.status-btn.active-fav{background:var(--red-soft);color:var(--red);border-color:var(--red)}
+.search-wrap{flex:1;min-width:150px}
+#search-input{width:100%;background:var(--bg);border:1px solid var(--border);border-radius:99px;padding:6px 16px;font-size:12px;outline:none;color:var(--text);font-family:var(--font);transition:border-color var(--t),box-shadow var(--t)}
+#search-input:focus{border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-soft)}
+#results-count{font-size:11px;color:var(--text-muted);white-space:nowrap}
+/* MAIN */
+#main{max-width:1400px;margin:0 auto;padding:20px 24px}
+#grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:14px}
+@media(max-width:600px){#grid{grid-template-columns:1fr}}
+.card{background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:18px 20px;box-shadow:var(--shadow-sm);transition:border-color var(--t),box-shadow var(--t);position:relative;cursor:default}
+.card:hover{border-color:var(--accent-light);box-shadow:var(--shadow-md)}
+.card.card-focused{border-color:var(--accent);box-shadow:0 0 0 2px var(--accent-soft),var(--shadow-md)}
+.card-top{display:flex;justify-content:space-between;align-items:flex-start;gap:10px;margin-bottom:10px}
+.card-name-block{flex:1;min-width:0}
+.card-name{font-size:17px;font-weight:700;color:var(--text);line-height:1.2;letter-spacing:-.01em;margin-bottom:4px}
+.card-name.editable{cursor:pointer;border-bottom:1px dashed var(--border-soft)}
+.card-name.editable:hover{background:var(--accent-soft);border-radius:2px}
+.card-meta-row{display:flex;gap:6px;align-items:center;flex-wrap:wrap}
+.card-hood{font-size:11px;color:var(--text-dim);position:relative;cursor:help;border-bottom:1px dotted var(--border)}
+.card-hood-tooltip{display:none;position:absolute;bottom:calc(100% + 4px);left:50%;transform:translateX(-50%);background:#1a1a1a;color:#fff;font-size:10px;padding:7px 10px;border-radius:6px;white-space:normal;width:240px;max-width:260px;z-index:50;pointer-events:none;font-weight:400;line-height:1.4;box-shadow:0 4px 12px rgba(0,0,0,.2)}
+.card-hood:hover .card-hood-tooltip{display:block}
+.city-pill{font-size:9px;font-weight:700;padding:2px 6px;border-radius:4px;white-space:nowrap;letter-spacing:.03em}
+.cp-mia{background:#ff6b6b;color:#fff}
+.cp-ny{background:#555;color:#fff}
+.card-cuisine{font-size:11px;color:var(--text-muted);margin-top:3px;letter-spacing:.01em}
+.badges-row{display:flex;flex-wrap:wrap;gap:4px;margin-bottom:8px}
+.badge{font-size:9px;font-weight:700;padding:2px 7px;border-radius:4px;white-space:nowrap;letter-spacing:.02em}
+.badge.b-m3{background:linear-gradient(135deg,#c9a84c,#8a6d1f);color:#fff}
+.badge.b-m2{background:#d4a843;color:#fff}
+.badge.b-m1{background:#9a7b2f;color:#fff}
+.badge.b-bib{background:var(--green);color:#fff}
+.badge.b-sel{background:#999;color:#fff}
+.badge.b-50b{background:var(--purple);color:#fff}
+.badge.b-vg{background:#d4380d;color:#fff}
+.badge.b-vj{background:#e84343;color:#fff}
+.badge.b-ft{background:#1a1a2e;color:#fff}
+.badge.b-ny{background:#000;color:#fff}
+.badge.b-bl{background:#0055a4;color:#fff}
+.badge.b-mu{background:var(--red);color:#fff}
+.card-vibe{font-size:12px;color:var(--text-dim);line-height:1.55;margin-bottom:10px}
+.card-chef{font-size:11px;color:var(--text-muted);margin-bottom:8px}
+.card-bottom{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:8px;flex-wrap:wrap}
+.price-dots{font-size:14px;font-weight:700;color:var(--accent);letter-spacing:1px}
+.price-dim{font-size:14px;color:var(--border-soft);letter-spacing:1px}
+.occ-row{display:flex;gap:4px;flex-wrap:wrap}
+.occ-tag{font-size:9px;padding:2px 7px;border-radius:4px;font-weight:600;letter-spacing:.02em}
+.ot-date{background:#e8f4ff;color:#1a6bb5}
+.ot-biz{background:#e8f0e8;color:#1a6b35}
+.ot-impress{background:#fff0e8;color:#b8561a}
+.ot-hidden{background:#e8e8f0;color:#5a4a8a}
+.ot-casual{background:#f0e8e0;color:#8a7a6a}
+.ot-late{background:#1a1a2e;color:#e8d8c8}
+.card-links{display:flex;flex-wrap:wrap;gap:4px 10px;margin-top:8px;padding-top:8px;border-top:1px solid var(--border-soft);font-size:11px}
+.card-link{color:var(--blue);text-decoration:none;transition:color var(--t)}
+.card-link:hover{text-decoration:underline;color:var(--accent)}
+.card-link-dash{color:var(--text-muted)}
+.status-pill{display:inline-flex;align-items:center;gap:4px;font-size:10px;font-weight:700;padding:4px 10px;border-radius:99px;cursor:pointer;white-space:nowrap;transition:all var(--t);user-select:none;border:1px solid transparent;flex-shrink:0}
+.status-pill:hover{opacity:.82;transform:translateY(-1px)}
+.status-pill:active{transform:translateY(0)}
+.sp-visited{background:var(--green-soft);color:var(--green);border-color:var(--green)}
+.sp-want{background:var(--amber-soft);color:var(--amber);border-color:var(--amber)}
+.sp-fav{background:var(--red-soft);color:var(--red);border-color:var(--red)}
+.card-actions{position:absolute;top:10px;right:10px;display:flex;gap:4px;opacity:0;transition:opacity var(--t)}
+.card:hover .card-actions{opacity:1}
+.card-action-btn{width:26px;height:26px;border-radius:6px;border:1px solid var(--border);background:var(--card);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:11px;color:var(--text-dim);transition:all var(--t)}
+.card-action-btn:hover{background:var(--border-soft)}
+.card-action-btn.del:hover{background:var(--red-soft);color:var(--red);border-color:var(--red)}
+.card-action-btn.edit:hover{background:var(--accent-soft);color:var(--accent);border-color:var(--accent)}
+/* EMPTY */
+#empty-state{text-align:center;padding:64px 20px;color:var(--text-muted)}
+#empty-state .empty-icon{font-size:48px;margin-bottom:14px;opacity:.6}
+/* FAB */
+#fab{position:fixed;bottom:28px;right:28px;z-index:200;width:52px;height:52px;border-radius:50%;background:var(--accent);color:#fff;border:none;font-size:24px;cursor:pointer;box-shadow:0 4px 16px rgba(154,123,47,0.35);transition:all var(--t);display:flex;align-items:center;justify-content:center}
+#fab:hover{transform:scale(1.08);box-shadow:0 6px 24px rgba(154,123,47,0.45)}
+#fab:active{transform:scale(0.96)}
+/* MODAL */
+.modal-overlay{position:fixed;inset:0;z-index:300;background:rgba(0,0,0,.45);display:flex;align-items:center;justify-content:center;padding:20px;backdrop-filter:blur(2px)}
+.modal{background:var(--card);border-radius:var(--r);max-width:520px;width:100%;max-height:82vh;overflow-y:auto;padding:28px;box-shadow:var(--shadow-modal);border:1px solid var(--border-soft)}
+.modal h2{font-size:18px;font-weight:700;margin-bottom:20px;letter-spacing:-.01em}
+.form-group{margin-bottom:14px}
+.form-group label{display:block;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--text-muted);margin-bottom:4px}
+.form-group input,.form-group textarea,.form-group select{width:100%;padding:8px 12px;border:1px solid var(--border);border-radius:var(--r-sm);font-size:13px;font-family:var(--font);background:var(--bg);color:var(--text);outline:none;transition:border-color var(--t),box-shadow var(--t)}
+.form-group input:focus,.form-group textarea:focus,.form-group select:focus{border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-soft)}
+.form-group textarea{resize:vertical;min-height:64px}
+.form-row{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px}
+.modal-actions{display:flex;gap:8px;margin-top:20px;justify-content:flex-end;padding-top:16px;border-top:1px solid var(--border-soft)}
+.modal-actions button{padding:9px 20px;border-radius:var(--r-sm);font-size:13px;font-weight:600;cursor:pointer;border:1px solid var(--border);transition:all var(--t)}
+.modal-actions button:hover{filter:brightness(0.94)}
+.btn-primary{background:var(--accent);color:#fff;border-color:var(--accent)!important;box-shadow:0 1px 4px rgba(154,123,47,0.2)}
+.btn-secondary{background:var(--bg);color:var(--text-dim)}
+.btn-danger{background:var(--red);color:#fff;border-color:var(--red)!important}
+/* INLINE EDIT */
+.inline-edit{background:var(--accent-soft);border:1px solid var(--accent);border-radius:2px;padding:1px 3px;outline:none;font:inherit;color:var(--text);max-width:100%}
+/* FOOTER */
+footer{border-top:1px solid var(--border-soft);text-align:center;padding:28px;color:var(--text-muted);font-size:11px;line-height:1.7}
+#nav-hint{position:fixed;bottom:90px;left:50%;transform:translateX(-50%);background:rgba(26,26,26,.85);color:#fff;padding:8px 18px;border-radius:99px;font-size:12px;opacity:0;transition:opacity .3s;pointer-events:none;z-index:150;backdrop-filter:blur(4px)}
+#nav-hint.show{opacity:1}
+/* GUIDES */
+#guides{background:var(--surface);border-top:1px solid var(--border-soft);margin-top:12px}
+.guides-inner{max-width:1400px;margin:0 auto;padding:24px}
+.guides-toggle{background:none;border:none;font-size:16px;font-weight:700;cursor:pointer;color:var(--text);display:flex;align-items:center;gap:8px;padding:6px 10px;margin:-6px -10px;border-radius:var(--r-sm);transition:background var(--t);margin-bottom:6px}
+.guides-toggle:hover{background:var(--accent-soft)}
+.guides-toggle .arrow{font-size:12px;transition:transform .2s;color:var(--text-muted)}
+.guides-toggle.open .arrow{transform:rotate(180deg)}
+.guides-sub{font-size:12px;color:var(--text-muted);margin-bottom:18px;padding-left:2px}
+.guides-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:14px}
+.guide-card{background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:18px;transition:border-color var(--t),box-shadow var(--t)}
+.guide-card:hover{border-color:var(--accent-light);box-shadow:var(--shadow-sm)}
+.guide-card-name{font-size:14px;font-weight:700;margin-bottom:6px;color:var(--text)}
+.guide-card-badge{display:inline-block;font-size:9px;font-weight:700;padding:2px 7px;border-radius:4px;margin-bottom:10px;letter-spacing:.02em}
+.guide-card-desc{font-size:12px;color:var(--text-dim);line-height:1.55;margin-bottom:10px}
+.guide-card-link{font-size:11px;color:var(--blue);text-decoration:none;transition:color var(--t)}
+.guide-card-link:hover{text-decoration:underline;color:var(--accent)}
+.press-section-title{font-size:13px;font-weight:700;margin:24px 0 14px;color:var(--text);letter-spacing:-.01em}
+.press-quotes{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:12px}
+.press-quote{background:var(--card);border:1px solid var(--border-soft);border-radius:var(--r);padding:16px 18px;border-left:3px solid var(--accent-light)}
+.press-quote-source{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--accent);margin-bottom:6px}
+.press-quote-text{font-size:12px;color:var(--text-dim);line-height:1.6;font-style:italic}
+.guides-content{display:block}
+.guides-content.collapsed{display:none}
+
+/* ─── RESPONSIVE: TABLET (≤768px) ───────────────────── */
+@media(max-width:768px){
+  .header-inner{padding:10px 16px;gap:8px}
+  #main{padding:14px 16px 80px}
+  .controls-inner{padding:8px 16px}
+  .legend-inner{padding:8px 16px}
+  .guides-inner{padding:16px}
+  .modal{padding:20px}
+  .form-row{grid-template-columns:1fr 1fr}
+  .guides-grid,.press-quotes{grid-template-columns:1fr}
+}
+
+/* ─── RESPONSIVE: PHONE (≤480px) ────────────────────── */
+@media(max-width:480px){
+  .header-inner{padding:8px 12px;flex-direction:column;align-items:flex-start;gap:6px}
+  .brand-sub{display:none}
+  .stats-row{width:100%;flex-wrap:wrap;gap:4px}
+  .stat-chip{flex:1 1 calc(33% - 4px);justify-content:center;padding:4px 8px;font-size:10px}
+  .stat-chip .sv{font-size:11px}
+  .sl{font-size:8px}
+
+  .controls-inner{padding:6px 12px;gap:6px}
+  .tabs-scroll{scrollbar-width:thin;scrollbar-color:var(--border) transparent}
+  .tabs-scroll::-webkit-scrollbar{display:block;height:3px}
+  .tabs-scroll::-webkit-scrollbar-thumb{background:var(--border);border-radius:3px}
+  .search-wrap{min-width:0;width:100%}
+
+  #main{padding:12px 10px 80px}
+  .card{padding:14px 16px}
+  .card-name{font-size:15px}
+  .card-actions{opacity:1}
+  .card-action-btn{width:28px;height:28px;font-size:13px}
+
+  #fab{bottom:16px;right:16px;width:46px;height:46px;font-size:20px}
+
+  .modal-overlay{padding:0;align-items:flex-end}
+  .modal{max-width:100%;width:100%;max-height:90vh;border-radius:var(--r) var(--r) 0 0;padding:20px 16px 28px;border-left:none;border-right:none;border-bottom:none}
+  .modal h2{font-size:16px;margin-bottom:14px}
+  .form-row{grid-template-columns:1fr}
+  .modal-actions{flex-wrap:wrap;gap:6px}
+  .modal-actions button{flex:1;min-width:80px;padding:11px 12px}
+
+  .legend-inner{padding:6px 12px}
+  .guides-inner{padding:12px}
+
+  footer{padding:18px 12px;font-size:10px}
+}
+</style>
+</head>
+<body>
+<style>body{visibility:hidden}#pw-screen{position:fixed;inset:0;z-index:9999;background:#f4f1ec;display:flex;flex-direction:column;align-items:center;justify-content:center;font-family:system-ui,sans-serif;visibility:visible}.pw-box{background:#fff;border:1px solid #d4d0c8;border-radius:10px;padding:32px;text-align:center;max-width:340px;width:90%;box-shadow:0 2px 12px rgba(0,0,0,.06)}.pw-box h2{margin:0 0 4px;font-size:18px;color:#1a1a1a}.pw-box p{margin:0 0 20px;font-size:13px;color:#888}.pw-box input{width:100%;padding:10px 14px;border:1px solid #d4d0c8;border-radius:6px;font-size:15px;outline:none;box-sizing:border-box;margin-bottom:12px;font-family:system-ui,sans-serif}.pw-box input:focus{border-color:#9a7b2f}.pw-box button{width:100%;padding:10px;background:#9a7b2f;color:#fff;border:none;border-radius:6px;font-size:14px;font-weight:600;cursor:pointer}.pw-box button:hover{background:#c9a84c}.pw-error{color:#a82828;font-size:12px;margin-top:8px;display:none}</style>
+<div id="pw-screen"><div class="pw-box"><h2>🔒 Incrementum</h2><p>Conteúdo protegido</p><input type="password" id="pw-input" placeholder="Senha" autofocus><button onclick="checkPW()">Entrar</button><div id="pw-error" class="pw-error">Senha incorreta</div></div></div>
+<script>
+const PASS_HASH = "8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918"; // admin
+const COOKIE = document.cookie.split('; ').find(r=>r.startsWith('ip_pass='));
+if(COOKIE && COOKIE.split('=')[1]==='1'){document.getElementById('pw-screen').remove();document.body.style.visibility='visible'}
+else{
+  document.getElementById('pw-input').addEventListener('keydown',e=>{if(e.key==='Enter')checkPW()});
+  async function checkPW(){
+    const pw = document.getElementById('pw-input').value;
+    const enc = new TextEncoder();
+    const buf = await crypto.subtle.digest('SHA-256', enc.encode(pw));
+    const hash = Array.from(new Uint8Array(buf)).map(b=>b.toString(16).padStart(2,'0')).join('');
+    if(hash===PASS_HASH){
+      document.cookie='ip_pass=1;path=/;max-age=86400';
+      document.getElementById('pw-screen').remove();
+      document.body.style.visibility='visible';
+    } else {
+      document.getElementById('pw-error').style.display='block';
+    }
+  }
+}
+</script>
+
+<!-- HEADER -->
+<header id="header">
+<div class="header-inner">
+<div class="brand"><div class="brand-mark">I</div><div class="brand-text"><div class="brand-name">INCREMENTUM PLACES</div><div class="brand-sub">Painel Pessoal · CRUD · Michelin · 50 Best · Vogue · VEJA</div></div></div>
+<div class="stats-row">
+<div class="stat-chip sc-total"><span class="sv" id="st-total">—</span><span class="sl">Total</span></div>
+<div class="stat-chip sc-visited"><span class="sv" id="st-visited">—</span><span class="sl">Visitados</span></div>
+<div class="stat-chip sc-want"><span class="sv" id="st-want">—</span><span class="sl">Watchlist</span></div>
+<div class="stat-chip sc-michelin"><span class="sv" id="st-michelin">—</span><span class="sl">Michelin</span></div>
+<div class="stat-chip sc-50b"><span class="sv" id="st-50b">—</span><span class="sl">50 Best</span></div>
+</div></div></header>
+<!-- LEGEND -->
+<div id="legend-bar"><div class="legend-inner"><button id="legend-toggle"><span>Legenda dos Badges</span><span class="arrow">↓</span></button>
+<div id="legend-content"><div class="legend-grid">
+<div class="leg-item"><span class="leg-badge b-m3">★★★</span> 3 Estrelas Michelin</div>
+<div class="leg-item"><span class="leg-badge b-m2">★★</span> 2 Estrelas Michelin</div>
+<div class="leg-item"><span class="leg-badge b-m1">★</span> 1 Estrela Michelin</div>
+<div class="leg-item"><span class="leg-badge b-bib">Bib</span> Bib Gourmand</div>
+<div class="leg-item"><span class="leg-badge b-sel">Sel</span> Selecionado Michelin</div>
+<div class="leg-item"><span class="leg-badge b-50b">50B</span> World's / LatAm 50 Best</div>
+<div class="leg-item"><span class="leg-badge b-vg">VG</span> Vogue · <span class="leg-badge b-vj">VJ</span> VEJA · <span class="leg-badge b-ft">FT</span> FT · <span class="leg-badge b-ny">NYT</span> NYT · <span class="leg-badge b-bl">BL</span> Bloomberg</div>
+<div class="leg-item"><span class="leg-badge b-mu">Must</span> Imperdível — curadoria pessoal</div>
+</div></div></div></div>
+<!-- CONTROLS -->
+<div id="controls"><div class="controls-inner">
+<div class="tabs-scroll"><div class="tabs-row" id="tabs-row">
+<button class="tab-btn active" data-tab="all">Todos</button>
+<button class="tab-btn" data-tab="italian">Italian</button>
+<button class="tab-btn" data-tab="japanese">Japanese</button>
+<button class="tab-btn" data-tab="contemporary">Contemporary</button>
+<button class="tab-btn" data-tab="french">French</button>
+<button class="tab-btn" data-tab="brazilian">Brazilian</button>
+<button class="tab-btn" data-tab="seafood">Seafood</button>
+<button class="tab-btn" data-tab="steakhouse">Steakhouse</button>
+<button class="tab-btn" data-tab="bar">Bar</button>
+<button class="tab-btn" data-tab="mediterranean">Mediterranean</button>
+<button class="tab-btn" data-tab="international">International</button>
+</div></div>
+<div class="tabs-scroll"><div class="status-row" id="status-row">
+<button class="status-btn active-all" data-status="all">Todos</button>
+<button class="status-btn" data-status="visited">✓ Visitados</button>
+<button class="status-btn" data-status="want">→ Watchlist</button>
+<button class="status-btn" data-status="fav">★ Favoritos</button>
+</div></div>
+<div class="search-wrap"><input type="text" id="search-input" placeholder="Buscar nome, bairro, cozinha, chef…" autocomplete="off"></div>
+<span id="results-count"></span>
+</div></div>
+<!-- MAIN -->
+<main id="main"><div id="grid"></div><div id="empty-state" style="display:none"><div class="empty-icon">🍽</div><p>Nenhum restaurante encontrado.</p></div></main>
+<!-- FAB -->
+<button id="fab" onclick="addRestaurant()" title="Adicionar restaurante">+</button>
+<!-- NAV HINT -->
+<div id="nav-hint">← → Navegue entre os cards</div>
+<!-- GUIDES -->
+<section id="guides"><div class="guides-inner">
+<button class="guides-toggle" id="guides-toggle" onclick="toggleGuides()"><span>Guias &amp; Referências</span><span class="arrow">↓</span></button>
+<div id="guides-content" class="guides-content collapsed">
+<div class="guides-sub">Os grandes árbitros da gastronomia mundial — e o que dizem sobre São Paulo</div>
+<div class="guides-grid">
+<div class="guide-card"><div class="guide-card-name">Guia Michelin Brasil</div><span class="guide-card-badge b-m1">★ Michelin</span><div class="guide-card-desc">O guia mais respeitado do mundo desde 1900. SP foi incluída em 2015. Em 2025, SP tem 2 restaurantes com 3 estrelas.</div><a class="guide-card-link" href="https://guide.michelin.com/br/pt/sao-paulo-region/restaurants" target="_blank" rel="noopener">guide.michelin.com →</a></div>
+<div class="guide-card"><div class="guide-card-name">World's 50 Best</div><span class="guide-card-badge b-50b">50B</span><div class="guide-card-desc">Ranking anual votado por 1.080 especialistas globais. SP tem múltiplos representantes no topo da LatAm.</div><a class="guide-card-link" href="https://www.theworlds50best.com" target="_blank" rel="noopener">theworlds50best.com →</a></div>
+<div class="guide-card"><div class="guide-card-name">Vogue Brasil</div><span class="guide-card-badge b-vg">VG</span><div class="guide-card-desc">Curadoria dos endereços mais elegantes e relevantes da cena paulistana.</div><a class="guide-card-link" href="https://vogue.globo.com/lifestyle/gastronomia" target="_blank" rel="noopener">vogue.globo.com →</a></div>
+<div class="guide-card"><div class="guide-card-name">VEJA Comer &amp; Beber</div><span class="guide-card-badge b-vj">VJ</span><div class="guide-card-desc">O guia anual mais influente de SP desde 1994. Em 2024-25, Evvai foi eleito Melhor do Ano.</div><a class="guide-card-link" href="https://vejasp.abril.com.br/comer-beber" target="_blank" rel="noopener">vejasp.abril.com.br →</a></div>
+</div>
+<div class="press-section-title">São Paulo na Imprensa Internacional</div>
+<div class="press-quotes">
+<div class="press-quote"><div class="press-quote-source">Financial Times</div><div class="press-quote-text">"São Paulo é a capital gastronômica da América Latina."</div></div>
+<div class="press-quote"><div class="press-quote-source">New York Times</div><div class="press-quote-text">"Nenhuma visita a SP está completa sem o D.O.M."</div></div>
+<div class="press-quote"><div class="press-quote-source">Bloomberg</div><div class="press-quote-text">"O Evvai é uma nova potência gastronômica mundial."</div></div>
+<div class="press-quote"><div class="press-quote-source">Condé Nast Traveller</div><div class="press-quote-text">"O Fasano é o restaurante mais luxuoso e consistente de SP."</div></div>
+</div></div></div></section>
+<footer>INCREMENTUM PLACES · Painel Pessoal · Dados: Michelin 2025 · 50 Best · VEJA · Vogue<br>Clique em qualquer campo para editar · Tudo salvo automaticamente</footer>
+
+<script>
+const HOODS = {"Jardins":"O coração gastronômico da elite paulistana","Pinheiros":"Bairro boêmio e criativo, polo cultural","Itaim Bibi":"Centro financeiro e gastronômico de alto padrão","Jardim Europa":"Enclave de luxo com mansões","Jardim Paulista":"Bairro nobre tranquilo","Higienópolis":"Bairro histórico e intelectual","Vila Madalena":"Bairro boêmio com grafites","Vila Olímpia":"Polo corporativo e gastronômico","Moema":"Bairro residencial arborizado","Liberdade":"O bairro japonês histórico","Bixiga":"Bairro italiano histórico","Campo Belo":"Bairro residencial discreto","Perdizes":"Bairro intelectual","Centro":"Coração histórico de SP","Casa Verde":"Bairro ao norte — Mocotó","Jardim América":"Enclave residencial verde","Vila Nova Conceição":"Bairro residencial chique","Consolação":"Bairro boêmio central","Saúde":"Bairro tradicional ao sul","Mooca":"Bairro italiano histórico","Alto da Mooca":"Tradição italiana","Juquehy":"Paraíso caiçara no litoral norte","Miami Beach":"Praia glamourosa","South Beach":"Coração do nightlife de Miami","Brickell":"Distrito financeiro de Miami","Design District":"Distrito de grifes e gastronomia","Bal Harbour":"Enclave de ultra luxo","Wynwood":"Bairro das artes","Downtown MIA":"Centro underground de Miami","West Village":"Bairro mais charmoso de Manhattan","Greenwich Village":"Village boêmio de NYC","DUMBO":"Brooklyn com vistas deslumbrantes","Chelsea":"Bairro de galerias de arte","LES":"Lower East Side hipster","Bela Vista":"Bar scene crescente","Manhattan":"A ilha que nunca dorme"};
+
+const _RAW = [
+/* ── CONTEMPORARY ── */
+{n:"D.O.M.",h:"Jardins",c:"Brasileira Contemporânea",t:"contemporary",ch:"Alex Atala",p:4,mi:3,l50:4,w50:14,vg:1,vj:1,ft:1,ny:1,bl:1,mu:1,st:"want",oc:["impress","date","biz"],vb:"Alex Atala captura a Amazônia no prato — formigas, tucupi, cumaru. O embaixador definitivo da culinária brasileira.",ig:"domrestaurante",tel:"",site:"",reserva:"",notes:""},
+{n:"Evvai",h:"Pinheiros",c:"Brasileira Contemporânea",t:"contemporary",ch:"Luiz Filipe Souza",p:4,mi:3,l50:6,w50:30,vj:1,bl:1,mu:1,st:"visited",oc:["impress","date"],vb:"Três estrelas Michelin, #6 LatAm — a nova cúpula da gastronomia paulistana.",ig:"evvairestaurante",tel:"",site:"",reserva:"",notes:""},
+{n:"Tuju",h:"Jardins",c:"Brasileira Contemporânea",t:"contemporary",ch:"Ivan Ralston",p:4,mi:2,l50:9,w50:48,ft:1,bl:1,mu:1,st:"want",oc:["impress","date"],vb:"Ivan Ralston forrageia a Mata Atlântica para criar pratos que só existem aqui.",ig:"tujurestaurante",tel:"",site:"",reserva:"",notes:""},
+{n:"Mani",h:"Jardim América",c:"Brasileira Contemporânea",t:"contemporary",ch:"Helena Rizzo",p:4,mi:1,l50:13,vg:1,ft:1,ny:1,mu:1,st:"visited",oc:["date","impress"],vb:"Helena Rizzo transforma ingredientes brasileiros em arte poética. Uma estrela Michelin.",ig:"manirestaurante",tel:"",site:"",reserva:"",notes:""},
+{n:"Soho",h:"Jardins",c:"Contemporânea",t:"contemporary",ch:"—",p:3,mi:1,st:"want",oc:["date","impress"],vb:"Contemporâneo sofisticado em Jardins com uma estrela Michelin — menu enxuto que prioriza ingredientes sazonais e entrega execução precisa.",ig:"",tel:"",site:"",reserva:"",notes:""},
+{n:"Carlota",h:"Jardins",c:"Contemporânea",t:"contemporary",ch:"Carla Pernambuco",p:3,sel:1,st:"want",oc:["date","biz"],vb:"Carla Pernambuco comanda esta cozinha que celebra o feminino — menu degustação criativo em Jardins, onde cada prato conta uma história de afeto e técnica.",ig:"",tel:"",site:"",reserva:"",notes:""},
+{n:"Spot",h:"Jardins",c:"Contemporânea",t:"contemporary",ch:"—",p:2,sel:1,vj:1,st:"want",oc:["date","biz"],vb:"Institution paulistana há 30 anos — o Spot é sinônimo de cozinha contemporânea consistente, encontros de negócios e a alma de Jardins.",ig:"spotsp",tel:"",site:"",reserva:"",notes:""},
+{n:"Pato Rei",h:"Centro",c:"Brasileira Contemporânea",t:"contemporary",ch:"—",p:2,sel:1,ny:1,mu:1,st:"want",oc:["date","hidden"],vb:"Joia escondida no Centro histórico — selecionado Michelin e aclamado pelo NYT, onde ingredientes brasileiros encontram técnica contemporânea.",ig:"",tel:"",site:"",reserva:"",notes:""},
+{n:"Simone",h:"Higienópolis",c:"Brasileira Contemporânea",t:"contemporary",ch:"Simone Zogbi",p:3,st:"visited",oc:["date","hidden"],vb:"Farm-to-table intimidade em Higienópolis — ingredientes sazonais tratados com carinho e intenção.",ig:"",tel:"",site:"",reserva:"",notes:""},
+{n:"Taraz",h:"Jardins",c:"Contemporânea Latino-Americana",t:"contemporary",ch:"Rosewood SP",p:4,vg:1,st:"visited",oc:["date","impress"],vb:"Terraço do Rosewood São Paulo com panorama deslumbrante — gastronomia contemporânea e drinks de autor.",ig:"",tel:"",site:"",reserva:"",notes:""},
+{n:"Badauê",h:"Jardins",c:"Brasileira Contemporânea",t:"contemporary",ch:"—",p:2,st:"visited",oc:["date"],vb:"Criativa e despretenciosa em Jardins — contemporânea brasileira com espírito autêntico do bairro.",ig:"",tel:"",site:"",reserva:"",notes:""},
+{n:"Ema",h:"Jardins",c:"Contemporânea Sazonal",t:"contemporary",ch:"—",p:3,st:"visited",oc:["date","hidden"],vb:"Sazonal, íntimo e dirigido pelo chef — um endereço que muda com as estações e surpreende sempre.",ig:"",tel:"",site:"",reserva:"",notes:""},
+{n:"Cozinha 212",h:"Jardins",c:"Brasileira Contemporânea",t:"contemporary",ch:"—",p:3,st:"visited",oc:["biz"],vb:"Luxo casual em Jardins — restaurante de bairro que funciona como escritório informal para a elite paulistana.",ig:"",tel:"",site:"",reserva:"",notes:""},
+{n:"Roi",h:"Jardins",c:"Contemporânea Sazonal",t:"contemporary",ch:"—",p:3,st:"visited",oc:["date","hidden"],vb:"Cardápio sazonal íntimo e execução precisa — um dos endereços mais queridos da cena autoral de Jardins.",ig:"",tel:"",site:"",reserva:"",notes:""},
+{n:"Jacó",h:"Pinheiros",c:"Contemporânea",t:"contemporary",ch:"—",p:3,st:"visited",oc:["date"],vb:"Pinheiros em sua melhor expressão — criativo, acolhedor e sempre com proposta autoral.",ig:"",tel:"",site:"",reserva:"",notes:""},
+{n:"Charco",h:"Jardins",c:"Grelhados Contemporâneos",t:"contemporary",ch:"—",p:3,st:"want",oc:["impress","date"],vb:"Carvão e fogo como linguagem — brasas que transformam ingredientes premium em prazeres intensos.",ig:"",tel:"",site:"",reserva:"",notes:""},
+{n:"Arturito",h:"Jardins",c:"Contemporânea Criativa",t:"contemporary",ch:"—",p:2,st:"want",oc:["date","hidden"],vb:"Arte e comida num espaço lúdico — um endereço que propõe experiências, não apenas refeições.",ig:"",tel:"",site:"",reserva:"",notes:""},
+{n:"Trindade",h:"Jardins",c:"Fine Dining Contemporâneo",t:"contemporary",ch:"Pedro Aranha",p:4,mu:1,st:"want",oc:["date","impress"],vb:"Pratos como obras de arte — Chef Pedro Aranha e a nova geração da gastronomia paulistana.",ig:"",tel:"",site:"",reserva:"",notes:""},
+{n:"Manu",h:"Jardim América",c:"Menu Degustação Contemporâneo",t:"contemporary",ch:"Manu Buffara",p:4,vg:1,mu:1,st:"want",oc:["impress","date"],vb:"Chef Manu Buffara com menu degustação criativo e pessoal — uma das vozes mais importantes da nova cozinha brasileira.",ig:"",tel:"",site:"",reserva:"",notes:""},
+{n:"Bossa",h:"Itaim Bibi",c:"Brasileira Contemporânea",t:"contemporary",ch:"—",p:3,st:"want",oc:["date"],vb:"Inspirado na Bossa Nova — gastronomia brasileira criativa com leveza e sofisticação.",ig:"",tel:"",site:"",reserva:"",notes:""},
+{n:"Fame",h:"Jardins",c:"Contemporânea",t:"contemporary",ch:"—",p:3,st:"want",oc:["date"],vb:"Estrela nascente da cozinha paulistana — uma mesa que já tem fila de espera e merece atenção.",ig:"",tel:"",site:"",reserva:"",notes:""},
+{n:"Vista",h:"Jardins",c:"Contemporânea",t:"contemporary",ch:"—",p:2,st:"visited",oc:["date"],vb:"Rooftop com vistas premium — coquetéis de autor e gastronomia contemporânea com a cidade aos pés.",ig:"",tel:"",site:"",reserva:"",notes:""},
+{n:"Mi.Ado",h:"Jardins",c:"Fusão Japonesa-Latina",t:"contemporary",ch:"—",p:3,st:"visited",oc:["date"],vb:"Oriente encontra América Latina — combinações que desafiam categorias e quase sempre acertam.",ig:"",tel:"",site:"",reserva:"",notes:""},
+{n:"Nit",h:"Pinheiros",c:"Contemporânea",t:"contemporary",ch:"—",p:2,st:"visited",oc:["late"],vb:"Conceito noturno em Pinheiros — atmosfera moody que floresce quando a noite cai sobre o bairro.",ig:"",tel:"",site:"",reserva:"",notes:""},
+{n:"Taberna 474",h:"Jardins",c:"Taverna Contemporânea",t:"contemporary",ch:"—",p:2,st:"visited",oc:["date"],vb:"Moderno conceito de taverna — pratos generosos para compartilhar num espaço acolhedor.",ig:"",tel:"",site:"",reserva:"",notes:""},
+{n:"Cala del Tanit",h:"Jardins",c:"Mediterrânea Contemporânea",t:"contemporary",ch:"—",p:3,st:"visited",oc:["date"],vb:"Vibes de Ibiza transplantadas para Jardins — terraço mediterrâneo com gastronomia de qualidade.",ig:"",tel:"",site:"",reserva:"",notes:""},
+
+/* ── ITALIAN ── */
+{n:"Fasano",h:"Jardins",c:"Italiana Fine Dining",t:"italian",ch:"Rogério Fasano",p:4,sel:1,vj:1,mu:1,st:"visited",oc:["impress","biz"],vb:"Meio século de elegância implacável — o ícone eterno de SP.",ig:"fasanohotels",tel:"",site:"",reserva:"",notes:""},
+{n:"Nelita",h:"Jardins",c:"Italiana Contemporânea",t:"italian",ch:"Telma Shiraishi",p:3,vg:1,mu:1,st:"visited",oc:["date","impress"],vb:"Massas feitas à mão — um dos endereços italianos mais amados de SP.",ig:"nelitarestaurante",tel:"",site:"",reserva:"",notes:""},
+{n:"Serafina",h:"Itaim Bibi",c:"Italiana",t:"italian",ch:"—",p:3,mi:1,vj:1,st:"want",oc:["date","impress"],vb:"Massas artesanais de excelência no Itaim — uma estrela Michelin que combina tradição italiana com ingredientes brasileiros de qualidade.",ig:"",tel:"",site:"",reserva:"",notes:""},
+{n:"Tatini",h:"Jardins",c:"Italiana Clássica",t:"italian",ch:"—",p:2,bib:1,vj:1,st:"want",oc:["date","biz"],vb:"Trattoria italiana que honra a tradição — massas artesanais e molhos que parecem saídos da cozinha da nonna, em Jardins com preço justíssimo.",ig:"",tel:"",site:"",reserva:"",notes:""},
+{n:"Terraço Itália",h:"Centro",c:"Italiana Clássica",t:"italian",ch:"—",p:3,sel:1,st:"want",oc:["impress","date"],vb:"Vista 360° do skyline de SP no 41º andar. Selecionado Michelin.",ig:"terracoitalia",tel:"",site:"",reserva:"",notes:""},
+{n:"Picchi",h:"Jardins",c:"Italiana Clássica",t:"italian",ch:"Pier Paolo Picchi",p:3,mi:1,st:"want",oc:["impress","date"],vb:"Pier Paolo Picchi comanda esta cozinha italiana clássica de precisão — uma estrela Michelin que honra a tradição sem abrir mão da personalidade.",ig:"",tel:"",site:"",reserva:"",notes:""},
+{n:"Casal",h:"Jardins",c:"Italiana Contemporânea",t:"italian",ch:"—",p:3,st:"visited",oc:["date"],vb:"Italiana contemporânea elegante em Jardins — menu degustação que equilibra tradição e criatividade num espaço intimista.",ig:"",tel:"",site:"",reserva:"",notes:""},
+{n:"Oro",h:"Jardim Paulista",c:"Italiana Contemporânea",t:"italian",ch:"Felipe Bronze",p:4,mi:1,l50:10,vj:1,st:"want",oc:["impress","date"],vb:"Felipe Bronze e sua precisão lendária — uma estrela Michelin e #10 LatAm para cozinha italiana contemporânea de altíssimo nível.",ig:"",tel:"",site:"",reserva:"",notes:""},
+{n:"Eataly",h:"Higienópolis",c:"Mercado Italiano",t:"italian",ch:"—",p:2,sel:1,st:"visited",oc:["biz"],vb:"O maior mercado gastronômico italiano de SP — de massas frescas feitas na hora a vinhos importados, cada corner celebra o melhor da Itália.",ig:"eataly_saopaulo",tel:"",site:"",reserva:"",notes:""},
+{n:"Pomodori",h:"Moema",c:"Italiana Clássica",t:"italian",ch:"—",p:2,bib:1,vj:1,st:"want",oc:["date"],vb:"Massas com molho de tomates San Marzano importados — a trattoria de Moema que prova que cozinha italiana honesta não precisa de estrelas.",ig:"",tel:"",site:"",reserva:"",notes:""},
+{n:"Rizzolio",h:"Pinheiros",c:"Italiana",t:"italian",ch:"—",p:2,bib:1,st:"want",oc:["date"],vb:"Italiana generosa e sem frescura em Pinheiros — porções fartas, molhos de cozimento lento e a energia de uma famiglia reunida.",ig:"",tel:"",site:"",reserva:"",notes:""},
+{n:"Speranza",h:"Mooca",c:"Pizza Italiana",t:"italian",ch:"—",p:1,bib:1,st:"want",oc:["casual"],vb:"A pizzaria mais querida de São Paulo há gerações — massa fina e crocante, ingredientes de qualidade e a alma da Mooca num forno a lenha.",ig:"",tel:"",site:"",reserva:"",notes:""},
+{n:"Piccini",h:"Jardins",c:"Italiana Florentina",t:"italian",ch:"—",p:3,st:"visited",oc:["biz","impress"],vb:"Bistecca alla fiorentina com elegância toscana.",ig:"",tel:"",site:"",reserva:"",notes:""},
+{n:"Tre Bicchieri",h:"Jardins",c:"Italiana com Vinho",t:"italian",ch:"—",p:2,st:"visited",oc:["date"],vb:"O endereço perfeito quando o vinho é co-protagonista.",ig:"",tel:"",site:"",reserva:"",notes:""},
+{n:"Da Marino",h:"Jardins",c:"Italiana Clássica",t:"italian",ch:"—",p:2,st:"visited",oc:["biz"],vb:"Trattoria clássica e confiável em Jardins.",ig:"",tel:"",site:"",reserva:"",notes:""},
+{n:"Evvai (trattoria)",h:"Pinheiros",c:"Trattoria Italiana",t:"italian",ch:"—",p:2,st:"visited",oc:["date"],vb:"Irmão casual do Evvai — qualidade sem cerimônia.",ig:"",tel:"",site:"",reserva:"",notes:""},
+{n:"Casa di Pri",h:"Jardim Europa",c:"Italiana Romana",t:"italian",ch:"—",p:3,st:"visited",oc:["date","hidden"],vb:"Italiana romana autêntica — uma das mesas mais reservadas de SP.",ig:"",tel:"",site:"",reserva:"",notes:""},
+{n:"La Piana",h:"Jardins",c:"Italiana-Siciliana",t:"italian",ch:"—",p:3,st:"visited",oc:["impress"],vb:"Tradições sicilianas de frutos do mar — elegante, sazonal e fiel à ilha mediterrânea.",ig:"",tel:"",site:"",reserva:"",notes:""},
+{n:"Due Cuochi",h:"Jardins",c:"Italiana Contemporânea",t:"italian",ch:"—",p:3,st:"visited",oc:["date","hidden"],vb:"Dois chefs, menus sazonais criativos — um encontro íntimo de personalidades culinárias em Jardins.",ig:"",tel:"",site:"",reserva:"",notes:""},
+{n:"Ristorantino",h:"Jardins",c:"Trattoria Romana",t:"italian",ch:"—",p:2,st:"visited",oc:["date","hidden"],vb:"Trattoria romana íntima com espírito de bairro — cacio e pepe e amatriciana de Jardins.",ig:"",tel:"",site:"",reserva:"",notes:""},
+{n:"Nino",h:"Jardins",c:"Italiana Clássica",t:"italian",ch:"—",p:3,st:"visited",oc:["biz"],vb:"Clássico de Jardins, almoço de poder — o endereço que o mercado financeiro faz questão de frequentar.",ig:"",tel:"",site:"",reserva:"",notes:""},
+{n:"Il Carpaccio",h:"Jardins",c:"Italiana",t:"italian",ch:"—",p:3,st:"visited",oc:["biz"],vb:"Mestria do carpaccio em Jardins há décadas — âncora italiana que resiste à moda com convicção.",ig:"",tel:"",site:"",reserva:"",notes:""},
+{n:"Luce",h:"Jardins",c:"Italiana Fine Dining",t:"italian",ch:"Grand Hyatt SP",p:3,st:"visited",oc:["biz","impress"],vb:"Dining do Grand Hyatt — italiana contemporânea num ambiente que combina eficiência hoteleira com elegância.",ig:"",tel:"",site:"",reserva:"",notes:""},
+{n:"Mondo",h:"Pinheiros",c:"Italiana Contemporânea",t:"italian",ch:"—",p:3,st:"visited",oc:["date"],vb:"Italiana moderna e criativa e sazonal em Pinheiros — menu que muda com as estações e surpreende a cada visita com frescor e personalidade.",ig:"",tel:"",site:"",reserva:"",notes:""},
+{n:"Zucco",h:"Jardins",c:"Italiana Contemporânea",t:"italian",ch:"—",p:3,st:"visited",oc:["date","hidden"],vb:"Menu degustação focado e preciso — italiana que usa a abóbora como ponto de partida.",ig:"",tel:"",site:"",reserva:"",notes:""},
+{n:"Mata Città",h:"Jardins",c:"Italiana Contemporânea",t:"italian",ch:"—",p:3,st:"visited",oc:["date","hidden"],vb:"Italiana que cultiva as próprias ervas — city-farm que conecta mesa e terra de forma genuína.",ig:"",tel:"",site:"",reserva:"",notes:""},
+{n:"Fiaschetteria",h:"Jardins",c:"Wine Bar Italiano",t:"italian",ch:"—",p:2,st:"visited",oc:["date"],vb:"Wine bar que se transforma em trattoria — convívio, bom vinho e petiscos.",ig:"",tel:"",site:"",reserva:"",notes:""},
+{n:"Basq",h:"Jardins",c:"Basca-Italiana",t:"italian",ch:"—",p:2,st:"visited",oc:["late"],vb:"Pintxos bascos encontram aperitivos italianos — criativo e informal.",ig:"",tel:"",site:"",reserva:"",notes:""},
+{n:"Donna",h:"Jardins",c:"Italiana",t:"italian",ch:"—",p:2,st:"visited",oc:["date"],vb:"Conceito feminino e contemporâneo de italiana — ingredientes delicados.",ig:"",tel:"",site:"",reserva:"",notes:""},
+{n:"Assim",h:"Jardins",c:"Napolitana",t:"italian",ch:"—",p:2,st:"visited",oc:["date"],vb:"Napolitana descontraída em Jardins — pizza com borda alta e ingredientes genuínos.",ig:"",tel:"",site:"",reserva:"",notes:""},
+{n:"Supra",h:"Jardins",c:"Italiana",t:"italian",ch:"—",p:2,st:"visited",oc:["biz"],vb:"Generosa e convivial — italiana para grupos que querem compartilhar pratos fartos sem cerimônia.",ig:"",tel:"",site:"",reserva:"",notes:""},
+{n:"Peppino",h:"Jardins",c:"Italiana Romana",t:"italian",ch:"—",p:2,st:"visited",oc:["biz"],vb:"Rusticidade romana no coração de SP — cozinha robusta que não precisa de mise en scène.",ig:"",tel:"",site:"",reserva:"",notes:""},
+{n:"Shihoma",h:"Jardins",c:"Fusão Italiana-Japonesa",t:"italian",ch:"—",p:3,st:"want",oc:["date","hidden"],vb:"Massas artesanais encontram técnica japonesa — conceito de nicho que funciona com elegância.",ig:"",tel:"",site:"",reserva:"",notes:""},
+{n:"Tappo Trattoria",h:"Jardins",c:"Trattoria Italiana",t:"italian",ch:"—",p:2,st:"want",oc:["date"],vb:"Rolha de cortiça e garrafa aberta — trattoria casual premium onde a adega é protagonista.",ig:"",tel:"",site:"",reserva:"",notes:""},
+{n:"Bosco",h:"Jardins",c:"Italiana de Floresta",t:"italian",ch:"—",p:3,st:"want",oc:["date","hidden"],vb:"Conceito de floresta — funghi e ingredientes forragiados em pratos que trazem o bosco ao prato.",ig:"",tel:"",site:"",reserva:"",notes:""},
+{n:"Lina",h:"Jardins",c:"Italiana Contemporânea",t:"italian",ch:"—",p:3,st:"want",oc:["date"],vb:"Abordagem delicada da italiana — sazonalidade e leveza numa proposta elegante.",ig:"",tel:"",site:"",reserva:"",notes:""},
+{n:"Pipo",h:"Jardins",c:"Pizza Gourmet",t:"italian",ch:"—",p:2,st:"want",oc:["date"],vb:"Pizza premium com coberturas criativas — a pizza elevada ao gourmet num espaço descontraído.",ig:"",tel:"",site:"",reserva:"",notes:""},
+{n:"Lita",h:"Jardins",c:"Italiana Sazonal",t:"italian",ch:"—",p:3,st:"want",oc:["date"],vb:"Italiana delicada e sazonal — ingredientes que priorizam a elegância sobre a robustez.",ig:"",tel:"",site:"",reserva:"",notes:""},
+{n:"Mamma Vanzetto",h:"Jardins",c:"Italiana Clássica",t:"italian",ch:"Pier Paolo Picchi",p:2,st:"want",oc:["biz"],vb:"As receitas da avó elevadas à arte — Chef Picchi homenageia a tradição italiana com precisão.",ig:"",tel:"",site:"",reserva:"",notes:""},
+{n:"Trattoria Fasano",h:"Jardins",c:"Trattoria Italiana Premium",t:"italian",ch:"Fasano Group",p:3,st:"want",oc:["biz"],vb:"O irmão descontraído do Fasano — espaço atemporal com o rigor do grupo.",ig:"fasanohotels",tel:"",site:"",reserva:"",notes:""},
+{n:"Quartieri",h:"Jardins",c:"Italiana Contemporânea",t:"italian",ch:"—",p:3,st:"want",oc:["date"],vb:"O espírito dos bairros de Roma transplantado para SP — cada prato evoca um rione com afeto.",ig:"",tel:"",site:"",reserva:"",notes:""},
+{n:"Osteria Insieme",h:"Itaim Bibi",c:"Italiana Sazonal",t:"italian",ch:"—",p:2,st:"want",oc:["date"],vb:"Mesa coletiva e convívio — osteria que celebra o comer junto com ingredientes sazonais.",ig:"",tel:"",site:"",reserva:"",notes:""},
+{n:"Porta",h:"Higienópolis",c:"Pizza Romana — Pinsa",t:"italian",ch:"—",p:2,st:"want",oc:["date","casual"],vb:"A verdadeira pinsa romana em Higienópolis — alternativa sofisticada à napolitana.",ig:"",tel:"",site:"",reserva:"",notes:""},
+{n:"Margutta",h:"Jardim Europa",c:"Culinária Romana",t:"italian",ch:"—",p:2,st:"want",oc:["date"],vb:"Tradições romanas centradas nos vegetais — leve e fiel à Via Margutta que inspira o lugar.",ig:"",tel:"",site:"",reserva:"",notes:""},
+{n:"Pici",h:"Pinheiros",c:"Massas Artesanais Italianas",t:"italian",ch:"—",p:2,st:"want",oc:["date","hidden"],vb:"Pici toscano e massa artesanal num counter íntimo em Pinheiros que prioriza o produto.",ig:"",tel:"",site:"",reserva:"",notes:""},
+{n:"Antonietta",h:"Pinheiros",c:"Italiana Contemporânea",t:"italian",ch:"—",p:3,st:"want",oc:["date","hidden"],vb:"Italiana pessoal e íntima — counter sazonal em Pinheiros, revelação unânime de 2024.",ig:"",tel:"",site:"",reserva:"",notes:""},
+{n:"Nona",h:"Itaim Bibi",c:"Italiana Napolitana",t:"italian",ch:"—",p:2,st:"want",oc:["date"],vb:"A nonna napolitana elevada — honesta e refinada com afeto da cozinha doméstica italiana.",ig:"",tel:"",site:"",reserva:"",notes:""},
+{n:"Il Borghese",h:"Jardim Europa",c:"Fine Dining Italiana",t:"italian",ch:"—",p:3,st:"want",oc:["biz","date"],vb:"Calor e precisão de vilarejo — fine dining com a warmth de um borgo toscano em Jardim Europa.",ig:"",tel:"",site:"",reserva:"",notes:""},
+{n:"Stravaganza",h:"Itaim Bibi",c:"Italiana Contemporânea",t:"italian",ch:"—",p:3,st:"want",oc:["date","impress"],vb:"Italiana teatral e extravagante — degustação flamboyant que transforma o jantar em performance.",ig:"",tel:"",site:"",reserva:"",notes:""},
+{n:"Vinheria Percussi",h:"Vila Madalena",c:"Italiana com Adega",t:"italian",ch:"—",p:3,mu:1,st:"want",oc:["date","impress","hidden"],vb:"Legado familiar com a lista de vinhos old-world mais extraordinária de SP.",ig:"",tel:"",site:"",reserva:"",notes:""},
+{n:"Carbone Miami",h:"South Beach",c:"Italiana-Americana",t:"italian",ch:"MAJOR Group",p:4,mu:1,st:"want",oc:["impress"],city:"MIA",vb:"Red sauce power dining — reserva meses antes.",ig:"carbonemiamibeach",tel:"",site:"",reserva:"",notes:""},
+{n:"Via Carota",h:"West Village",c:"Italiana Rústica",t:"italian",ch:"Rita Sodi & Jody Williams",p:2,mu:1,st:"want",oc:["date"],city:"NY",vb:"A joia do West Village — rusticidade italiana perfeita.",ig:"viacarotanyc",tel:"",site:"",reserva:"",notes:""},
+{n:"Cecconi's",h:"DUMBO",c:"Italiana Contemporânea",t:"italian",ch:"Soho House",p:3,st:"want",oc:["impress"],city:"NY",vb:"À beira do rio em DUMBO com Manhattan ao fundo.",ig:"cecconisnyc",tel:"",site:"",reserva:"",notes:""},
+{n:"Carbone NYC",h:"Greenwich Village",c:"Italiana-Americana",t:"italian",ch:"MAJOR Group",p:4,mu:1,st:"want",oc:["impress"],city:"NY",vb:"O Carbone original de NYC — power dining.",ig:"carbonenewyork",tel:"",site:"",reserva:"",notes:""},
+
+/* ── JAPANESE ── */
+{n:"Kotori",h:"Consolação",c:"Japonesa Fine Dining",t:"japanese",ch:"—",p:4,l50:18,vg:1,vj:1,bl:1,mu:1,st:"want",oc:["impress","date"],vb:"Omakase japonês de precisão excepcional — #18 LatAm, Vogue, Bloomberg.",ig:"kotorisushi",tel:"",site:"",reserva:"",notes:""},
+{n:"Jun Sakamoto",h:"Pinheiros",c:"Sushi Japonês",t:"japanese",ch:"Jun Sakamoto",p:4,mi:1,vj:1,mu:1,st:"visited",oc:["impress","biz"],vb:"O sushiman de referência de SP. Estrela Michelin.",ig:"",tel:"",site:"",reserva:"",notes:""},
+{n:"Kinoshita",h:"Vila Olímpia",c:"Japonesa",t:"japanese",ch:"—",p:4,mi:1,l50:44,vj:1,mu:1,st:"want",oc:["impress","date"],vb:"O benchmark japonês de SP — omakase kaiseki com estrela Michelin.",ig:"",tel:"",site:"",reserva:"",notes:""},
+{n:"Huto",h:"Itaim Bibi",c:"Japonesa",t:"japanese",ch:"—",p:3,mi:1,vj:1,st:"want",oc:["date","hidden"],vb:"Uma estrela Michelin no Itaim — omakase íntimo com ingredientes japoneses de rigor absoluto.",ig:"",tel:"",site:"",reserva:"",notes:""},
+{n:"Shin-Zushi",h:"Moema",c:"Sushi Japonês",t:"japanese",ch:"—",p:4,mi:1,vj:1,st:"want",oc:["impress"],vb:"Moema guarda este templo do sushi — neta premium de peixe voado do Japão, num counter onde o Chef decide o que você vai comer e acerta sempre.",ig:"",tel:"",site:"",reserva:"",notes:""},
+{n:"Aizomê",h:"Liberdade",c:"Japonesa-Brasileira",t:"japanese",ch:"—",p:3,mi:1,vj:1,mu:1,st:"want",oc:["date","impress"],vb:"A herança japonesa encontra ingredientes brasileiros. VEJA Revelação do Ano.",ig:"",tel:"",site:"",reserva:"",notes:""},
+{n:"Murakami",h:"Jardins",c:"Japonesa Contemporânea",t:"japanese",ch:"—",p:3,mi:1,st:"want",oc:["date"],vb:"Contemporâneo japonês em Jardins com uma estrela Michelin — técnica apurada que mescla apresentação brasileira com precisão nipônica.",ig:"",tel:"",site:"",reserva:"",notes:""},
+{n:"Kan Suke",h:"Jardins",c:"Sushi Japonês",t:"japanese",ch:"—",p:3,mi:1,st:"want",oc:["date","impress"],vb:"Sushi de precisão com uma estrela Michelin — cada peça é um estudo de textura, temperatura e frescor no coração de Jardins.",ig:"",tel:"",site:"",reserva:"",notes:""},
+{n:"Sushi Yassu",h:"Jardins",c:"Sushi Japonês",t:"japanese",ch:"—",p:3,mi:1,st:"want",oc:["impress"],vb:"Referência histórica do sushi paulistano com estrela Michelin.",ig:"",tel:"",site:"",reserva:"",notes:""},
+{n:"Ikeda",h:"Jardins",c:"Japonesa",t:"japanese",ch:"—",p:3,mi:1,st:"want",oc:["impress","hidden"],vb:"Counter omakase discreto e preciso — estrela Michelin que não precisa de marketing.",ig:"",tel:"",site:"",reserva:"",notes:""},
+{n:"Sushi Rika",h:"Campo Belo",c:"Sushi Japonês",t:"japanese",ch:"—",p:3,mi:1,st:"want",oc:["impress"],vb:"Campo Belo abriga um dos counters mais disputados de SP — omakase que combina tradição japonesa com peixe brasileiro de primeira linha.",ig:"",tel:"",site:"",reserva:"",notes:""},
+{n:"Hachi",h:"Perdizes",c:"Sushi Japonês",t:"japanese",ch:"—",p:3,mi:1,st:"want",oc:["impress","hidden"],vb:"Oito assentos, estrela Michelin — o counter mais intimista e puro da cidade.",ig:"",tel:"",site:"",reserva:"",notes:""},
+{n:"Temae",h:"Vila Nova Conceição",c:"Japonesa Kaiseki",t:"japanese",ch:"—",p:3,mi:1,st:"want",oc:["date","impress"],vb:"Kaiseki íntimo preparado diante de você — estrela Michelin em Vila Nova Conceição.",ig:"",tel:"",site:"",reserva:"",notes:""},
+{n:"Ohka",h:"Jardim Paulista",c:"Japonesa Kaiseki",t:"japanese",ch:"Shin Koike",p:4,vg:1,mu:1,st:"visited",oc:["impress","date"],vb:"Kaiseki premium do Chef Shin Koike — a joia japonesa mais preciosa de SP.",ig:"",tel:"",site:"",reserva:"",notes:""},
+{n:"Kosushi",h:"Jardins",c:"Sushi Japonês Tradicional",t:"japanese",ch:"—",p:4,mu:1,st:"visited",oc:["biz","impress"],vb:"Instituição japonesa de décadas — precisão de Tóquio, ambiente de poder.",ig:"",tel:"",site:"",reserva:"",notes:""},
+{n:"Hon Maguro",h:"Jardins",c:"Atum Azul Japonês",t:"japanese",ch:"—",p:4,mu:1,st:"visited",oc:["impress","hidden"],vb:"Especialista em atum azul — neta sazonal de bluefin voada semanalmente do Japão.",ig:"",tel:"",site:"",reserva:"",notes:""},
+{n:"Kosho",h:"Jardins",c:"Kaiseki Japonês",t:"japanese",ch:"—",p:3,st:"visited",oc:["date","hidden"],vb:"Kaiseki-inspired com progressão sazonal belíssima.",ig:"",tel:"",site:"",reserva:"",notes:""},
+{n:"Watanabe",h:"Jardins",c:"Sushi Japonês",t:"japanese",ch:"—",p:3,st:"visited",oc:["biz"],vb:"Old-school Tokyo sushi transplantado para Jardins.",ig:"",tel:"",site:"",reserva:"",notes:""},
+{n:"Maza",h:"Jardins",c:"Japonesa",t:"japanese",ch:"—",p:3,st:"visited",oc:["date","biz"],vb:"Omakase e sushi craftsmanship, refinado.",ig:"",tel:"",site:"",reserva:"",notes:""},
+{n:"Aima",h:"Itaim Bibi",c:"Japonesa Contemporânea",t:"japanese",ch:"—",p:3,st:"visited",oc:["date","impress"],vb:"Omakase moderno com toques tropicais — criatividade japonesa calibrada pelos ingredientes brasileiros.",ig:"",tel:"",site:"",reserva:"",notes:""},
+{n:"Naga",h:"Jardins",c:"Fusão Japonesa-Brasileira",t:"japanese",ch:"—",p:3,st:"visited",oc:["date"],vb:"Fusão criativa em Jardins — o japonês-brasileiro que agrada a todos sem comprometer ninguém.",ig:"",tel:"",site:"",reserva:"",notes:""},
+{n:"Kitchin",h:"Jardins",c:"Japonesa",t:"japanese",ch:"—",p:3,st:"visited",oc:["date","hidden"],vb:"Counter íntimo com seleção sazonal de peixe — o endereço que o cliente fiel não quer que você descubra.",ig:"",tel:"",site:"",reserva:"",notes:""},
+{n:"Kazuo",h:"Jardins",c:"Sushi Japonês",t:"japanese",ch:"Kazuo",p:3,st:"visited",oc:["date"],vb:"Nigiri counter tradicional, refinado e preciso.",ig:"",tel:"",site:"",reserva:"",notes:""},
+{n:"Ohkinha",h:"Jardins",c:"Japonesa",t:"japanese",ch:"—",p:2,st:"visited",oc:["date"],vb:"Casual sibling do Ohka, mesma precisão, menos formal.",ig:"",tel:"",site:"",reserva:"",notes:""},
+{n:"Kensei",h:"Itaim Bibi",c:"Omakase Premium Japonês",t:"japanese",ch:"—",p:4,mu:1,st:"want",oc:["hidden","impress"],vb:"6 assentos, reserva com meses de antecedência — o omakase mais exclusivo de SP.",ig:"",tel:"",site:"",reserva:"",notes:""},
+{n:"Nakayoshi",h:"Pinheiros",c:"Omakase Japonês",t:"japanese",ch:"Frederico Kanô",p:4,mu:1,st:"want",oc:["hidden","impress"],vb:"8 assentos, mercado fresco, nigiri ritual — o Chef Kanô transforma cada noite numa cerimônia.",ig:"nakayoshisushi",tel:"",site:"",reserva:"",notes:""},
+{n:"Kuro",h:"Jardins",c:"Omakase Japonês",t:"japanese",ch:"—",p:4,mu:1,st:"want",oc:["impress","date"],vb:"Dark e exclusivo — omakase num ambiente moody que transforma o jantar em cerimônia.",ig:"",tel:"",site:"",reserva:"",notes:""},
+{n:"Sushimuyo",h:"Itaim Bibi",c:"Sushi Japonês",t:"japanese",ch:"—",p:3,st:"want",oc:["date","hidden"],vb:"Omakase de alto nível — um dos counters mais disputados de SP.",ig:"",tel:"",site:"",reserva:"",notes:""},
+{n:"Naoki",h:"Itaim Bibi",c:"Japonesa Contemporânea",t:"japanese",ch:"—",p:3,st:"visited",oc:["date"],vb:"Criativa e refinada — cozinha japonesa com alma brasileira.",ig:"",tel:"",site:"",reserva:"",notes:""},
+{n:"Hisho",h:"Itaim Bibi",c:"Nigiri Premium Japonês",t:"japanese",ch:"—",p:4,mu:1,st:"want",oc:["impress","hidden"],vb:"Peixe raro voado de Tóquio — counter de altíssimo nível para os que levam nigiri a sério.",ig:"",tel:"",site:"",reserva:"",notes:""},
+{n:"João",h:"Itaim Bibi",c:"Japonesa",t:"japanese",ch:"—",p:3,st:"want",oc:["date"],vb:"Omakase premiado que combina técnica japonesa com alma brasileira.",ig:"",tel:"",site:"",reserva:"",notes:""},
+{n:"Tanuki",h:"Jardins",c:"Izakaya",t:"bar",ch:"—",p:2,st:"visited",oc:["late"],vb:"Izakaya autêntico — o bar japonês mais querido de Jardins.",ig:"",tel:"",site:"",reserva:"",notes:""},
+{n:"Koya",h:"Jardim Paulista",c:"Kaiseki Japonês",t:"japanese",ch:"—",p:3,st:"want",oc:["date","impress"],vb:"Kaiseki-inspirado onde o Japão encontra o Brasil em cada curso.",ig:"",tel:"",site:"",reserva:"",notes:""},
+{n:"Ichirin",h:"Pinheiros",c:"Sake e Omakase Japonês",t:"japanese",ch:"—",p:3,st:"want",oc:["date","hidden"],vb:"Um petisco de cada vez — harmonização com sake premium numa experiência que prioriza o momento.",ig:"",tel:"",site:"",reserva:"",notes:""},
+{n:"Genko",h:"Itaim Bibi",c:"Japonesa Contemporânea",t:"japanese",ch:"—",p:3,st:"want",oc:["date","hidden"],vb:"Minimalismo japonês num cardápio sazonal e chef-driven — clean, preciso e sem concessões.",ig:"",tel:"",site:"",reserva:"",notes:""},
+{n:"Sushi Oze",h:"Pinheiros",c:"Sushi Japonês Tradicional",t:"japanese",ch:"Chef Oze",p:4,mu:1,st:"want",oc:["impress"],vb:"Abordagem purista de Tóquio — neta sazonal importada, o Chef Oze entrega nigiri sem ornamentos.",ig:"",tel:"",site:"",reserva:"",notes:""},
+{n:"Iwa",h:"Vila Nova Conceição",c:"Omakase Japonês",t:"japanese",ch:"—",p:4,st:"want",oc:["impress"],vb:"Técnica sólida como pedra e sourcing premium — omakase que cresce a cada estação.",ig:"",tel:"",site:"",reserva:"",notes:""},
+{n:"Goya Zushi",h:"Jardins",c:"Sushi Japonês Tradicional",t:"japanese",ch:"—",p:4,st:"want",oc:["impress"],vb:"Técnica de Tóquio pura — counter de sushi para os que não precisam de entretenimento, só qualidade.",ig:"",tel:"",site:"",reserva:"",notes:""},
+{n:"Sushi Vaz",h:"Jardins",c:"Sushi Japonês",t:"japanese",ch:"Chef Vaz",p:3,st:"want",oc:["date"],vb:"Chef's table íntimo — Vaz e sua equipe numa experiência personalizada e próxima.",ig:"",tel:"",site:"",reserva:"",notes:""},
+{n:"Ryo",h:"Jardins",c:"Omakase Japonês",t:"japanese",ch:"Chef Ryo",p:4,st:"want",oc:["impress"],vb:"Omakase com sourcing premium e neta sazonais — um dos counters mais disputados do momento.",ig:"",tel:"",site:"",reserva:"",notes:""},
+{n:"Komah",h:"Jardins",c:"Omakase Japonês Minimalista",t:"japanese",ch:"—",p:4,mu:1,st:"want",oc:["impress","date"],vb:"Atmosfera zen — minimalismo rigoroso onde cada nigiri é um haiku. VEJA Revelação do Ano.",ig:"",tel:"",site:"",reserva:"",notes:""},
+{n:"Kazan",h:"Moema",c:"Japonesa Contemporânea",t:"japanese",ch:"Chef Kazan",p:3,st:"want",oc:["date","hidden"],vb:"Perfis de sabor vulcânicos — omakase criativo que desafia a tradição com respeito.",ig:"",tel:"",site:"",reserva:"",notes:""},
+{n:"Shiso",h:"Jardim Paulista",c:"Japonesa Moderna",t:"japanese",ch:"—",p:3,st:"want",oc:["date","hidden"],vb:"Inspirado na folha de shiso — cardápio herbáceo num counter íntimo, revelação de 2024.",ig:"",tel:"",site:"",reserva:"",notes:""},
+{n:"Nobu",h:"Miami Beach",c:"Japonesa-Peruana",t:"japanese",ch:"Nobu Matsuhisa",p:4,mu:1,st:"want",oc:["impress"],city:"MIA",vb:"O ícone de Miami Beach — a fusão japonesa-peruana que definiu uma era na gastronomia global.",ig:"nobumiamibeach",tel:"",site:"",reserva:"",notes:""},
+{n:"Makoto",h:"Bal Harbour",c:"Japonesa Contemporânea",t:"japanese",ch:"Makoto Okuwa",p:4,st:"want",oc:["biz","impress"],city:"MIA",vb:"Japonesa sofisticada no Bal Harbour Shops — rigor japonês no enclave de ultra luxo de Miami.",ig:"makotobalharbour",tel:"",site:"",reserva:"",notes:""},
+{n:"Motai",h:"Brickell",c:"Japonesa Contemporânea",t:"japanese",ch:"—",p:4,st:"want",oc:["impress"],city:"MIA",vb:"Omakase japonês encontra a sofisticação de Brickell — alta gastronomia no coração financeiro.",ig:"",tel:"",site:"",reserva:"",notes:""},
+{n:"Nami Nori",h:"West Village",c:"Japonesa — Temaki",t:"japanese",ch:"—",p:2,st:"want",oc:["date"],city:"NY",vb:"Temaki hand-rolled no West Village — informal e preciso, japonês sem a cerimônia do omakase.",ig:"naminorinyc",tel:"",site:"",reserva:"",notes:""},
+{n:"Kazu Nori",h:"West Village",c:"Japonesa — Hand Roll",t:"japanese",ch:"—",p:2,st:"want",oc:["date"],city:"NY",vb:"Bar de hand roll criativo e rápido — premium sem pretensão, um dos mais divertidos em NYC.",ig:"kazunori",tel:"",site:"",reserva:"",notes:""},
+{n:"Sugarfish",h:"Manhattan",c:"Sushi Japonês",t:"japanese",ch:"Nozawa Tradition",p:3,st:"want",oc:["biz"],city:"NY",vb:"Treinado na escola Nozawa — nigiri purista onde o shoyu é desnecessário.",ig:"sugarfishbynobi",tel:"",site:"",reserva:"",notes:""},
+
+/* ── FRENCH ── */
+{n:"Cantaloup",h:"Jardim Paulista",c:"Francesa Contemporânea",t:"french",ch:"—",p:3,vj:1,mu:1,st:"want",oc:["impress","date"],vb:"O jardim mais bonito de SP — clássico de Jardim Paulista com terraço e culinária francesa de excelência.",ig:"cantaloupsp",tel:"",site:"",reserva:"",notes:""},
+{n:"Tête à Tête",h:"Jardins",c:"Bistrô Francês",t:"french",ch:"—",p:3,mi:1,vj:1,st:"want",oc:["date","impress"],vb:"Bistrô francês íntimo com estrela Michelin — o endereço para quando Paris é o estado de espírito.",ig:"",tel:"",site:"",reserva:"",notes:""},
+{n:"La Brasserie",h:"Itaim Bibi",c:"Francesa",t:"french",ch:"—",p:3,mi:1,vj:1,st:"want",oc:["date","biz"],vb:"Brasserie francesa clássica no Itaim com uma estrela Michelin — steak frites, frutos do mar do dia e a energia de uma brasserie parisiense autêntica.",ig:"",tel:"",site:"",reserva:"",notes:""},
+{n:"Charlô",h:"Jardim Europa",c:"Francesa Contemporânea",t:"french",ch:"Pulso Hotel",p:3,st:"visited",oc:["biz"],vb:"A joia gastronômica do Pulso Hotel em Jardim Europa.",ig:"",tel:"",site:"",reserva:"",notes:""},
+{n:"Loup",h:"Jardim Europa",c:"Francesa Contemporânea",t:"french",ch:"Elia Schramm",p:4,mu:1,st:"want",oc:["date","impress"],vb:"Chef Elia Schramm com técnica francesa e criatividade moderna.",ig:"",tel:"",site:"",reserva:"",notes:""},
+{n:"Soeta",h:"Pinheiros",c:"Francesa-Brasileira",t:"french",ch:"André Mifano",p:3,vj:1,mu:1,st:"want",oc:["date","impress"],vb:"André Mifano — técnica impecável num endereço contemporâneo.",ig:"",tel:"",site:"",reserva:"",notes:""},
+{n:"Tangará Jean Georges",h:"Jardim Europa",c:"Francesa Fine Dining",t:"french",ch:"Jean-Georges Vongerichten",p:4,vg:1,vj:1,mu:1,st:"want",oc:["impress","biz"],vb:"Jean-Georges no Tangará — fine dining à beira do parque.",ig:"tangarajeangeorges",tel:"",site:"",reserva:"",notes:""},
+{n:"Millet",h:"Higienópolis",c:"Francesa",t:"french",ch:"—",p:2,bib:1,st:"want",oc:["date","casual"],vb:"Bistrô francês acessível com Bib Gourmand — leveza parisiense e relação preço-qualidade imbatível.",ig:"",tel:"",site:"",reserva:"",notes:""},
+{n:"La Parisienne",h:"Higienópolis",c:"Padaria Francesa",t:"french",ch:"—",p:1,bib:1,st:"want",oc:["casual"],vb:"Padaria francesa premiada com Bib Gourmand — croissants au beurre que rivalizam com Paris.",ig:"",tel:"",site:"",reserva:"",notes:""},
+{n:"La Villette",h:"Jardins",c:"Bistrô Francês",t:"french",ch:"—",p:2,bib:1,st:"want",oc:["date"],vb:"Bistrô parisiense autêntico em Jardins — steak frites, vinho tinto na jarra e a sensação de estar num arrondissement, sem sair de SP.",ig:"",tel:"",site:"",reserva:"",notes:""},
+{n:"Le Cordon Bleu",h:"Jardins",c:"Francesa",t:"french",ch:"—",p:3,bib:1,st:"want",oc:["biz","impress"],vb:"A escola mais famosa do mundo com Bib Gourmand em SP — técnica clássica servida com maestria.",ig:"",tel:"",site:"",reserva:"",notes:""},
+{n:"Paris 6",h:"Jardins",c:"Brasserie Francesa",t:"french",ch:"—",p:2,bib:1,st:"want",oc:["late","date"],vb:"Brasserie 24h com Bib Gourmand — moules-frites às 3h da manhã em Jardins.",ig:"paris6sp",tel:"",site:"",reserva:"",notes:""},
+{n:"Votre",h:"Jardins",c:"Bistrô Francês",t:"french",ch:"—",p:2,st:"visited",oc:["date"],vb:"Atmosfera parisiense, vinhos naturais e culinária bistronômica.",ig:"",tel:"",site:"",reserva:"",notes:""},
+{n:"Le Quartier",h:"Jardins",c:"Brasserie Francesa",t:"french",ch:"—",p:2,st:"visited",oc:["biz"],vb:"Brasserie clássica que nunca sai de moda — o endereço francês de conforto em Jardins.",ig:"",tel:"",site:"",reserva:"",notes:""},
+{n:"Petit Le Jazz",h:"Jardins",c:"Bistrô Francês",t:"french",ch:"—",p:3,st:"want",oc:["date"],vb:"Jazz ao vivo e culinária francesa num encontro romântico inevitável.",ig:"",tel:"",site:"",reserva:"",notes:""},
+{n:"Marie",h:"Jardins",c:"Bistrô Francês",t:"french",ch:"—",p:2,st:"want",oc:["date"],vb:"Inspirado em Marie Antoinette — boudoir chic, pastelaria e culinária francesa.",ig:"",tel:"",site:"",reserva:"",notes:""},
+{n:"Balthazar",h:"Jardim Paulista",c:"Brasserie Francesa Grand",t:"french",ch:"—",p:3,st:"want",oc:["biz","date"],vb:"Grand brasserie parisiense com energia de Jardim Paulista — ostras, steak frites.",ig:"",tel:"",site:"",reserva:"",notes:""},
+{n:"Chez Auguste",h:"Pinheiros",c:"Bistrô Francês Premium",t:"french",ch:"—",p:3,st:"want",oc:["date","hidden"],vb:"Técnica francesa autêntica num encontro íntimo em Pinheiros.",ig:"",tel:"",site:"",reserva:"",notes:""},
+{n:"Chez Marie",h:"Higienópolis",c:"Bistrô Francês Premium",t:"french",ch:"—",p:3,st:"want",oc:["date","hidden"],vb:"Parisiense íntimo e autoral em Higienópolis — vinhos naturais e cozinha sazonal.",ig:"",tel:"",site:"",reserva:"",notes:""},
+{n:"Glouton",h:"Jardim Paulista",c:"Wine Dining Francesa",t:"french",ch:"—",p:3,st:"want",oc:["date"],vb:"O paraíso dos gulosos — menus sazonais harmonizados e filosofia de celebração plena.",ig:"",tel:"",site:"",reserva:"",notes:""},
+{n:"Pour Vous",h:"Jardins",c:"Francesa Contemporânea",t:"french",ch:"—",p:4,vg:1,mu:1,st:"want",oc:["date","impress"],vb:"Íntimo e refinado — cozinha francesa contemporânea que Vogue elegeu como o mais sedutor de SP.",ig:"",tel:"",site:"",reserva:"",notes:""},
+{n:"La Tambouille",h:"Jardim Europa",c:"Francesa-Brasileira",t:"french",ch:"—",p:4,vj:1,mu:1,st:"want",oc:["biz","impress"],vb:"A instituição francesa de SP por décadas — grand dining onde a tradição nunca se rendeu à moda.",ig:"",tel:"",site:"",reserva:"",notes:""},
+{n:"Chou",h:"Jardins",c:"Fusão Francesa-Brasileira",t:"french",ch:"—",p:3,st:"want",oc:["date"],vb:"Fusão que constrói pontes entre técnica francesa e ingredientes brasileiros.",ig:"",tel:"",site:"",reserva:"",notes:""},
+
+/* ── BRAZILIAN ── */
+{n:"Casa do Porco",h:"Higienópolis",c:"Brasileira — Porco",t:"brazilian",ch:"Jefferson Rueda",p:2,bib:1,l50:15,ny:1,ft:1,bl:1,mu:1,st:"want",oc:["impress","date"],vb:"Bib Gourmand + #15 LatAm + NYT — o porco mais celebrado do Brasil.",ig:"casadoporcobr",tel:"",site:"",reserva:"",notes:""},
+{n:"Mocotó",h:"Casa Verde",c:"Nordestina",t:"brazilian",ch:"Rodrigo Oliveira",p:2,bib:1,sel:1,vg:1,ny:1,ft:1,mu:1,st:"want",oc:["casual","impress"],vb:"Selecionado Michelin + Vogue + NYT — a alma nordestina de SP.",ig:"restaurantemocoto",tel:"",site:"",reserva:"",notes:""},
+{n:"Bar da Dona Onça",h:"Centro",c:"Brasileira",t:"brazilian",ch:"—",p:2,bib:1,ny:1,st:"want",oc:["casual","date"],vb:"Bib Gourmand + NYT — petiscos brasileiros com alma no icônico Edifício Copan.",ig:"",tel:"",site:"",reserva:"",notes:""},
+{n:"Capim Santo",h:"Jardins",c:"Baiana Brasileira",t:"brazilian",ch:"Morena Leite",p:3,st:"visited",oc:["date","biz"],vb:"Morena Leite e as ervas frescas da Bahia.",ig:"",tel:"",site:"",reserva:"",notes:""},
+{n:"Jiquitaia",h:"Pinheiros",c:"Amazônica",t:"brazilian",ch:"—",p:3,mi:1,l50:36,mu:1,st:"want",oc:["impress","date"],vb:"O Chef usa jambu, tucupi e ervas amazônicas num menu que transporta a Floresta Amazônica para o coração boêmio de Pinheiros.",ig:"",tel:"",site:"",reserva:"",notes:""},
+{n:"Banzeiro",h:"Pinheiros",c:"Amazônica",t:"brazilian",ch:"Lúcio Vieira",p:3,mi:1,l50:30,ft:1,mu:1,st:"want",oc:["impress"],vb:"Lúcio Vieira cozinha a Amazônia que ele conhece — peixes do Rio Negro, castanhas e frutos nativos num menu que defende a floresta no prato.",ig:"banzeiro",tel:"",site:"",reserva:"",notes:""},
+{n:"Kaa",h:"Itaim Bibi",c:"Amazônica Contemporânea",t:"brazilian",ch:"Ivan Ralston",p:4,mi:1,vj:1,mu:1,st:"want",oc:["impress","date"],vb:"VEJA Revelação do Ano — Ivan Ralston abre novo universo criativo.",ig:"kaarestaurante",tel:"",site:"",reserva:"",notes:""},
+{n:"Dalva e Dito",h:"Jardins",c:"Brasileira",t:"brazilian",ch:"Alex Atala",p:3,sel:1,st:"want",oc:["date","biz"],vb:"Alex Atala desconecta a alta gastronomia e volta às raízes — arroz, feijão, farofa e cortes nobres que celebram o Brasil de verdade em Jardins.",ig:"dalvaedito",tel:"",site:"",reserva:"",notes:""},
+{n:"Maníoca",h:"Jardins",c:"Brasileira",t:"brazilian",ch:"—",p:3,sel:1,st:"want",oc:["date"],vb:"A mandioca elevada a protagonista — raízes brasileiras reinterpretadas com técnica contemporânea, um dos segredos mais saborosos de Jardins.",ig:"",tel:"",site:"",reserva:"",notes:""},
+{n:"Tordesilhas",h:"Vila Madalena",c:"Brasileira Regional",t:"brazilian",ch:"Mara Salles",p:2,bib:1,vj:1,mu:1,st:"want",oc:["impress","biz"],vb:"Mara Salles e o Brasil inteiro no cardápio — Bib Gourmand e VEJA.",ig:"tordesilhas",tel:"",site:"",reserva:"",notes:""},
+{n:"Brasil a Gosto",h:"Higienópolis",c:"Brasileira",t:"brazilian",ch:"—",p:3,mi:1,st:"want",oc:["date","biz"],vb:"A cozinha brasileira de identidade celebrada com rigor — ingredientes de cada região do país transformados em pratos que emocionam e educam o paladar.",ig:"",tel:"",site:"",reserva:"",notes:""},
+{n:"Sal",h:"Pinheiros",c:"Brasileira Contemporânea",t:"brazilian",ch:"—",p:3,mi:1,st:"want",oc:["date","impress"],vb:"Sal, peixe e criatividade em Pinheiros — uma estrela Michelin que exalta os sabores do mar brasileiro com técnica contemporânea e ingredientes locais.",ig:"",tel:"",site:"",reserva:"",notes:""},
+{n:"Eñe",h:"Jardins",c:"Brasileira Contemporânea",t:"brazilian",ch:"—",p:3,mi:1,vg:1,st:"want",oc:["date"],vb:"Brasas e fogo como linguagem criativa — ingredientes brasileiros tratados com técnica de grelha que Vogue elegeu como uma das melhores mesas de SP.",ig:"",tel:"",site:"",reserva:"",notes:""},
+{n:"Tonka",h:"Pinheiros",c:"Brasileira Contemporânea",t:"brazilian",ch:"—",p:3,mi:1,st:"want",oc:["date"],vb:"Feijão, raízes e ingredientes brasileiros elevados à alta gastronomia — a cozinha de raiz que conquistou uma estrela Michelin em Pinheiros.",ig:"",tel:"",site:"",reserva:"",notes:""},
+{n:"Figueira Rubaiyat",h:"Jardins",c:"Carnes — Brasileira",t:"brazilian",ch:"—",p:4,sel:1,vj:1,st:"want",oc:["impress","date"],vb:"Sob a figueira centenária — uma das experiências mais únicas do mundo.",ig:"",tel:"",site:"",reserva:"",notes:""},
+{n:"Labuta",h:"Pinheiros",c:"Amazônica",t:"brazilian",ch:"Felipe Schaedler",p:3,st:"want",oc:["date","hidden"],vb:"Peixe do Rio Negro, jambu e ervas nativas.",ig:"",tel:"",site:"",reserva:"",notes:""},
+{n:"Cuia",h:"Pinheiros",c:"Amazônica",t:"brazilian",ch:"—",p:2,st:"want",oc:["date","hidden"],vb:"Açaí do Rio Negro servido na cuia — Amazônia portátil.",ig:"",tel:"",site:"",reserva:"",notes:""},
+{n:"Sagrado",h:"Vila Madalena",c:"Brasileira",t:"brazilian",ch:"—",p:2,bib:1,st:"want",oc:["casual","date"],vb:"Cerveja artesanal e petiscos sagrados — Bib Gourmand para o boteco que cuida do que serve.",ig:"",tel:"",site:"",reserva:"",notes:""},
+{n:"Senzala",h:"Centro",c:"Brasileira",t:"brazilian",ch:"—",p:1,bib:1,st:"want",oc:["casual"],vb:"Comida brasileira no Centro histórico com Bib Gourmand — honesta e enraizada na tradição popular.",ig:"",tel:"",site:"",reserva:"",notes:""},
+{n:"Zé Carlos",h:"Pinheiros",c:"Brasileira",t:"brazilian",ch:"—",p:1,bib:1,st:"want",oc:["casual"],vb:"Boteco brasileiro clássico com Bib Gourmand — o endereço que você frequenta sem precisar de motivo.",ig:"",tel:"",site:"",reserva:"",notes:""},
+{n:"Baianeira",h:"Pinheiros",c:"Baiana",t:"brazilian",ch:"—",p:2,sel:1,st:"want",oc:["date","casual"],vb:"Cozinha baiana autêntica selecionada pelo Michelin — dendê, vatapá e acarajé com alma nordestina.",ig:"",tel:"",site:"",reserva:"",notes:""},
+{n:"Empório Santa Maria",h:"Jardins",c:"Brasileira",t:"brazilian",ch:"—",p:2,bib:1,st:"want",oc:["casual","biz"],vb:"Delicatessen com Bib Gourmand — produtos premium e cardápio sofisticado, mercado e restaurante.",ig:"",tel:"",site:"",reserva:"",notes:""},
+{n:"Jund",h:"Jardins",c:"Brasileira Contemporânea",t:"brazilian",ch:"—",p:2,bib:1,st:"want",oc:["date","casual"],vb:"Bib Gourmand e criatividade brasileira acessível — qualidade que não precisa custar uma fortuna.",ig:"",tel:"",site:"",reserva:"",notes:""},
+{n:"Toro Burger",h:"Pinheiros",c:"Hambúrguer Gourmet",t:"brazilian",ch:"—",p:2,bib:1,st:"want",oc:["casual"],vb:"O hambúrguer premium de SP com Bib Gourmand — carnes nobres e ingredientes de qualidade.",ig:"",tel:"",site:"",reserva:"",notes:""},
+
+/* ── SEAFOOD ── */
+{n:"Mergulho",h:"Jardins",c:"Frutos do Mar",t:"seafood",ch:"—",p:3,bib:1,vj:1,mu:1,st:"want",oc:["date","impress"],vb:"O melhor peixe fresco de Jardins — do linguado ao robalo, preparações que respeitam o produto e surpreendem pela simplicidade precisa.",ig:"",tel:"",site:"",reserva:"",notes:""},
+{n:"Vila Caiçara",h:"Saúde",c:"Frutos do Mar",t:"seafood",ch:"—",p:2,bib:1,vj:1,st:"want",oc:["casual","date"],vb:"Caiçara autêntico no sul de SP — peixe fresco na brasa, pirão e a alma do litoral paulista servida sem frescura há décadas.",ig:"",tel:"",site:"",reserva:"",notes:""},
+{n:"Oceania",h:"Itaim Bibi",c:"Frutos do Mar",t:"seafood",ch:"—",p:3,vj:1,st:"want",oc:["date"],vb:"VEJA destaque — frutos do mar no Itaim.",ig:"",tel:"",site:"",reserva:"",notes:""},
+{n:"Cais",h:"Jardins",c:"Frutos do Mar Contemporâneo",t:"seafood",ch:"—",p:3,st:"visited",oc:["impress","date"],vb:"Conceito de cais urbano — ostras, ceviches e peixes frescos num ambiente sofisticado.",ig:"",tel:"",site:"",reserva:"",notes:""},
+{n:"Atlântico 212",h:"Jardins",c:"Frutos do Mar Contemporâneo",t:"seafood",ch:"—",p:3,st:"visited",oc:["biz"],vb:"Inspirações atlânticas em Jardins — frutos do mar com técnica contemporânea.",ig:"",tel:"",site:"",reserva:"",notes:""},
+{n:"Naia",h:"Jardins",c:"Raw Bar Premium",t:"seafood",ch:"—",p:3,st:"visited",oc:["impress"],vb:"Bar de crus premium — ostras, tartar e crudo num setting elegante.",ig:"",tel:"",site:"",reserva:"",notes:""},
+{n:"Teus",h:"Jardins",c:"Frutos do Mar Estilo Grego",t:"seafood",ch:"—",p:3,st:"visited",oc:["date"],vb:"Peixe fresco na brasa à maneira grega — charcoal e sal marinho.",ig:"",tel:"",site:"",reserva:"",notes:""},
+{n:"Mico",h:"Jardins",c:"Raw Bar Moderno",t:"seafood",ch:"—",p:2,st:"visited",oc:["date"],vb:"Raw bar moderno e descontraído — ostras frescas e cocktails para iniciar a noite.",ig:"",tel:"",site:"",reserva:"",notes:""},
+{n:"Acqua",h:"Juquehy",c:"Frutos do Mar Brasileiros",t:"seafood",ch:"—",p:2,st:"visited",oc:["date"],vb:"Fuga para o litoral caiçara — peixe fresco direto do mar em Juquehy.",ig:"",tel:"",site:"",reserva:"",notes:""},
+{n:"Barú Marischeria",h:"Jardins",c:"Frutos do Mar — Mariscos",t:"seafood",ch:"—",p:3,st:"want",oc:["impress"],vb:"Bar de mariscos premium — energia latina e excelência de produto numa proposta vibrante.",ig:"",tel:"",site:"",reserva:"",notes:""},
+{n:"Avra",h:"Miami Beach",c:"Frutos do Mar Gregos",t:"seafood",ch:"—",p:4,st:"want",oc:["impress","date"],city:"MIA",vb:"Peixe inteiro por quilo à maneira do Egeu em Miami Beach — elegância grega e frescor.",ig:"avramiami",tel:"",site:"",reserva:"",notes:""},
+{n:"Roy Fish",h:"Manhattan",c:"Frutos do Mar Contemporâneo",t:"seafood",ch:"Chef Roy",p:3,st:"want",oc:["date"],city:"NY",vb:"Frutos do mar de precisão em NYC — peixe fresco e técnica chef-driven.",ig:"",tel:"",site:"",reserva:"",notes:""},
+
+/* ── STEAKHOUSE ── */
+{n:"A Figueira Rubaiyat",h:"Jardim Europa",c:"Brasileira / Carnes",t:"steakhouse",ch:"—",p:4,sel:1,vj:1,mu:1,st:"want",oc:["impress","biz"],vb:"Debaixo de uma figueira centenária em Jardim Europa — a experiência mais icônica e única de SP.",ig:"",tel:"",site:"",reserva:"",notes:""},
+{n:"Rubaiyat",h:"Itaim Bibi",c:"Carnes",t:"steakhouse",ch:"—",p:4,sel:1,vj:1,mu:1,st:"want",oc:["impress","biz"],vb:"A referência em carnes nobres de SP desde os anos 50 — cortes premium reconhecidos pelo Michelin e VEJA, ambiente que combina tradição com elegância.",ig:"rubaiyat",tel:"",site:"",reserva:"",notes:""},
+{n:"Varanda Grill",h:"Itaim Bibi",c:"Carnes Premium",t:"steakhouse",ch:"—",p:3,sel:1,vj:1,st:"want",oc:["biz","impress"],vb:"O grill clássico do Itaim — cortes premium preparados à perfeição, reconhecido pelo Michelin e pela VEJA como referência em carnes.",ig:"",tel:"",site:"",reserva:"",notes:""},
+{n:"Templo da Carne",h:"Itaim Bibi",c:"Carnes",t:"steakhouse",ch:"—",p:4,sel:1,vj:1,st:"want",oc:["impress"],vb:"Cortes curados e maturados por até 60 dias num ritual que transforma carne em experiência — selecionado Michelin e VEJA como templo da charcutaria premium.",ig:"templo_da_carne",tel:"",site:"",reserva:"",notes:""},
+{n:"Novilho de Prata",h:"Jardins",c:"Carnes Premium",t:"steakhouse",ch:"—",p:3,sel:1,vj:1,st:"want",oc:["biz"],vb:"Tradição em carnes em Jardins — cortes maturados com excelência, selecionado Michelin e eleito pela VEJA.",ig:"",tel:"",site:"",reserva:"",notes:""},
+{n:"Rodeio",h:"Jardim América",c:"Churrasco Brasileiro Premium",t:"steakhouse",ch:"—",p:3,vj:1,mu:1,st:"want",oc:["impress","biz"],vb:"O melhor churrasco brasileiro clássico de SP — old-school com classe, eleito pelo VEJA.",ig:"rodeiosteak",tel:"",site:"",reserva:"",notes:""},
+{n:"Charcoal",h:"Itaim Bibi",c:"Steakhouse Premium",t:"steakhouse",ch:"—",p:4,st:"want",oc:["impress"],vb:"Fogo como linguagem — cortes premium defumados e braseados, luxo e rusticidade.",ig:"",tel:"",site:"",reserva:"",notes:""},
+{n:"Baires",h:"Brickell",c:"Argentina Contemporânea",t:"steakhouse",ch:"—",p:3,st:"want",oc:["biz"],city:"MIA",vb:"Buenos Aires em Miami — cortes portenhos premium, Malbec e alma argentina.",ig:"bairesmiami",tel:"",site:"",reserva:"",notes:""},
+
+/* ── BAR ── */
+{n:"Baretto",h:"Jardins",c:"Bar Italiano",t:"bar",ch:"Fasano Group",p:3,vg:1,mu:1,st:"visited",oc:["late","date"],vb:"O bar do Fasano — coquetéis e o see-and-be-seen da elite paulistana.",ig:"fasanohotels",tel:"",site:"",reserva:"",notes:""},
+{n:"Guilhotina Bar",h:"Pinheiros",c:"Bar / Coquetéis",t:"bar",ch:"—",p:2,st:"visited",oc:["late"],vb:"Laboratório de cocktails que não tem medo de experimentar.",ig:"guilhotinabar",tel:"",site:"",reserva:"",notes:""},
+{n:"Bar Astor",h:"Vila Madalena",c:"Bar Clássico",t:"bar",ch:"—",p:2,mu:1,st:"want",oc:["late"],vb:"Instituição dos coquetéis de SP desde os anos 90.",ig:"barastor",tel:"",site:"",reserva:"",notes:""},
+{n:"Sub Astor",h:"Vila Madalena",c:"Bar / Speakeasy",t:"bar",ch:"—",p:2,st:"want",oc:["late","hidden"],vb:"Escada secreta para um underground de cocktails.",ig:"",tel:"",site:"",reserva:"",notes:""},
+{n:"Mila",h:"South Beach",c:"Mediterrâneo / Club",t:"bar",ch:"—",p:4,st:"want",oc:["late"],city:"MIA",vb:"Restaurante que se transforma em teatro noturno — o Mila é espetáculo.",ig:"milamiami",tel:"",site:"",reserva:"",notes:""},
+{n:"Liv",h:"Miami Beach",c:"Nightclub",t:"bar",ch:"Fontainebleau",p:4,mu:1,st:"want",oc:["late"],city:"MIA",vb:"O clube que definiu o nightlife de Miami.",ig:"livnightclub",tel:"",site:"",reserva:"",notes:""},
+{n:"Mynt",h:"South Beach",c:"Nightclub",t:"bar",ch:"—",p:3,st:"want",oc:["late"],city:"MIA",vb:"South Beach classic — elegante e energético.",ig:"mynt_lounge",tel:"",site:"",reserva:"",notes:""},
+{n:"Space",h:"Downtown MIA",c:"Nightclub / Techno",t:"bar",ch:"—",p:2,st:"want",oc:["late"],city:"MIA",vb:"Warehouse de techno com licença 24h.",ig:"clubspacemiami",tel:"",site:"",reserva:"",notes:""},
+{n:"Tan Tan",h:"Jardins",c:"Bar / Coquetéis",t:"bar",ch:"—",p:2,st:"visited",oc:["late","date"],vb:"Laboratório de coquetéis criativos num espaço íntimo em Jardins.",ig:"",tel:"",site:"",reserva:"",notes:""},
+{n:"Sarau Bar",h:"Pinheiros",c:"Bar / Cultural",t:"bar",ch:"—",p:2,st:"visited",oc:["late"],vb:"Música ao vivo e cultura num bar de Pinheiros — onde você vai para ouvir e beber.",ig:"",tel:"",site:"",reserva:"",notes:""},
+{n:"Vicio",h:"Pinheiros",c:"Boteco Premium",t:"bar",ch:"—",p:2,bib:1,st:"want",oc:["casual","late"],vb:"Boteco viciante com Bib Gourmand em Pinheiros — petiscos irresistíveis e informalidade.",ig:"",tel:"",site:"",reserva:"",notes:""},
+{n:"Bar do Juarez",h:"Pinheiros",c:"Petiscos Brasileiros",t:"bar",ch:"—",p:2,bib:1,st:"want",oc:["casual","late"],vb:"Bib Gourmand para o boteco que elevou o petisco paulistano — Pinheiros honesto.",ig:"",tel:"",site:"",reserva:"",notes:""},
+{n:"Resid Bar",h:"Jardins",c:"Bar / Coquetéis Artesanais",t:"bar",ch:"—",p:2,st:"want",oc:["late","hidden"],vb:"Atmosfera residencial numa cave aconchegante de Jardins — coquetéis cuidadosos.",ig:"",tel:"",site:"",reserva:"",notes:""},
+{n:"Kotchi Bar",h:"Itaim Bibi",c:"Bar Inspirado em Japonês",t:"bar",ch:"—",p:2,st:"want",oc:["late"],vb:"Cultura de cocktails japonesa no Itaim — destilados nipônicos e highballs com precisão.",ig:"",tel:"",site:"",reserva:"",notes:""},
+{n:"The Liquor Store",h:"Jardins",c:"Bar / Destilados Premium",t:"bar",ch:"—",p:2,st:"want",oc:["late"],vb:"Curadoria premium de destilados — ambiente relaxado para quem sabe o que quer beber.",ig:"",tel:"",site:"",reserva:"",notes:""},
+{n:"Oculto",h:"Vila Madalena",c:"Bar / Speakeasy",t:"bar",ch:"—",p:2,st:"want",oc:["late","hidden"],vb:"Entrada secreta, ritual de speakeasy — a Vila Madalena que não está no Google Maps.",ig:"",tel:"",site:"",reserva:"",notes:""},
+{n:"Gioia",h:"Jardins",c:"Bar / Aperitivo Italiano",t:"bar",ch:"—",p:2,st:"want",oc:["late"],vb:"Aperitivo italiano, Campari e Negroni — a filosofia do aperitivo antes da vita.",ig:"",tel:"",site:"",reserva:"",notes:""},
+{n:"Matiz Bar",h:"Jardins",c:"Wine Bar",t:"bar",ch:"—",p:2,st:"want",oc:["late","date"],vb:"Pequenos produtores, vinhos naturais e bistronomia — um dos melhores wine bars de SP.",ig:"",tel:"",site:"",reserva:"",notes:""},
+{n:"Bar Lágrima",h:"Pinheiros",c:"Bar Íntimo",t:"bar",ch:"—",p:2,st:"want",oc:["late","hidden"],vb:"Emoção aplicada à bartending — experiência pessoal e marcante que fica na memória.",ig:"",tel:"",site:"",reserva:"",notes:""},
+{n:"Exímia Bar",h:"Jardins",c:"Bar / Coquetéis Premium",t:"bar",ch:"—",p:2,st:"want",oc:["late","hidden"],vb:"Excelência como padrão — programa de cocktails rigoroso que valoriza o ofício da bartending.",ig:"",tel:"",site:"",reserva:"",notes:""},
+{n:"Beverino Vinhos",h:"Jardins",c:"Wine Bar",t:"bar",ch:"—",p:2,st:"want",oc:["date","late"],vb:"Garrafas naturais e clássicas num ambiente que convida a ficar mais uma hora.",ig:"",tel:"",site:"",reserva:"",notes:""},
+{n:"Maison Dodoma",h:"Jardins",c:"Bar / Afro-Francês",t:"bar",ch:"—",p:2,st:"want",oc:["late","hidden"],vb:"Tanzânia encontra Paris — o endereço mais inesperado e fascinante da cena noturna de SP.",ig:"",tel:"",site:"",reserva:"",notes:""},
+{n:"Must Bar",h:"Jardim Europa",c:"Bar / Hotel",t:"bar",ch:"Tivoli Hotel",p:3,st:"want",oc:["late","biz"],vb:"O bar do Tivoli Hotel — whisky premium e a clientela que faz acontecer.",ig:"",tel:"",site:"",reserva:"",notes:""},
+{n:"Sern",h:"Jardim Europa",c:"Bar / Hotel",t:"bar",ch:"Tivoli Hotel",p:3,st:"want",oc:["late"],vb:"A experiência de cocktails assinada do Tivoli — sofisticação hoteleira.",ig:"",tel:"",site:"",reserva:"",notes:""},
+{n:"Cava Bar",h:"Jardins",c:"Wine Bar / Espumantes",t:"bar",ch:"—",p:2,st:"want",oc:["date","late"],vb:"Espumantes e cavas — o lugar certo quando há algo para comemorar.",ig:"",tel:"",site:"",reserva:"",notes:""},
+{n:"Aramo",h:"Jardim Europa",c:"Natural Wine Bar",t:"bar",ch:"—",p:2,st:"want",oc:["date","late","hidden"],vb:"Vinhos naturais e petiscos precisos — Jardim Europa revelando seus melhores segredos.",ig:"",tel:"",site:"",reserva:"",notes:""},
+{n:"Tanin",h:"Pinheiros",c:"Bistrô de Vinho",t:"bar",ch:"—",p:2,st:"want",oc:["date","late","hidden"],vb:"Taninos e terroar — bistrô de vinho natural em Pinheiros com menu sazonal.",ig:"",tel:"",site:"",reserva:"",notes:""},
+{n:"Cepa",h:"Jardins",c:"Wine Bar / Contemporâneo",t:"bar",ch:"—",p:2,st:"visited",oc:["date"],vb:"Adega moderna com lista curada — wine dining que prioriza o vinho sem esquecer a comida.",ig:"",tel:"",site:"",reserva:"",notes:""},
+{n:"Clos",h:"Jardim Europa",c:"Fine Dining com Vinhos",t:"bar",ch:"—",p:3,st:"want",oc:["date"],vb:"Cave francesa encontra fine dining — vinhos naturais e cozinha com igual elegância.",ig:"",tel:"",site:"",reserva:"",notes:""},
+{n:"Bela Vista Bar",h:"Bela Vista",c:"Bar Contemporâneo",t:"bar",ch:"—",p:2,st:"want",oc:["late"],vb:"Vista panorâmica e cocktails — o bar de bairro que cresce com a cena ao redor da Paulista.",ig:"",tel:"",site:"",reserva:"",notes:""},
+{n:"Starlane",h:"Jardins",c:"Bar Premium",t:"bar",ch:"—",p:3,st:"want",oc:["late"],vb:"Experiência estelar de bar — um espaço premium em Jardins.",ig:"",tel:"",site:"",reserva:"",notes:""},
+{n:"Santana Bar",h:"Jardins",c:"Bar / Coquetéis",t:"bar",ch:"—",p:2,st:"want",oc:["late"],vb:"Bairro cool e cocktails criativos — neighborhood bar com sempre o drinque certo.",ig:"",tel:"",site:"",reserva:"",notes:""},
+{n:"Spaniard",h:"West Village",c:"Bar Espanhol",t:"bar",ch:"—",p:2,st:"want",oc:["date","late"],city:"NY",vb:"Pintxos e vinhos naturais no West Village — o bar espanhol mais querido de Manhattan.",ig:"spaniard_nyc",tel:"",site:"",reserva:"",notes:""},
+{n:"Mr Purple",h:"LES",c:"Bar / Rooftop",t:"bar",ch:"Hotel Indigo",p:2,st:"want",oc:["late"],city:"NY",vb:"Rooftop no Lower East Side com o skyline de Manhattan como fundo.",ig:"mrpurplenyc",tel:"",site:"",reserva:"",notes:""},
+{n:"Le Bain",h:"Chelsea",c:"Bar / Club",t:"bar",ch:"The Standard High Line",p:3,st:"want",oc:["late"],city:"NY",vb:"Rooftop do The Standard High Line sobre o Hudson — bar-club que parece um loft europeu.",ig:"lebainnyc",tel:"",site:"",reserva:"",notes:""},
+
+/* ── MEDITERRANEAN ── */
+{n:"Marena",h:"Jardins",c:"Mediterrânea",t:"mediterranean",ch:"—",p:3,mu:1,st:"visited",oc:["impress","date","hidden"],vb:"Mediterrânea que surpreende — uma das joias escondidas de SP.",ig:"",tel:"",site:"",reserva:"",notes:""},
+{n:"Tanit",h:"Jardins",c:"Mediterrânea",t:"mediterranean",ch:"—",p:3,st:"want",oc:["date"],vb:"Ibiza transplantada para SP — leveza e alegria mediterrânea.",ig:"",tel:"",site:"",reserva:"",notes:""},
+{n:"Pergolato",h:"Jardim Paulista",c:"Mediterrânea",t:"mediterranean",ch:"—",p:2,st:"want",oc:["date","hidden"],vb:"Vinha que cobre a pérgola num jantar de verão.",ig:"",tel:"",site:"",reserva:"",notes:""},
+
+/* ── INTERNATIONAL ── */
+{n:"Tradição Portuguesa",h:"Bixiga",c:"Portuguesa",t:"international",ch:"—",p:3,mi:1,st:"want",oc:["date","impress"],vb:"Um clássico português no coração do Bixiga italiano — bacalhau confitado em azeite, pastéis de nata e a ironia deliciosa de uma estrela Michelin numa travessa histórica.",ig:"",tel:"",site:"",reserva:"",notes:""},
+{n:"Adega Santiago",h:"Jardins",c:"Portuguesa",t:"international",ch:"—",p:2,st:"visited",oc:["date"],vb:"Adega lisboeta em Jardins — vinhos do Douro e petiscos.",ig:"",tel:"",site:"",reserva:"",notes:""},
+{n:"Metzi",h:"Jardins",c:"Mexicana Contemporânea",t:"international",ch:"—",p:2,st:"want",oc:["date","late"],vb:"Tacos premium e mezcal criativo.",ig:"",tel:"",site:"",reserva:"",notes:""},
+{n:"Corrutella",h:"Vila Madalena",c:"Vinho Natural",t:"international",ch:"—",p:2,st:"want",oc:["date","hidden"],vb:"Menu sazonal e vinhos naturais.",ig:"",tel:"",site:"",reserva:"",notes:""},
+{n:"Bar Europa",h:"Jardins",c:"Brasserie Europeia",t:"international",ch:"—",p:2,st:"want",oc:["biz"],vb:"Grand café europeu em Jardins.",ig:"",tel:"",site:"",reserva:"",notes:""},
+{n:"Marakuthai",h:"Itaim Bibi",c:"Tailandesa-Brasileira",t:"international",ch:"Alain Poletto",p:3,vj:1,mu:1,st:"want",oc:["date","impress"],vb:"O benchmark tailandês de SP — fusão mágica com ingredientes brasileiros.",ig:"marakuthai",tel:"",site:"",reserva:"",notes:""},
+{n:"Amazonico",h:"Design District",c:"Sul-Americana",t:"international",ch:"—",p:3,st:"want",oc:["impress"],city:"MIA",vb:"A selva amazônica levada ao Design District de Miami.",ig:"amazonicorestaurant",tel:"",site:"",reserva:"",notes:""},
+{n:"Kote",h:"Brickell",c:"Contemporânea Latina",t:"international",ch:"—",p:3,st:"want",oc:["date"],city:"MIA",vb:"Inspiração colombiana criativa em Brickell — cocktails inventivos e cozinha latino-americana.",ig:"",tel:"",site:"",reserva:"",notes:""},
+{n:"Sunnys",h:"Wynwood",c:"Americana Contemporânea",t:"international",ch:"—",p:2,st:"want",oc:["date"],city:"MIA",vb:"Almoço e jantar ao sol de Wynwood — casual premium com energia artística.",ig:"",tel:"",site:"",reserva:"",notes:""},
+{n:"Mojo East",h:"LES",c:"Asiática-Americana Contemporânea",t:"international",ch:"—",p:2,st:"want",oc:["date"],city:"NY",vb:"Oriente encontra downtown NYC — asiática-americana casual e criativa no Lower East Side.",ig:"",tel:"",site:"",reserva:"",notes:""},
+];
+
+// Deduplicate by name (first wins)
+const seen = new Set();
+const RESTAURANTS = _RAW.filter(d => { if (seen.has(d.n)) return false; seen.add(d.n); return true; });
+
+// Load from localStorage or use defaults
+let STORE = (() => {
+  try { const s = localStorage.getItem('ip_data'); if (s) return JSON.parse(s); } catch(e) {}
+  return null;
+})();
+
+// Merge localStorage overrides into defaults
+if (STORE) {
+  STORE.forEach(s => {
+    const idx = RESTAURANTS.findIndex(r => r.n === s.n);
+    if (idx >= 0) Object.assign(RESTAURANTS[idx], s);
+  });
+}
+
+// Filter state
+const F = { tab:"all", status:"all", q:"" };
+let activeIdx = -1;
+let visibleData = [];
+
+// Save to localStorage
+function saveState() {
+  try { localStorage.setItem('ip_data', JSON.stringify(RESTAURANTS.map(r => ({
+    n:r.n, st:r.st, notes:r.notes, ig:r.ig, tel:r.tel, site:r.site, reserva:r.reserva
+  })))); } catch(e) {}
+}
+
+// Cycle status: want -> visited -> fav -> want
+function cycleStatus(idx) {
+  const d = visibleData[idx];
+  const map = {want:'visited', visited:'fav', fav:'want'};
+  d.st = map[d.st] || 'want';
+  saveState();
+  render();
+}
+
+// Add restaurant form
+function addRestaurant() {
+  showModal(null, 'Adicionar Restaurante', {n:'',h:'Jardins',c:'',t:'contemporary',ch:'',p:2,st:'want',oc:[],vb:'',ig:'',tel:'',site:'',reserva:'',notes:''});
+}
+
+// Edit restaurant
+function editRestaurant(idx) {
+  const d = visibleData[idx];
+  showModal(idx, 'Editar '+d.n, {...d});
+}
+
+// Delete restaurant
+function deleteRestaurant(idx) {
+  const d = visibleData[idx];
+  if (!confirm(`Remover "${d.n}"?`)) return;
+  const ri = RESTAURANTS.findIndex(r => r.n === d.n && r.h === d.h);
+  if (ri >= 0) RESTAURANTS.splice(ri, 1);
+  saveState();
+  render();
+}
+
+// Modal system
+function showModal(idx, title, data) {
+  const ov = document.createElement('div');
+  ov.className = 'modal-overlay';
+  ov.innerHTML = `<div class="modal"><h2>${title}</h2>
+  <div class="form-group"><label>Nome</label><input id="mf-n" value="${escHtml(data.n)}" placeholder="Nome do restaurante"></div>
+  <div class="form-row">
+    <div class="form-group"><label>Bairro</label><input id="mf-h" value="${escHtml(data.h)}" placeholder="Bairro"></div>
+    <div class="form-group"><label>Cozinha</label><input id="mf-c" value="${escHtml(data.c)}" placeholder="Tipo de cozinha"></div>
+    <div class="form-group"><label>Preço (1-4)</label><input id="mf-p" type="number" min="1" max="4" value="${data.p||2}"></div>
+  </div>
+  <div class="form-row">
+    <div class="form-group"><label>Categoria</label><select id="mf-t">
+      ${['contemporary','italian','japanese','french','brazilian','seafood','steakhouse','bar','mediterranean','international'].map(t => `<option value="${t}" ${data.t===t?'selected':''}>${t}</option>`).join('')}
+    </select></div>
+    <div class="form-group"><label>Chef</label><input id="mf-ch" value="${escHtml(data.ch||'')}" placeholder="Chef"></div>
+    <div class="form-group"><label>Status</label><select id="mf-st">
+      ${['want','visited','fav'].map(s => `<option value="${s}" ${data.st===s?'selected':''}>${s==='want'?'Watchlist':s==='visited'?'Visitado':'Favorito'}</option>`).join('')}
+    </select></div>
+  </div>
+  <div class="form-group"><label>Instagram</label><input id="mf-ig" value="${escHtml(data.ig||'')}" placeholder="@username"></div>
+  <div class="form-row">
+    <div class="form-group"><label>Telefone</label><input id="mf-tel" value="${escHtml(data.tel||'')}" placeholder="(11) 99999-9999"></div>
+    <div class="form-group"><label>Site</label><input id="mf-site" value="${escHtml(data.site||'')}" placeholder="site.com.br"></div>
+    <div class="form-group"><label>Reserva</label><input id="mf-reserva" value="${escHtml(data.reserva||'')}" placeholder="Link/telefone"></div>
+  </div>
+  <div class="form-group"><label>Vibe / Descrição</label><textarea id="mf-vb" rows="2">${escHtml(data.vb||'')}</textarea></div>
+  <div class="form-group"><label>Notas Pessoais</label><textarea id="mf-notes" rows="2">${escHtml(data.notes||'')}</textarea></div>
+  <div class="modal-actions">
+    <button class="btn-secondary" onclick="this.closest('.modal-overlay').remove()">Cancelar</button>
+    <button class="btn-primary" onclick="saveModal(${idx===null?'null':idx})">Salvar</button>
+  </div></div>`;
+  document.body.appendChild(ov);
+  ov.addEventListener('click', e => { if (e.target===ov) ov.remove(); });
+}
+
+function saveModal(idx) {
+  const data = {
+    n: document.getElementById('mf-n').value.trim(),
+    h: document.getElementById('mf-h').value.trim(),
+    c: document.getElementById('mf-c').value.trim(),
+    t: document.getElementById('mf-t').value,
+    ch: document.getElementById('mf-ch').value.trim() || '—',
+    p: parseInt(document.getElementById('mf-p').value) || 2,
+    st: document.getElementById('mf-st').value,
+    ig: document.getElementById('mf-ig').value.trim(),
+    tel: document.getElementById('mf-tel').value.trim(),
+    site: document.getElementById('mf-site').value.trim(),
+    reserva: document.getElementById('mf-reserva').value.trim(),
+    vb: document.getElementById('mf-vb').value.trim(),
+    notes: document.getElementById('mf-notes').value.trim(),
+    oc: ['date']
+  };
+  if (!data.n) { alert('Nome é obrigatório'); return; }
+  if (idx === null) {
+    RESTAURANTS.push(data);
+  } else {
+    const d = visibleData[idx];
+    Object.assign(d, data);
+  }
+  saveState();
+  document.querySelector('.modal-overlay').remove();
+  render();
+}
+
+function escHtml(s) { return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+
+// Build badges
+function buildBadges(d) {
+  const b = [];
+  if (d.mi===3) b.push('<span class="badge b-m3">★★★ Michelin</span>');
+  else if (d.mi===2) b.push('<span class="badge b-m2">★★ Michelin</span>');
+  else if (d.mi===1) b.push('<span class="badge b-m1">★ Michelin</span>');
+  if (d.bib) b.push('<span class="badge b-bib">Bib Gourmand</span>');
+  if (d.sel && !d.mi && !d.bib) b.push('<span class="badge b-sel">Selecionado</span>');
+  if (d.l50) b.push('<span class="badge b-50b">50B #'+d.l50+' LatAm</span>');
+  if (d.w50) b.push('<span class="badge b-50b">#'+d.w50+' World</span>');
+  if (d.vg) b.push('<span class="badge b-vg">VG</span>');
+  if (d.vj) b.push('<span class="badge b-vj">VJ</span>');
+  if (d.ft) b.push('<span class="badge b-ft">FT</span>');
+  if (d.ny) b.push('<span class="badge b-ny">NYT</span>');
+  if (d.bl) b.push('<span class="badge b-bl">BL</span>');
+  if (d.mu) b.push('<span class="badge b-mu">Must</span>');
+  return b.join('');
+}
+
+function priceStr(p) {
+  return '<span class="price-dots">'+'$'.repeat(p||2)+'</span><span class="price-dim">'+'$'.repeat(4-(p||2))+'</span>';
+}
+
+function statusPill(st, idx) {
+  const map = {visited:'✓ Visitado', want:'→ Watchlist', fav:'★ Favorito'};
+  const cls = {visited:'sp-visited', want:'sp-want', fav:'sp-fav'};
+  return `<span class="status-pill ${cls[st]||cls.want}" onclick="cycleStatus(${idx})">${map[st]||map.want}</span>`;
+}
+
+function cityPill(city) {
+  if (!city || city==='SP') return '';
+  return `<span class="city-pill ${city==='MIA'?'cp-mia':'cp-ny'}">${city==='MIA'?'Miami':'NYC'}</span>`;
+}
+
+function buildOcc(oc) {
+  if (!oc || !oc.length) return '';
+  const map = {date:['ot-date','Encontro'], biz:['ot-biz','Negócios'], impress:['ot-impress','Impressionar'], hidden:['ot-hidden','Joia'], casual:['ot-casual','Casual'], late:['ot-late','Noite']};
+  return oc.map(o => map[o] ? `<span class="occ-tag ${map[o][0]}">${map[o][1]}</span>` : '').join('');
+}
+
+function hoodTip(h) {
+  const tip = HOODS[h]||'';
+  return tip ? `<span class="card-hood">${h}<span class="card-hood-tooltip">${tip}</span></span>` : `<span class="card-hood">${h}</span>`;
+}
+
+// Render
+function render() {
+  const grid = document.getElementById('grid');
+  const empty = document.getElementById('empty-state');
+  visibleData = RESTAURANTS.filter(d => {
+    if (F.tab !== 'all' && d.t !== F.tab) return false;
+    if (F.status !== 'all' && d.st !== F.status) return false;
+    if (F.q) {
+      const q = F.q.toLowerCase();
+      if (![d.n,d.c,d.h,d.ch||'',d.vb||''].join(' ').toLowerCase().includes(q)) return false;
+    }
+    return true;
+  });
+  document.getElementById('st-total').textContent = RESTAURANTS.length;
+  document.getElementById('st-visited').textContent = RESTAURANTS.filter(x=>x.st==='visited').length;
+  document.getElementById('st-want').textContent = RESTAURANTS.filter(x=>x.st==='want').length;
+  document.getElementById('st-michelin').textContent = RESTAURANTS.filter(x=>x.mi||x.bib||x.sel).length;
+  document.getElementById('st-50b').textContent = RESTAURANTS.filter(x=>x.l50||x.w50).length;
+  const cr = document.getElementById('results-count');
+  cr.textContent = visibleData.length===RESTAURANTS.length ? RESTAURANTS.length+' restaurantes' : visibleData.length+' de '+RESTAURANTS.length;
+  if (!visibleData.length) { grid.innerHTML=''; empty.style.display='block'; return; }
+  empty.style.display='none';
+  grid.innerHTML = visibleData.map((d,i) => {
+    const badges = buildBadges(d);
+    const occs = buildOcc(d.oc);
+    const ig = d.ig ? `<a class="card-link" href="https://instagram.com/${d.ig}" target="_blank">📸 @${d.ig}</a>` : '<span class="card-link-dash">—</span>';
+    const tel = d.tel ? `<span>📞 ${d.tel}</span>` : '';
+    const site = d.site ? `<a class="card-link" href="https://${d.site}" target="_blank">🌐 ${d.site}</a>` : '';
+    const reserva = d.reserva ? `<span>📋 ${d.reserva}</span>` : '';
+    const notes = d.notes ? `<div style="margin-top:6px;padding:6px;background:var(--accent-soft);border-radius:4px;font-size:11px;color:var(--text-dim)">📝 ${escHtml(d.notes)}</div>` : '';
+    return `<div class="card" data-idx="${i}" tabindex="0">
+<div class="card-actions">
+<button class="card-action-btn edit" onclick="event.stopPropagation();editRestaurant(${i})" title="Editar">✏️</button>
+<button class="card-action-btn del" onclick="event.stopPropagation();deleteRestaurant(${i})" title="Remover">🗑</button>
+</div>
+<div class="card-top"><div class="card-name-block"><div class="card-name">${d.n}</div>
+<div class="card-meta-row">${hoodTip(d.h)}${cityPill(d.city)}</div>
+<div class="card-cuisine">${d.c}</div></div>${statusPill(d.st,i)}</div>
+${badges?'<div class="badges-row">'+badges+'</div>':''}
+${d.vb?'<div class="card-vibe">'+d.vb+'</div>':''}
+<div class="card-chef"><strong>Chef</strong> ${d.ch||'—'}</div>
+<div class="card-bottom"><div>${priceStr(d.p)}</div>${occs?'<div class="occ-row">'+occs+'</div>':''}</div>
+<div class="card-links">${ig}${tel}${site}${reserva}</div>${notes}
+</div>`;
+  }).join('');
+  activeIdx = -1;
+  grid.querySelectorAll('.card').forEach(c => {
+    c.addEventListener('click', () => setActive(parseInt(c.dataset.idx)));
+  });
+}
+
+// Keyboard nav
+function setActive(idx) {
+  document.querySelectorAll('#grid .card').forEach(c => c.classList.remove('card-focused'));
+  if (idx < 0 || idx >= visibleData.length) { activeIdx=-1; return; }
+  activeIdx = idx;
+  const t = document.querySelector(`#grid .card[data-idx="${idx}"]`);
+  if (t) { t.classList.add('card-focused'); t.scrollIntoView({behavior:'smooth',block:'nearest'}); }
+  showHint();
+}
+let hintTO;
+function showHint() {
+  const h = document.getElementById('nav-hint');
+  h.classList.add('show'); clearTimeout(hintTO);
+  hintTO = setTimeout(() => h.classList.remove('show'), 2500);
+}
+document.addEventListener('keydown', e => {
+  if (!['ArrowLeft','ArrowRight','ArrowUp','ArrowDown'].includes(e.key)) return;
+  if (activeIdx===-1 && visibleData.length) { setActive(0); return; }
+  const cols = window.innerWidth>=1100?3:(window.innerWidth>=680?2:1);
+  let n = activeIdx;
+  if (e.key==='ArrowRight') n=Math.min(n+1,visibleData.length-1);
+  else if (e.key==='ArrowLeft') n=Math.max(n-1,0);
+  else if (e.key==='ArrowDown') n=Math.min(n+cols,visibleData.length-1);
+  else if (e.key==='ArrowUp') n=Math.max(n-cols,0);
+  if (n!==activeIdx) { e.preventDefault(); setActive(n); }
+});
+document.addEventListener('keydown', e => { if (e.key==='Escape') setActive(-1); });
+
+// Tabs
+document.querySelectorAll('.tab-btn').forEach(btn => btn.addEventListener('click', function() {
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  this.classList.add('active'); F.tab=this.dataset.tab; render();
+}));
+
+// Status filter
+document.querySelectorAll('.status-btn').forEach(btn => btn.addEventListener('click', function() {
+  document.querySelectorAll('.status-btn').forEach(b => b.className='status-btn');
+  F.status=this.dataset.status;
+  const cls = F.status==='all'?'active-all':F.status==='visited'?'active-visited':F.status==='want'?'active-want':'active-fav';
+  this.classList.add(cls); render();
+}));
+
+// Search
+document.getElementById('search-input').addEventListener('input', function() { F.q=this.value.trim(); render(); });
+
+// Legend toggle
+document.getElementById('legend-toggle').addEventListener('click', function() {
+  this.classList.toggle('open');
+  document.getElementById('legend-content').classList.toggle('open');
+});
+
+// Guides toggle
+function toggleGuides() {
+  document.getElementById('guides-toggle').classList.toggle('open');
+  document.getElementById('guides-content').classList.toggle('collapsed');
+}
+
+// Init
+render();
+</script>
+</body>
+</html>

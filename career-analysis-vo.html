@@ -1,0 +1,1006 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Career Analysis v.o. — Eduardo · Incrementum</title>
+<style>
+:root {
+  --bg: #f4f1ec;
+  --surface: #ffffff;
+  --surface-2: #faf7f2;
+  --surface-3: #f0ece4;
+  --text: #1a1a1a;
+  --text-2: #4a4743;
+  --text-3: #8a8680;
+  --border: #d4d0c8;
+  --border-2: #c8c4bb;
+  --gold: #9a7b2f;
+  --gold-bg: rgba(154,123,47,.08);
+  --gold-border: rgba(154,123,47,.25);
+  --link: #1e4d8c;
+  --green: #1a6b35;
+  --green-bg: rgba(26,107,53,.07);
+  --green-border: rgba(26,107,53,.25);
+  --red: #a82828;
+  --red-bg: rgba(168,40,40,.07);
+  --red-border: rgba(168,40,40,.25);
+  --amber: #b06010;
+  --amber-bg: rgba(176,96,16,.07);
+  --amber-border: rgba(176,96,16,.25);
+  --blue-bg: rgba(30,77,140,.06);
+  --blue-border: rgba(30,77,140,.22);
+  --decade: #7a5c10;
+  --core-ai: #1e4d8c;
+  --enter-ai: #5c3d8a;
+  --anima: #1a6b35;
+  --fo-gen: #2d6050;
+}
+*, *::before, *::after { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+html, body {
+  margin: 0; padding: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: "Georgia", "Times New Roman", serif;
+  -webkit-font-smoothing: antialiased;
+  line-height: 1.7;
+  font-size: 15px;
+}
+p, li, td { font-family: "Georgia", serif; }
+h1, h2, h3, h4, h5,
+.nav-brand, .sticky-nav-inner a, .eyebrow, th,
+.toc-title, .score-pill .name, .pill,
+.tag, .callout .label, .traj-title, .milestone-time,
+.arc-year-label, .runway-label, .sf-title,
+.matrix-factor, .section-lede, button, .expander-sub {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+}
+
+/* === MAIN TAB NAV === */
+.main-tab-nav {
+  position: sticky;
+  top: 0;
+  z-index: 300;
+  background: rgba(244,241,236,0.97);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+  box-shadow: 0 1px 6px rgba(0,0,0,.05);
+  display: flex;
+  align-items: stretch;
+  padding: 0 24px;
+}
+.main-brand {
+  font-size: 9.5px; font-weight: 800; color: var(--gold);
+  letter-spacing: 2.5px; text-transform: uppercase;
+  padding: 14px 16px 14px 0;
+  border-right: 1px solid var(--border);
+  margin-right: 12px;
+  display: flex; align-items: center; flex-shrink: 0;
+}
+.main-tab-btn {
+  padding: 14px 20px;
+  background: none; border: none;
+  border-bottom: 2px solid transparent;
+  font-size: 11px; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 1.5px;
+  color: var(--text-3); cursor: pointer;
+  transition: color 150ms, border-color 150ms;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+  flex-shrink: 0;
+}
+.main-tab-btn:hover { color: var(--text-2); }
+.main-tab-btn.active { color: var(--gold); border-bottom-color: var(--gold); }
+.tab-pane { display: none; }
+.tab-pane.active { display: block; }
+
+/* === STICKY NAV (career tab) === */
+.sticky-nav {
+  position: sticky; top: 46px; z-index: 100;
+  background: rgba(244,241,236,0.95);
+  backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+  box-shadow: 0 1px 6px rgba(0,0,0,.06);
+}
+.sticky-nav-inner {
+  max-width: 1060px; margin: 0 auto; padding: 0 24px;
+  display: flex; align-items: stretch; overflow-x: auto; scrollbar-width: none;
+  gap: 2px;
+}
+.sticky-nav-inner::-webkit-scrollbar { display: none; }
+.nav-brand {
+  flex-shrink: 0; font-size: 10px; font-weight: 800;
+  color: var(--gold); letter-spacing: 2.5px; text-transform: uppercase;
+  padding: 12px 16px 12px 0; border-right: 1px solid var(--border);
+  margin-right: 8px; display: flex; align-items: center;
+}
+.sticky-nav-inner a {
+  flex-shrink: 0; padding: 12px 9px; font-size: 10.5px; font-weight: 600;
+  color: var(--text-3); text-decoration: none; white-space: nowrap;
+  border-bottom: 2px solid transparent; display: flex; align-items: center;
+  transition: color 130ms, border-color 130ms; letter-spacing: .3px; text-transform: uppercase;
+}
+.sticky-nav-inner a:hover { color: var(--text-2); }
+.sticky-nav-inner a.nav-active { color: var(--gold); border-bottom-color: var(--gold); }
+
+/* === FLOATING SCORE === */
+.score-float {
+  position: fixed; bottom: 24px; right: 24px; z-index: 200;
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: 12px; padding: 16px 18px 12px; min-width: 210px;
+  box-shadow: 0 4px 24px rgba(0,0,0,.12);
+  opacity: 0; pointer-events: none; transform: translateY(12px);
+  transition: opacity 280ms, transform 280ms;
+}
+.score-float.sf-visible { opacity: 1; pointer-events: auto; transform: translateY(0); }
+.sf-title {
+  font-size: 9px; text-transform: uppercase; letter-spacing: 2px;
+  color: var(--text-3); font-weight: 700; margin-bottom: 10px;
+  display: flex; justify-content: space-between; align-items: center;
+  border-bottom: 1px solid var(--border); padding-bottom: 8px;
+}
+.sf-close {
+  background: none; border: none; color: var(--text-3); cursor: pointer;
+  font-size: 15px; padding: 0; transition: color 130ms; line-height: 1;
+}
+.sf-close:hover { color: var(--text); }
+.sf-row {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 5px 0; border-bottom: 1px solid var(--border); font-size: 12.5px;
+}
+.sf-row:last-child { border-bottom: none; padding-bottom: 0; }
+.sf-row .sf-name { color: var(--text-2); font-family: sans-serif; }
+.sf-row .sf-val { font-weight: 700; font-family: "SF Mono", "Fira Code", monospace; }
+@media (max-width: 640px) { .score-float { display: none; } }
+
+/* === PAGE === */
+.page { max-width: 1060px; margin: 0 auto; padding: 52px 24px 110px; }
+
+/* === HERO === */
+header.hero {
+  border: 1px solid var(--border); border-radius: 14px;
+  padding: 38px 38px 30px;
+  background: linear-gradient(135deg, #ffffff 0%, #fdf9f0 100%);
+  margin-bottom: 32px; position: relative; overflow: hidden;
+  box-shadow: 0 2px 12px rgba(0,0,0,.06);
+}
+header.hero::before {
+  content: ""; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+  background: linear-gradient(90deg, var(--decade) 0%, var(--core-ai) 33%, var(--enter-ai) 66%, var(--anima) 100%);
+}
+.eyebrow {
+  color: var(--gold); font-size: 10.5px; text-transform: uppercase;
+  letter-spacing: 2.5px; font-weight: 700; margin-bottom: 14px;
+  display: flex; align-items: center; gap: 10px;
+}
+.eyebrow::before { content: ""; width: 22px; height: 2px; background: var(--gold); }
+header.hero h1 {
+  margin: 0 0 10px; font-size: 28px; line-height: 1.25;
+  letter-spacing: -0.018em; font-weight: 700;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+}
+header.hero h1 em { font-style: normal; color: var(--gold); }
+header.hero .sub {
+  color: var(--text-2); font-size: 14.5px; max-width: 760px;
+  line-height: 1.7; margin: 0;
+}
+.hero-tags { display: flex; flex-wrap: wrap; gap: 7px; margin-top: 20px; padding-top: 20px; border-top: 1px solid var(--border); }
+.tag {
+  border: 1px solid var(--border); background: var(--surface-2);
+  color: var(--text-2); padding: 4px 10px; border-radius: 999px; font-size: 11px;
+  font-family: sans-serif; font-weight: 500;
+}
+.tag.warn { color: var(--amber); border-color: var(--amber-border); background: var(--amber-bg); }
+.tag.ok   { color: var(--green); border-color: var(--green-border); background: var(--green-bg); }
+.tag.v4   { color: var(--gold); border-color: var(--gold-border); background: var(--gold-bg); }
+.tag.alert { color: var(--enter-ai); border-color: rgba(92,61,138,.3); background: rgba(92,61,138,.07); }
+
+/* === TOC === */
+nav.toc {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: 10px; padding: 18px 22px; margin-bottom: 40px;
+  box-shadow: 0 1px 4px rgba(0,0,0,.04);
+}
+nav.toc .toc-title {
+  font-size: 9.5px; text-transform: uppercase; letter-spacing: 2px;
+  color: var(--text-3); font-weight: 700; margin-bottom: 12px;
+}
+nav.toc ol { margin: 0; padding-left: 20px; columns: 2; column-gap: 24px; }
+nav.toc li { margin: 3px 0; }
+nav.toc a { color: var(--link); text-decoration: none; font-size: 13px; transition: opacity 130ms; font-family: sans-serif; }
+nav.toc a:hover { opacity: .75; text-decoration: underline; }
+@media (max-width: 560px) { nav.toc ol { columns: 1; } }
+
+/* === SECTIONS === */
+section { margin-top: 56px; scroll-margin-top: 96px; }
+h2.section-title {
+  font-size: 19px; margin: 0 0 6px;
+  letter-spacing: -0.012em; font-weight: 700;
+  display: flex; align-items: baseline; gap: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+}
+h2.section-title .num {
+  color: var(--gold); font-size: 12px; font-weight: 700;
+  margin-right: 12px; letter-spacing: .5px;
+  font-family: "SF Mono", "Fira Code", monospace; opacity: .8;
+}
+.section-lede { color: var(--text-2); margin: 0 0 22px; font-size: 14px; line-height: 1.65; }
+
+/* === CARDS === */
+.card {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: 12px; padding: 22px 24px; margin-bottom: 14px;
+  transition: border-color 180ms, box-shadow 180ms;
+  box-shadow: 0 1px 4px rgba(0,0,0,.04);
+}
+.card:hover { border-color: var(--border-2); box-shadow: 0 3px 12px rgba(0,0,0,.08); }
+.card h3 {
+  margin: 0 0 8px; font-size: 16px; letter-spacing: -.01em; font-weight: 700;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+}
+.card p { margin: 7px 0; font-size: 14px; line-height: 1.7; }
+.card ul { margin: 6px 0 6px 16px; padding: 0; }
+.card li { margin: 5px 0; font-size: 13.5px; line-height: 1.65; }
+
+/* === EXPANDER === */
+.expander { margin-bottom: 14px; border: 1px solid var(--border); border-radius: 12px; overflow: hidden; box-shadow: 0 1px 4px rgba(0,0,0,.04); }
+.expander-header {
+  background: var(--surface); padding: 18px 22px;
+  cursor: pointer; display: flex; align-items: center; gap: 14px;
+  transition: background 160ms; user-select: none;
+}
+.expander-header:hover { background: var(--surface-2); }
+.expander-icon {
+  width: 22px; height: 22px; border-radius: 50%;
+  background: var(--surface-2); border: 1px solid var(--border);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 13px; flex-shrink: 0; transition: transform 240ms;
+  color: var(--text-3); font-weight: 700;
+}
+.expander.open .expander-icon { transform: rotate(45deg); color: var(--gold); }
+.expander-label { font-size: 15px; font-weight: 700; flex: 1; font-family: sans-serif; }
+.expander-sub { font-size: 12px; color: var(--text-3); }
+.expander-body {
+  max-height: 0; overflow: hidden;
+  transition: max-height 380ms cubic-bezier(.4,0,.2,1);
+}
+.expander.open .expander-body { max-height: 14000px; border-top: 1px solid var(--border); }
+.expander-inner { padding: 24px 26px; background: var(--surface-2); }
+
+/* === PROFILE GRID === */
+.profile-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; }
+@media (max-width: 760px) { .profile-grid { grid-template-columns: 1fr; } }
+.profile-block h4 {
+  margin: 0 0 10px; font-size: 11px; color: var(--text-3); text-transform: uppercase;
+  letter-spacing: 1.2px; font-weight: 700; font-family: sans-serif;
+  padding-bottom: 6px; border-bottom: 1px solid var(--border);
+}
+.profile-block ul { margin: 0 0 0 14px; padding: 0; }
+.profile-block li { margin: 5px 0; font-size: 13.5px; line-height: 1.65; }
+.profile-block p { margin: 5px 0; font-size: 13.5px; line-height: 1.65; color: var(--text-2); }
+
+/* === INTEL BLOCK === */
+.intel-block {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: 10px; padding: 18px 22px; margin: 14px 0;
+  box-shadow: 0 1px 3px rgba(0,0,0,.04);
+}
+.intel-block-title {
+  font-size: 10px; font-weight: 800; text-transform: uppercase; letter-spacing: 1.8px;
+  color: var(--text-3); margin-bottom: 14px; font-family: sans-serif;
+  padding-bottom: 8px; border-bottom: 1px solid var(--border);
+  display: flex; align-items: center; gap: 8px;
+}
+.intel-block-title .badge {
+  font-size: 9px; padding: 2px 7px; border-radius: 999px; font-weight: 700;
+  background: var(--gold-bg); color: var(--gold); border: 1px solid var(--gold-border);
+}
+.intel-block p { margin: 6px 0; font-size: 13.5px; line-height: 1.7; color: var(--text-2); }
+.intel-block ul { margin: 6px 0 6px 16px; }
+.intel-block li { margin: 5px 0; font-size: 13.5px; line-height: 1.65; }
+.intel-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 10px; }
+@media (max-width: 700px) { .intel-grid { grid-template-columns: 1fr; } }
+.intel-sub {
+  font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.2px;
+  color: var(--text-3); margin: 12px 0 6px; font-family: sans-serif;
+}
+
+/* === DOSSIER === */
+.dossier-block {
+  background: linear-gradient(135deg, var(--surface) 0%, var(--surface-2) 100%);
+  border: 1px solid var(--border); border-radius: 10px;
+  padding: 18px 22px; margin: 14px 0;
+}
+.dossier-name { font-size: 17px; font-weight: 800; letter-spacing: -0.01em; font-family: sans-serif; margin-bottom: 4px; }
+.dossier-title { font-size: 12px; color: var(--text-3); font-family: sans-serif; margin-bottom: 12px; }
+.dossier-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 14px; }
+@media (max-width: 700px) { .dossier-grid { grid-template-columns: 1fr; } }
+.dossier-section h5 {
+  font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.2px;
+  color: var(--text-3); margin: 0 0 6px; font-family: sans-serif;
+  padding-bottom: 5px; border-bottom: 1px solid var(--border);
+}
+.dossier-section p { font-size: 13px; line-height: 1.6; margin: 4px 0; color: var(--text-2); }
+.dossier-section ul { margin: 4px 0 4px 14px; }
+.dossier-section li { font-size: 13px; line-height: 1.6; margin: 3px 0; }
+.why-matters {
+  background: var(--gold-bg); border: 1px solid var(--gold-border); border-left: 3px solid var(--gold);
+  padding: 10px 14px; border-radius: 0 8px 8px 0; margin-top: 12px;
+  font-size: 13px; color: var(--text-2); line-height: 1.6;
+}
+.why-matters strong { color: var(--gold); }
+
+/* === WEEK NARRATIVE === */
+.week-narrative {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: 8px; padding: 16px 20px; margin: 14px 0;
+  font-size: 13.5px; line-height: 1.75; color: var(--text-2);
+}
+.week-narrative strong { color: var(--text); }
+.week-narrative .week-caveat {
+  margin-top: 12px; padding-top: 10px; border-top: 1px solid var(--border);
+  font-size: 12px; color: var(--text-3); font-family: sans-serif; font-style: italic;
+}
+
+/* === FURTHER READING === */
+.reading-list { margin: 0; }
+.reading-item { display: flex; gap: 14px; padding: 10px 0; border-bottom: 1px solid var(--border); font-size: 13px; }
+.reading-item:last-child { border-bottom: none; padding-bottom: 0; }
+.reading-num { font-family: "SF Mono", "Fira Code", monospace; font-size: 10px; color: var(--text-3); font-weight: 700; flex-shrink: 0; width: 18px; padding-top: 3px; }
+.reading-title { font-weight: 600; color: var(--link); text-decoration: none; }
+.reading-title:hover { text-decoration: underline; }
+.reading-source { font-size: 11px; color: var(--text-3); margin-top: 1px; font-family: sans-serif; }
+.reading-why { margin-top: 4px; color: var(--text-2); font-size: 12.5px; line-height: 1.55; }
+
+/* === GRIDS === */
+.grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px; }
+@media (max-width: 760px) { .grid-2, .grid-3 { grid-template-columns: 1fr; } }
+
+/* === PILLS === */
+.pill { font-size: 10px; font-weight: 700; padding: 2px 8px; border-radius: 999px; margin-left: 7px; vertical-align: middle; display: inline-block; }
+.pill.decade   { background: rgba(122,92,16,.10);  color: var(--decade);   border: 1px solid rgba(122,92,16,.28); }
+.pill.core-ai  { background: rgba(30,77,140,.09);   color: var(--core-ai);  border: 1px solid rgba(30,77,140,.28); }
+.pill.enter-ai { background: rgba(92,61,138,.09);   color: var(--enter-ai); border: 1px solid rgba(92,61,138,.28); }
+.pill.anima    { background: rgba(26,107,53,.09);   color: var(--anima);    border: 1px solid rgba(26,107,53,.28); }
+.pill.unicorn  { background: rgba(92,61,138,.14);   color: var(--enter-ai); border: 1.5px solid rgba(92,61,138,.4); font-size: 9px; }
+
+/* === TABLES === */
+.tbl-wrap { overflow-x: auto; margin: 14px 0; border-radius: 10px; border: 1px solid var(--border); box-shadow: 0 1px 4px rgba(0,0,0,.04); }
+table { width: 100%; border-collapse: collapse; font-size: 13px; }
+thead th { text-align: left; color: var(--text-2); font-weight: 700; border-bottom: 2px solid var(--border); padding: 10px 12px; background: var(--surface-3); font-size: 11px; text-transform: uppercase; letter-spacing: .9px; white-space: nowrap; }
+tbody td { padding: 10px 12px; border-bottom: 1px solid var(--border); vertical-align: top; line-height: 1.55; font-size: 13px; }
+tbody tr:nth-child(odd)  td { background: var(--surface); }
+tbody tr:nth-child(even) td { background: var(--surface-2); }
+tbody tr:last-child td { border-bottom: 0; }
+tbody tr:hover td { background: var(--surface-3) !important; }
+td.good { color: var(--green); font-weight: 600; }
+td.meh  { color: var(--amber); font-weight: 500; }
+td.bad  { color: var(--red);   font-weight: 500; }
+
+/* === CALLOUT === */
+.callout {
+  border-left: 3px solid var(--gold); background: var(--gold-bg);
+  padding: 14px 18px; border-radius: 0 10px 10px 0; margin: 14px 0;
+  border: 1px solid var(--gold-border); border-left-width: 3px;
+}
+.callout.warn  { border-color: var(--amber-border); border-left-color: var(--amber); background: var(--amber-bg); }
+.callout.green { border-color: var(--green-border); border-left-color: var(--green); background: var(--green-bg); }
+.callout.red   { border-color: var(--red-border);   border-left-color: var(--red);   background: var(--red-bg); }
+.callout.blue  { border-color: var(--blue-border);  border-left-color: var(--link);  background: var(--blue-bg); }
+.callout.purple { border-color: rgba(92,61,138,.3); border-left-color: var(--enter-ai); background: rgba(92,61,138,.07); }
+.callout .label { font-size: 10px; text-transform: uppercase; letter-spacing: 1.8px; color: var(--text-3); font-weight: 700; margin-bottom: 5px; display: block; }
+.callout p { margin: 4px 0; font-size: 14px; line-height: 1.65; }
+
+/* === MARKS === */
+.u   { color: var(--amber); font-weight: 600; }
+.est { color: var(--link); font-weight: 500; font-style: italic; }
+.neg { color: var(--red); }
+.pos { color: var(--green); }
+a { color: var(--link); }
+
+/* === SALARY BARS === */
+.salary-grid { display: grid; gap: 10px; margin-bottom: 8px; }
+.salary-row { display: flex; align-items: center; gap: 12px; }
+.salary-label { width: 110px; font-size: 12px; color: var(--text-2); flex-shrink: 0; font-weight: 600; font-family: sans-serif; }
+.salary-track { flex: 1; height: 26px; background: var(--surface-3); border-radius: 6px; border: 1px solid var(--border); overflow: hidden; position: relative; }
+.salary-fill { height: 100%; display: flex; align-items: center; padding: 0 12px; font-size: 11px; font-weight: 700; color: #fff; white-space: nowrap; border-radius: 6px; }
+.salary-fill.decade   { background: linear-gradient(90deg, #5a3c00, var(--decade)); }
+.salary-fill.core-ai  { background: linear-gradient(90deg, #0f2a50, var(--core-ai)); }
+.salary-fill.enter-ai { background: linear-gradient(90deg, #3a1f60, var(--enter-ai)); }
+.salary-fill.anima    { background: linear-gradient(90deg, #0d3d1c, var(--anima)); }
+.salary-note { width: 200px; font-size: 11px; color: var(--text-3); flex-shrink: 0; font-family: sans-serif; }
+@media (max-width: 700px) { .salary-note { display: none; } .salary-label { width: 90px; } }
+
+/* === DECISION MATRIX === */
+.matrix-wrap { overflow-x: auto; border-radius: 12px; border: 1px solid var(--border); margin: 16px 0; box-shadow: 0 1px 6px rgba(0,0,0,.05); }
+.matrix-tbl { min-width: 860px; border-collapse: collapse; width: 100%; font-size: 13px; }
+.matrix-tbl thead th { padding: 12px 14px; font-size: 11px; text-transform: uppercase; letter-spacing: 1px; color: var(--text-2); font-weight: 700; background: var(--surface-3); border-bottom: 2px solid var(--border); text-align: center; }
+.matrix-tbl thead th:first-child { text-align: left; min-width: 160px; }
+.matrix-tbl thead th:nth-child(2) { text-align: center; min-width: 60px; color: var(--text-3); }
+.matrix-tbl tbody td { padding: 10px 14px; border-bottom: 1px solid var(--border); text-align: center; }
+.matrix-tbl tbody td:first-child { text-align: left; color: var(--text); font-weight: 600; }
+.matrix-tbl tbody td:nth-child(2) { color: var(--text-3); font-size: 12px; }
+.matrix-tbl tbody tr:nth-child(odd)  td { background: var(--surface); }
+.matrix-tbl tbody tr:nth-child(even) td { background: var(--surface-2); }
+.matrix-tbl tbody tr:hover td { background: var(--surface-3) !important; }
+.matrix-tbl .total-row td { border-top: 2px solid var(--border); font-weight: 800; font-size: 15px; background: var(--surface-3) !important; }
+.matrix-tbl .total-row td:first-child { color: var(--text-3); font-size: 11px; text-transform: uppercase; letter-spacing: 1px; }
+.matrix-factor { font-size: 11.5px; color: var(--text-3); font-weight: 400; display: block; margin-top: 2px; }
+.score-cell { display: inline-flex; align-items: center; justify-content: center; width: 38px; height: 24px; border-radius: 5px; font-weight: 800; font-size: 13px; font-family: "SF Mono", monospace; }
+.score-cell.s-high   { background: var(--green-bg); color: var(--green); border: 1px solid var(--green-border); }
+.score-cell.s-mid    { background: var(--amber-bg); color: var(--amber); border: 1px solid var(--amber-border); }
+.score-cell.s-low    { background: var(--red-bg);   color: var(--red);   border: 1px solid var(--red-border); }
+.score-cell.s-winner { background: rgba(26,107,53,.14); color: var(--green); border: 2px solid var(--green); font-size: 14px; }
+.matrix-col-decade   th, .matrix-col-decade   td { border-left: 1px solid rgba(122,92,16,.18); }
+.matrix-col-core-ai  th, .matrix-col-core-ai  td { border-left: 1px solid rgba(30,77,140,.14); }
+.matrix-col-enter-ai th, .matrix-col-enter-ai td { border-left: 1px solid rgba(92,61,138,.14); }
+.matrix-col-anima    th, .matrix-col-anima    td { border-left: 1px solid rgba(26,107,53,.18); }
+.matrix-col-fo-gen   th, .matrix-col-fo-gen   td { border-left: 1px solid rgba(45,96,80,.14); }
+
+/* === GROWTH TRAJECTORY === */
+.traj-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin: 16px 0; }
+@media (max-width: 900px) { .traj-grid { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 540px) { .traj-grid { grid-template-columns: 1fr; } }
+.traj-card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 16px; box-shadow: 0 1px 4px rgba(0,0,0,.04); }
+.traj-card.decade   { border-top: 3px solid var(--decade); }
+.traj-card.core-ai  { border-top: 3px solid var(--core-ai); }
+.traj-card.enter-ai { border-top: 3px solid var(--enter-ai); }
+.traj-card.anima    { border-top: 3px solid var(--anima); }
+.traj-title { font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 14px; }
+.traj-title.decade   { color: var(--decade); }
+.traj-title.core-ai  { color: var(--core-ai); }
+.traj-title.enter-ai { color: var(--enter-ai); }
+.traj-title.anima    { color: var(--anima); }
+.milestone { display: flex; gap: 10px; margin-bottom: 12px; }
+.milestone-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; margin-top: 5px; }
+.milestone-dot.decade   { background: var(--decade); }
+.milestone-dot.core-ai  { background: var(--core-ai); }
+.milestone-dot.enter-ai { background: var(--enter-ai); }
+.milestone-dot.anima    { background: var(--anima); }
+.milestone-content { line-height: 1.45; }
+.milestone-time { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: var(--text-3); }
+.milestone-desc { color: var(--text-2); margin-top: 2px; font-size: 12.5px; }
+
+/* === CAREER ARC === */
+.arc-row { display: grid; grid-template-columns: 100px 1fr 1fr 1fr; gap: 12px; align-items: start; padding: 12px 0; border-bottom: 1px solid var(--border); }
+.arc-row:last-child { border-bottom: none; }
+.arc-path { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; padding-top: 2px; font-family: sans-serif; }
+.arc-year { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 12px 14px; }
+.arc-year-label { font-size: 10px; color: var(--text-3); font-weight: 700; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 5px; }
+.arc-year-content { font-size: 12.5px; color: var(--text-2); line-height: 1.5; }
+@media (max-width: 700px) { .arc-row { grid-template-columns: 1fr; } }
+
+/* === RUNWAY === */
+.runway-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 12px; margin: 16px 0; }
+@media (max-width: 660px) { .runway-grid { grid-template-columns: 1fr; } }
+.runway-card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 18px 20px; text-align: center; box-shadow: 0 1px 4px rgba(0,0,0,.04); }
+.runway-label { font-size: 10px; color: var(--text-3); text-transform: uppercase; letter-spacing: 1.5px; font-weight: 700; margin-bottom: 8px; }
+.runway-amount { font-size: 26px; font-weight: 800; letter-spacing: -0.02em; font-family: sans-serif; }
+.runway-desc { font-size: 12px; color: var(--text-2); margin-top: 6px; line-height: 1.45; }
+.runway-card.critical .runway-amount { color: var(--red); }
+.runway-card.moderate .runway-amount { color: var(--amber); }
+.runway-card.safe .runway-amount { color: var(--green); }
+
+/* === FIT BLOCK === */
+.fit-block { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 20px 24px; margin-bottom: 14px; box-shadow: 0 1px 4px rgba(0,0,0,.04); }
+.fit-header { display: grid; grid-template-columns: 230px 1fr 1fr 70px; gap: 14px; padding-bottom: 10px; border-bottom: 2px solid var(--border); color: var(--text-3); font-size: 10.5px; text-transform: uppercase; letter-spacing: 1px; font-family: sans-serif; font-weight: 700; }
+.fit-row { display: grid; grid-template-columns: 230px 1fr 1fr 70px; align-items: center; gap: 14px; padding: 10px 0; border-bottom: 1px solid var(--border); }
+.fit-row:last-child { border-bottom: 0; }
+.fit-row .label { font-size: 13px; }
+.fit-row .label .w { color: var(--text-3); font-size: 11px; margin-left: 5px; font-family: sans-serif; }
+.bar { height: 14px; background: var(--surface-3); border-radius: 999px; overflow: hidden; border: 1px solid var(--border); position: relative; }
+.bar > span { display: block; height: 100%; border-radius: 999px; }
+.bar.fo > span  { background: linear-gradient(90deg, var(--anima), #3a9f60); }
+.bar.su > span  { background: linear-gradient(90deg, var(--decade), #c09820); }
+.bar .legend { position: absolute; right: 8px; top: 50%; transform: translateY(-50%); font-size: 10px; color: #fff; font-weight: 700; }
+.fit-totals { display: grid; grid-template-columns: 230px 1fr 1fr 70px; gap: 14px; padding-top: 14px; margin-top: 6px; border-top: 2px solid var(--border); font-weight: 700; }
+.fit-totals .num.fo { color: var(--anima); font-family: sans-serif; }
+.fit-totals .num.su { color: var(--decade); font-family: sans-serif; }
+@media (max-width: 700px) { .fit-row, .fit-header, .fit-totals { grid-template-columns: 1fr; } }
+
+/* === RECO BLOCK === */
+.reco { border: 1px solid var(--border); background: linear-gradient(135deg, #ffffff, #faf7f0); padding: 30px 32px; border-radius: 14px; margin-top: 18px; box-shadow: 0 2px 12px rgba(0,0,0,.06); border-top: 3px solid var(--decade); }
+.reco h3 { margin: 0 0 10px; font-size: 20px; letter-spacing: -0.012em; font-family: sans-serif; }
+.reco p { font-size: 14px; line-height: 1.7; margin: 10px 0; }
+.reco ul { margin: 8px 0 8px 18px; }
+.reco li { font-size: 13.5px; line-height: 1.65; margin: 6px 0; }
+.score-pair { display: flex; gap: 16px; margin: 16px 0 10px; flex-wrap: wrap; }
+.score-pill { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 12px 18px; min-width: 190px; box-shadow: 0 1px 4px rgba(0,0,0,.04); }
+.score-pill .name { color: var(--text-3); font-size: 10px; text-transform: uppercase; letter-spacing: 1px; font-weight: 700; font-family: sans-serif; }
+.score-pill .val  { font-size: 26px; font-weight: 800; margin-top: 3px; letter-spacing: -0.02em; font-family: sans-serif; }
+.score-pill.winner .val { color: var(--decade); }
+.score-pill.second .val { color: var(--enter-ai); }
+.score-pill.third  .val { color: var(--anima); }
+
+/* === COMP === */
+.comp-block { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 16px 18px; margin: 10px 0; }
+.comp-block-title { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.2px; color: var(--text-3); margin-bottom: 10px; font-family: sans-serif; padding-bottom: 6px; border-bottom: 1px solid var(--border); }
+.comp-line { display: flex; justify-content: space-between; align-items: baseline; padding: 5px 0; border-bottom: 1px solid var(--border); font-size: 13px; }
+.comp-line:last-child { border-bottom: none; }
+.comp-line .comp-key { color: var(--text-2); }
+.comp-line .comp-val { font-weight: 700; font-family: "SF Mono", monospace; font-size: 12.5px; }
+.source-note { font-size: 11px; color: var(--text-3); margin-top: 6px; font-style: italic; line-height: 1.45; }
+.source-detail { background: var(--surface-3); border: 1px solid var(--border); border-radius: 8px; padding: 12px 16px; margin-top: 10px; }
+.source-detail-title { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.2px; color: var(--text-3); margin-bottom: 8px; font-family: sans-serif; }
+.source-detail ul { margin: 0 0 0 14px; }
+.source-detail li { font-size: 12px; color: var(--text-2); margin: 4px 0; line-height: 1.5; }
+
+/* === FO TAB STYLES === */
+.fo-page { max-width: 1060px; margin: 0 auto; padding: 52px 24px 110px; }
+.fo-group-header {
+  margin: 48px 0 20px;
+  padding-bottom: 14px;
+  border-bottom: 2px solid var(--border);
+  display: flex; align-items: baseline; gap: 14px;
+}
+.fo-group-num {
+  font-family: "SF Mono", "Fira Code", monospace;
+  font-size: 11px; font-weight: 700; color: var(--gold);
+  letter-spacing: 1px; opacity: .8;
+}
+.fo-group-title {
+  font-size: 18px; font-weight: 700; letter-spacing: -0.01em;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+}
+.fo-group-count {
+  font-size: 11px; color: var(--text-3); font-family: sans-serif;
+  background: var(--surface-3); border: 1px solid var(--border);
+  padding: 2px 8px; border-radius: 999px; font-weight: 600; margin-left: auto;
+}
+.fo-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+}
+@media (max-width: 900px) { .fo-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 560px) { .fo-grid { grid-template-columns: 1fr; } }
+.fo-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 18px 18px 14px;
+  position: relative;
+  transition: border-color 180ms, box-shadow 180ms;
+  box-shadow: 0 1px 4px rgba(0,0,0,.04);
+}
+.fo-card:hover { border-color: var(--border-2); box-shadow: 0 3px 12px rgba(0,0,0,.08); }
+.fo-card-top { display: flex; align-items: flex-start; gap: 10px; margin-bottom: 10px; }
+.fo-num {
+  font-family: "SF Mono", "Fira Code", monospace;
+  font-size: 10px; font-weight: 700; color: var(--text-3);
+  flex-shrink: 0; padding-top: 2px;
+}
+.fo-name {
+  font-size: 15px; font-weight: 700; letter-spacing: -0.01em; line-height: 1.3;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+  flex: 1;
+}
+.fo-fit {
+  font-size: 9.5px; font-weight: 700; padding: 3px 8px; border-radius: 999px;
+  text-transform: uppercase; letter-spacing: .8px; flex-shrink: 0;
+  font-family: sans-serif; white-space: nowrap;
+}
+.fo-fit.fit-altissimo { background: var(--gold-bg); color: var(--gold); border: 1px solid var(--gold-border); }
+.fo-fit.fit-muito-alto { background: var(--green-bg); color: var(--green); border: 1px solid var(--green-border); }
+.fo-fit.fit-alto { background: var(--blue-bg); color: var(--link); border: 1px solid var(--blue-border); }
+.fo-fit.fit-medio-alto { background: var(--amber-bg); color: var(--amber); border: 1px solid var(--amber-border); }
+.fo-fit.fit-medio { background: var(--surface-3); color: var(--text-3); border: 1px solid var(--border); }
+.fo-family {
+  font-size: 12px; color: var(--text-2); margin-bottom: 10px; line-height: 1.45;
+  font-family: "Georgia", serif;
+}
+.fo-aum {
+  display: inline-flex; align-items: center; gap: 4px;
+  font-size: 11px; font-weight: 700; color: var(--gold);
+  background: var(--gold-bg); border: 1px solid var(--gold-border);
+  padding: 2px 8px; border-radius: 5px; margin-bottom: 10px;
+  font-family: "SF Mono", "Fira Code", monospace;
+}
+.fo-aum .est-tag { font-weight: 400; color: var(--text-3); font-size: 10px; }
+.fo-tags { display: flex; flex-wrap: wrap; gap: 5px; margin-bottom: 10px; }
+.fo-style-tag {
+  font-size: 10px; color: var(--text-3); background: var(--surface-2);
+  border: 1px solid var(--border); padding: 2px 6px; border-radius: 4px;
+  font-family: sans-serif; font-weight: 500;
+}
+.fo-location {
+  font-size: 11px; color: var(--text-3); font-family: sans-serif;
+  display: flex; align-items: center; gap: 4px; margin-bottom: 8px;
+}
+.fo-link-row { padding-top: 8px; border-top: 1px solid var(--border); }
+.fo-link-row a { font-size: 11px; color: var(--link); text-decoration: none; font-family: sans-serif; }
+.fo-link-row a:hover { text-decoration: underline; }
+
+/* === TOP 10 TABLE (FO TAB) === */
+.fo-top10-section { margin-top: 56px; }
+.fo-strategy-section { margin-top: 36px; }
+.fo-strategy-section .card { font-family: "Georgia", serif; }
+
+footer {
+  margin-top: 60px; border-top: 1px solid var(--border);
+  padding-top: 18px; color: var(--text-3); font-size: 12px; line-height: 1.6;
+  font-family: sans-serif;
+}
+</style>
+</head>
+<body>
+<style>body{visibility:hidden}#pw-screen{position:fixed;inset:0;z-index:9999;background:#f4f1ec;display:flex;flex-direction:column;align-items:center;justify-content:center;font-family:system-ui,sans-serif;visibility:visible}.pw-box{background:#fff;border:1px solid #d4d0c8;border-radius:10px;padding:32px;text-align:center;max-width:340px;width:90%;box-shadow:0 2px 12px rgba(0,0,0,.06)}.pw-box h2{margin:0 0 4px;font-size:18px;color:#1a1a1a}.pw-box p{margin:0 0 20px;font-size:13px;color:#888}.pw-box input{width:100%;padding:10px 14px;border:1px solid #d4d0c8;border-radius:6px;font-size:15px;outline:none;box-sizing:border-box;margin-bottom:12px;font-family:system-ui,sans-serif}.pw-box input:focus{border-color:#9a7b2f}.pw-box button{width:100%;padding:10px;background:#9a7b2f;color:#fff;border:none;border-radius:6px;font-size:14px;font-weight:600;cursor:pointer}.pw-box button:hover{background:#c9a84c}.pw-error{color:#a82828;font-size:12px;margin-top:8px;display:none}</style>
+<div id="pw-screen"><div class="pw-box"><h2>🔒 Incrementum</h2><p>Conteúdo protegido</p><input type="password" id="pw-input" placeholder="Senha" autofocus><button onclick="checkPW()">Entrar</button><div id="pw-error" class="pw-error">Senha incorreta</div></div></div>
+<script>
+const PASS_HASH = "8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918"; // admin
+const COOKIE = document.cookie.split('; ').find(r=>r.startsWith('ip_pass='));
+if(COOKIE && COOKIE.split('=')[1]==='1'){document.getElementById('pw-screen').remove();document.body.style.visibility='visible'}
+else{
+  document.getElementById('pw-input').addEventListener('keydown',e=>{if(e.key==='Enter')checkPW()});
+  async function checkPW(){
+    const pw = document.getElementById('pw-input').value;
+    const enc = new TextEncoder();
+    const buf = await crypto.subtle.digest('SHA-256', enc.encode(pw));
+    const hash = Array.from(new Uint8Array(buf)).map(b=>b.toString(16).padStart(2,'0')).join('');
+    if(hash===PASS_HASH){
+      document.cookie='ip_pass=1;path=/;max-age=86400';
+      document.getElementById('pw-screen').remove();
+      document.body.style.visibility='visible';
+    } else {
+      document.getElementById('pw-error').style.display='block';
+    }
+  }
+}
+</script>
+
+
+<nav class="main-tab-nav">
+  <div class="main-brand">INC &middot; CAREER</div>
+  <button class="main-tab-btn active" data-tab="career" onclick="switchTab('career')">An&aacute;lise de Carreira</button>
+  <button class="main-tab-btn" data-tab="fo" onclick="switchTab('fo')">Family Offices</button>
+</nav>
+
+<!-- ==================== TAB 1: CAREER ANALYSIS ==================== -->
+<div id="pane-career" class="tab-pane active">
+
+<div class="sticky-nav">
+  <div class="sticky-nav-inner">
+    <div class="nav-brand">CAREER &middot; v4</div>
+    <a href="#s0">Disclosure</a>
+    <a href="#s1">Profiles</a>
+    <a href="#s2">Comp</a>
+    <a href="#s3">Trajectory</a>
+    <a href="#s4">Matrix</a>
+    <a href="#s5">IncrementumOS</a>
+    <a href="#s6">Arc</a>
+    <a href="#s7">Runway</a>
+    <a href="#s8">Recommendation</a>
+    <a href="#s9">Persona Fit</a>
+  </div>
+</div>
+
+<div class="score-float" id="scoreFloat">
+  <div class="sf-title">
+    Decision Matrix v4 <button class="sf-close" onclick="document.getElementById('scoreFloat').classList.remove('sf-visible')">&times;</button>
+  </div>
+  <div class="sf-row"><span class="sf-name">Decade</span><span class="sf-val" style="color:var(--decade)">7.70 &#9733;</span></div>
+  <div class="sf-row"><span class="sf-name">Enter AI</span><span class="sf-val" style="color:var(--enter-ai)">7.50 &#9650;</span></div>
+  <div class="sf-row"><span class="sf-name">Anima FO</span><span class="sf-val" style="color:var(--anima)">7.00</span></div>
+  <div class="sf-row"><span class="sf-name">Core AI</span><span class="sf-val" style="color:var(--core-ai)">6.05</span></div>
+  <div class="sf-row"><span class="sf-name">FO Gen.</span><span class="sf-val" style="color:var(--fo-gen)">5.25</span></div>
+</div>
+
+<div class="page">
+
+<header class="hero">
+  <div class="eyebrow">Career Strategy &middot; v4 &middot; Incrementum &middot; Confidential</div>
+  <h1>Frontier Tech vs Capital Markets &mdash;<br/><em>complete decision framework</em></h1>
+  <p class="sub">Full corrected intelligence on four paths: Decade (likely Vitor Olivier / Frontier Technologies), Core AI (Enrico Francesco + Fernando Martins, Stone alumni), Enter AI (Mateus Costa-Ribeiro, Harvard Law &mdash; LatAm&rsquo;s first AI unicorn at $1.2B), and Anima Investimentos (Pedro Passos family, Natura co-founder). Each profile includes real founder dossiers, verified company intelligence, compensation with explicit sourcing, and a realistic week narrative. v4 corrects three material errors from v3.</p>
+  <div class="hero-tags">
+    <span class="tag">2026-05-16</span>
+    <span class="tag v4">v4 &mdash; Corrected Intelligence</span>
+    <span class="tag alert">Enter AI = $1.2B unicorn &uarr; from 5.75 to 7.50</span>
+    <span class="tag warn">Anima FO corrected: Pedro Passos family, not ANIM3</span>
+    <span class="tag ok">Founder dossiers: all four researched and sourced</span>
+    <span class="tag">Day-in-life: narrative, not generic M&ndash;F grid</span>
+  </div>
+</header>
+
+<nav class="toc">
+  <div class="toc-title">Contents</div>
+  <ol>
+    <li><a href="#s0">Epistemic disclosure &amp; v4 corrections</a></li>
+    <li><a href="#s1">Full path profiles: founder dossiers, intel, further reading</a></li>
+    <li><a href="#s2">Compensation with explicit sourcing</a></li>
+    <li><a href="#s3">Growth trajectory 6m / 1yr / 2yr / 3yr</a></li>
+    <li><a href="#s4">Decision matrix &mdash; 8 factors &times; 5 paths</a></li>
+    <li><a href="#s5">IncrementumOS compatibility</a></li>
+    <li><a href="#s6">Career arc: 2027 &rarr; 2028 &rarr; 2030</a></li>
+    <li><a href="#s7">Runway required per path</a></li>
+    <li><a href="#s8">Recommendation &amp; rationale</a></li>
+    <li><a href="#s9">Eduardo persona-fit score</a></li>
+  </ol>
+</nav>
+
+<section id="s0">
+  <h2 class="section-title"><span class="num">00</span>Epistemic disclosure &amp; v4 corrections</h2>
+  <p class="section-lede">Three material errors in v3 corrected. What changed, why it matters.</p>
+
+  <div class="callout red">
+    <span class="label">v3 Error 1 &mdash; Anima Investimentos misidentified</span>
+    <p>v3 confused Anima Investimentos with <strong>Anima Educa&ccedil;&atilde;o (B3: ANIM3)</strong>, a publicly-traded education group. <strong>Corrected:</strong> Anima Investimentos is a S&atilde;o Paulo single-family office created in 2011 by the <strong>Pedro Passos family</strong> &mdash; Pedro Luiz Barreiros Passos is one of Natura&rsquo;s three co-founders. Guilherme Leal operates through Maraé Investimentos; Luiz Seabra has separate arrangements. Anima Investimentos manages direct, concentrated equity positions (&sim;20 companies) with no stated exit horizon. All references to ANIM3 or education have been removed.</p>
+  </div>
+
+  <div class="callout red">
+    <span class="label">v3 Error 2 &mdash; Enter AI severely underscored on missing information</span>
+    <p>v3 scored Enter AI at 5.75 (last) and described its founder as &ldquo;unknown.&rdquo; <strong>Corrected:</strong> Enter AI is <strong>Latin America&rsquo;s first AI unicorn</strong> as of May 2026 &mdash; valued at $1.2B after a $100M+ Series B led by Founders Fund with Sequoia, Ribbit Capital, Atlantico, ONEVC, and Kaszek. Founder <strong>Mateus Costa-Ribeiro</strong>: youngest practicing lawyer in Brazil at age 18, Harvard Law graduate, passed the New York Bar at age 20, left a full Stanford MBA scholarship to found Enter. The company processes 300,000+ lawsuits annually for 45+ enterprise clients including Nubank, Bradesco, and Mercado Livre. Enter AI is now scored at 7.50 &mdash; second-ranked path in this framework.</p>
+  </div>
+
+  <div class="callout warn">
+    <span class="label">v3 Issue 3 &mdash; Day-in-the-life was generic AI output</span>
+    <p>v3 used a Mon&ndash;Fri grid format that was generic. v4 replaces every grid with a narrative week description grounded in each company&rsquo;s specific stage, culture, and known operational patterns. Where company-specific details remain unverified, they are explicitly flagged as estimates or marked &ldquo;Request from founder &mdash; confirm before signing.&rdquo;</p>
+  </div>
+
+  <div class="callout blue">
+    <span class="label">What is and is not verified in v4</span>
+    <p>The following are <strong>confirmed from public sources</strong>: Vitor Olivier as likely Decade founder (Frontier Technologies, a16z seed $14M); Mateus Costa-Ribeiro as Enter AI founder ($1.2B, Founders Fund/Sequoia); Enrico Francesco + Fernando Martins as Core AI founders (Stone alumni, $5.1M seed); Pedro Passos family as Anima Investimentos. Salary figures remain industry estimates tagged <span class="est">[est.]</span> with explicit source attribution. Company-specific culture and operational details remain <span class="u">[uncertain &mdash; ask in diligence]</span>. The analytical framework is the durable value; the intelligence is directional.</p>
+  </div>
+</section>
+
+<section id="s1">
+  <h2 class="section-title"><span class="num">01</span>Full path profiles</h2>
+  <p class="section-lede">Each path with founder dossier, company intelligence, culture, realistic weekly narrative, alumni arc, and further reading. Decade is open by default.</p>
+
+  <!-- DECADE -->
+  <div class="expander open" id="exp-decade">
+    <div class="expander-header" style="border-left:3px solid var(--decade)">
+      <div class="expander-icon">+</div>
+      <div style="flex:1">
+        <div class="expander-label">Decade <span class="pill decade">Frontier Tech</span></div>
+        <div class="expander-sub">Likely Frontier Technologies &middot; Vitor Olivier (ex-Nubank CTO, first employee) &middot; Seed $14M (a16z) &middot; AI-focused &middot; S&atilde;o Paulo</div>
+      </div>
+    </div>
+    <div class="expander-body">
+      <div class="expander-inner">
+        <div class="callout warn" style="margin-top:0;margin-bottom:18px">
+          <span class="label">Identity note</span>
+          <p>&ldquo;Decade&rdquo; is Eduardo&rsquo;s code name. Public records suggest the ex-Nubank CTO&rsquo;s new AI venture is <strong>Frontier Technologies</strong>, founded by <strong>Vitor Guarino Olivier</strong>. He wrote an essay titled &ldquo;Nubank 10 years: a decade of transformation&rdquo; before leaving &mdash; possibly the origin of this code name. Confirm the company name with Eduardo before treating any specific detail below as binding.</p>
+        </div>
+        <div class="dossier-block">
+          <div style="font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:1.8px;color:var(--text-3);margin-bottom:14px;font-family:sans-serif;padding-bottom:8px;border-bottom:1px solid var(--border)">Founder Dossier</div>
+          <div class="dossier-name">Vitor Guarino Olivier</div>
+          <div class="dossier-title">Founder &amp; CEO, Frontier Technologies &middot; Former CTO, Nubank</div>
+          <div class="dossier-grid">
+            <div class="dossier-section"><h5>Education</h5><p>Duke University &mdash; double major in Economics and Computer Science.</p></div>
+            <div class="dossier-section"><h5>Career history</h5><ul><li>BTG Pactual &mdash; credit, FX, and trading (pre-Nubank)</li><li>Nubank &mdash; <strong>first employee</strong>, joined 2014 as software engineer</li><li>SE &rarr; Head of Financial Engineering &rarr; CPO &rarr; VP Operations &rarr; GM &rarr; <strong>CTO</strong> (March 2023)</li><li>Departed Nubank September 2025 after 11.5 years</li><li>Founded Frontier Technologies &mdash; seed $14M led by a16z, with General Catalyst and Accel</li></ul></div>
+            <div class="dossier-section"><h5>Notable achievements</h5><ul><li>Nubank&rsquo;s first engineering hire &mdash; helped build technical foundation of a $50B+ company</li><li>Five distinct C-level or VP roles across 11 years</li><li>Attracted a16z + General Catalyst + Accel for seed round</li></ul></div>
+            <div class="dossier-section"><h5>What his reputation signals</h5><ul><li>Technical credibility is real &mdash; not a figurehead CTO but a builder</li><li>Commercial and operational credibility equally real: CPO, GM, VP Ops roles are not symbolic</li><li>a16z at seed = at minimum one GP placed a high-conviction bet</li><li>11.5 years at one company suggests patience and depth; second-time founder pattern is untested</li></ul></div>
+          </div>
+          <div class="why-matters"><strong>Why this matters for Eduardo:</strong> Olivier is the only founder in this set who has built and scaled a $50B company&rsquo;s technical infrastructure from scratch. That makes him an exceptional teacher. Probe directly: if vision and execution are entirely founder-driven, Eduardo&rsquo;s marginal contribution may be smaller than it appears.</div>
+        </div>
+        <div class="intel-block">
+          <div class="intel-block-title">Company Intelligence <span class="badge">Sourced</span></div>
+          <div class="intel-grid">
+            <div>
+              <div class="intel-sub">Founding story &amp; product</div>
+              <p>Olivier departed Nubank in September 2025 after 11.5 years. Frontier Technologies focuses on AI applied to industries &mdash; specific product domain not yet publicly disclosed. Given his Nubank background (financial engineering, trading, credit), most probable product domains are AI for financial services or AI tooling for financial workflows.</p>
+            </div>
+            <div>
+              <div class="intel-sub">Funding &amp; valuation</div>
+              <ul><li><strong>Pre-seed:</strong> General Catalyst (lead)</li><li><strong>Seed:</strong> $14M led by <strong>a16z</strong>, with Accel</li><li><strong>Stage (May 2026):</strong> Seed &mdash; Series A build likely in progress</li><li>Post-money valuation not publicly disclosed</li></ul>
+              <div class="intel-sub" style="margin-top:14px">Risks &amp; red flags</div>
+              <ul><li><strong>Product secrecy at seed:</strong> No public product; get a demo in diligence</li><li><strong>AI crowding:</strong> Ask what the company does that GPT-5/Claude won&rsquo;t commoditize</li><li><strong>First-time second-timer:</strong> Starting from zero as principal is a different cognitive task; check references on leadership under scarcity</li><li><strong>Role definition at seed:</strong> Get it in writing before signing</li></ul>
+            </div>
+          </div>
+        </div>
+        <div class="profile-grid" style="margin-top:18px;margin-bottom:22px">
+          <div class="profile-block"><h4>Culture signals</h4><ul><li><strong>Nubank DNA:</strong> Written memos, radical candor, extremely high hiring bars</li><li><strong>Hours:</strong> 65&ndash;80h/week at seed; no ceiling during Series A windows <span class="est">[est.]</span></li><li><strong>Hierarchy:</strong> Flat. Founder makes final calls; Eduardo extends founder bandwidth</li><li><strong>Technical-first:</strong> Engineering-dominant; commercial roles valued but not native to identity</li></ul></div>
+          <div class="profile-block"><h4>Learning trajectory</h4><ul><li><strong>6 months:</strong> Fundraising mechanics first-hand; LP deck construction; a16z Series A process; network permanently transferable</li><li><strong>1 year:</strong> Series A term sheets, cap table management, first hires with Eduardo&rsquo;s input</li><li><strong>2 years:</strong> Distribution strategy, GTM sequencing, pricing frameworks</li><li><strong>Unique asset:</strong> Direct mentorship from someone who built Nubank from the first commit</li></ul></div>
+          <div class="profile-block"><h4>Alumni arc</h4><ul><li><strong>VC partner track:</strong> Decade r&eacute;sum&eacute; under ex-Nubank CTO opens Kaszek, Valor, Softbank LatAm, a16z LatAm without a cold email</li><li><strong>Founder:</strong> Series A fundraising experience + Nubank-orbit network = fundable seed round</li><li><strong>International mobility:</strong> High. a16z brand opens US and EU doors.</li></ul></div>
+          <div class="profile-block"><h4>Honest risk register</h4><ul><li><strong>Startup failure:</strong> Modal outcome even with excellent founders &mdash; model equity as zero</li><li><strong>Role drift:</strong> Corp-dev/strategy can drift into generalist operator; get role in writing</li><li><strong>Product unknown:</strong> Eduardo is betting on founder, not product. Legitimate bet; be honest about it</li><li><strong>Founder integrity:</strong> Reference-check on character, not just skill</li></ul></div>
+        </div>
+        <h4 style="font-size:11px;color:var(--text-3);text-transform:uppercase;letter-spacing:1.2px;margin-bottom:10px;font-family:sans-serif;border-bottom:1px solid var(--border);padding-bottom:6px">Realistic week at seed-stage Decade</h4>
+        <div class="week-narrative">
+          <p>At seed stage, there is no canonical week &mdash; <strong>the founder&rsquo;s current priority is the week&rsquo;s agenda</strong>. Based on Frontier Technologies&rsquo; stage and known investor dynamics, expect the week to be split roughly: <strong>two days on investor relations</strong> (a16z portfolio support, introductions to new co-investors for the Series A, follow-up on prior intro calls), <strong>two days on strategic and commercial work</strong> (financial modeling, competitive analysis, product-market fit iteration from a commercial perspective, early customer discovery), and <strong>one day of operational catch-up</strong> (hiring pipeline, legal, admin). During Series A fundraising sprints this structure collapses entirely into investor prep and data room management.</p>
+          <p><strong>Meeting cadence with Olivier:</strong> <em>Request from founder &mdash; confirm what direct interaction looks like day-to-day before signing. Ask for a &ldquo;shadow day&rdquo; in the offer process.</em></p>
+          <p><strong>Autonomy level:</strong> High relative to junior employees; low relative to the founder. Expands materially as trust builds &mdash; typically after month 6 if Eduardo delivers consistently.</p>
+          <div class="week-caveat">Source basis: general seed-stage operator patterns for Nubank-orbit founders and a16z portfolio companies. Company-specific rhythm unverified. Confirm in diligence: &ldquo;Walk me through what last Tuesday looked like.&rdquo;</div>
+        </div>
+        <div class="intel-block" style="margin-top:18px">
+          <div class="intel-block-title">Further Reading</div>
+          <div class="reading-list">
+            <div class="reading-item"><div class="reading-num">01</div><div><a class="reading-title" href="https://international.nubank.com.br/company/nubank-10-years-a-decade-of-transformation-by-vitor-olivier/" target="_blank">Nubank 10 years: a decade of transformation &mdash; by Vitor Olivier</a><div class="reading-source">Nubank Blog</div><div class="reading-why">Olivier&rsquo;s own essay on what building Nubank&rsquo;s first decade taught him. Best primary source for understanding his intellectual framework and what working for him is like. Essay title is likely the origin of &ldquo;Decade.&rdquo;</div></div></div>
+            <div class="reading-item"><div class="reading-num">02</div><div><a class="reading-title" href="https://www.baguete.com.br/noticias/cto-deixa-nubank-para-abrir-startup-de-ia" target="_blank">CTO deixa Nubank para abrir startup de IA</a><div class="reading-source">Baguete (Brazilian tech news)</div><div class="reading-why">First Brazilian tech press coverage of Olivier&rsquo;s departure and new venture.</div></div></div>
+            <div class="reading-item"><div class="reading-num">03</div><div><a class="reading-title" href="https://international.nubank.com.br/company/nubank-appoints-eric-young-as-chief-technology-officer/" target="_blank">Nubank Appoints Eric Young as Chief Technology Officer</a><div class="reading-source">Nubank IR &middot; August 2025</div><div class="reading-why">Official announcement confirming Olivier&rsquo;s departure timeline (September 2025).</div></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CORE AI -->
+  <div class="expander" id="exp-core">
+    <div class="expander-header" style="border-left:3px solid var(--core-ai)">
+      <div class="expander-icon">+</div>
+      <div style="flex:1">
+        <div class="expander-label">Core AI <span class="pill core-ai">Credit Infrastructure</span></div>
+        <div class="expander-sub">Enrico Francesco + Fernando Martins (Stone alumni) &middot; Seed $5.1M (14B) &middot; BaaS credit API &middot; S&atilde;o Paulo &middot; 5 clients, $3M projected revenue 2026</div>
+      </div>
+    </div>
+    <div class="expander-body">
+      <div class="expander-inner">
+        <div class="dossier-block">
+          <div style="font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:1.8px;color:var(--text-3);margin-bottom:14px;font-family:sans-serif;padding-bottom:8px;border-bottom:1px solid var(--border)">Founder Dossier &mdash; Two Co-Founders</div>
+          <div class="dossier-grid">
+            <div class="dossier-section"><h5>Enrico Francesco</h5><p>Co-founder, Core AI. Programmer. Met Fernando Martins in college; worked together 8+ years. Previously co-founded Preparo (HR tech). At Stone: led data science, analytics, and ML teams. Stone is Brazil&rsquo;s largest payment technology company &mdash; deep exposure to regulated financial infrastructure, credit risk, and payments at scale.</p></div>
+            <div class="dossier-section"><h5>Fernando Martins</h5><p>Co-founder, Core AI. Programmer. Same Stone background. The 8+ year working relationship before founding Core AI is a structural risk mitigant: co-founder conflict is the leading cause of early startup failure. These two have already resolved most conflict patterns before the company existed.</p></div>
+          </div>
+          <div class="why-matters" style="margin-top:14px"><strong>What their profile signals:</strong> Core AI is a technically-credible founding team with domain expertise. Both founders are programmers, which means the commercial function (Eduardo&rsquo;s seat) has no natural institutional advocate in leadership. Eduardo enters as the commercial counterpart to a highly technical founding pair &mdash; an opportunity and a constraint simultaneously.</div>
+        </div>
+        <div class="intel-block">
+          <div class="intel-block-title">Company Intelligence <span class="badge">Sourced</span></div>
+          <div class="intel-grid">
+            <div>
+              <div class="intel-sub">What Core AI actually does</div>
+              <p>Core AI provides <strong>integrated credit infrastructure</strong> enabling SaaS companies to embed white-label credit products into their platforms. Acts as intermediary between client SaaS companies and Banking-as-a-Service providers &mdash; specifically Celcoin and Stark Bank &mdash; managing the &ldquo;last mile&rdquo; of credit operations through an API. The moat is in integration depth and compliance management, not the credit models or funding.</p>
+            </div>
+            <div>
+              <div class="intel-sub">Funding &amp; traction</div>
+              <ul><li><strong>Seed (March 2026):</strong> $5.1M led by <strong>14B</strong>, with Big Bets, Norte Ventures, Nameless, BFF</li><li><strong>Clients:</strong> 5 enterprise SaaS companies as of early 2026</li><li><strong>Projected 2026 revenue:</strong> $3M+ (R$&sim;15M)</li></ul>
+              <div class="intel-sub" style="margin-top:14px">Key risks</div>
+              <ul><li><strong>BaaS regulatory risk:</strong> BCB credit regulations change fast</li><li><strong>Investor tier:</strong> 14B is legitimate but below Kaszek/Softbank tier</li><li><strong>Disintermediation risk:</strong> Can Celcoin or Stark Bank build what Core AI does?</li></ul>
+            </div>
+          </div>
+        </div>
+        <div class="profile-grid" style="margin-top:18px;margin-bottom:22px">
+          <div class="profile-block"><h4>Culture signals</h4><ul><li><strong>Stone DNA:</strong> Analytically rigorous, data-driven, meritocratic</li><li><strong>Hours:</strong> 55&ndash;70h/week <span class="est">[est.]</span></li><li><strong>Engineering-dominant:</strong> Commercial decisions require Eduardo to earn credibility before influencing roadmap</li></ul></div>
+          <div class="profile-block"><h4>Learning trajectory</h4><ul><li><strong>6 months:</strong> BaaS market structure and BCB regulatory landscape internalized; first client expansion deal owned</li><li><strong>1 year:</strong> Sales cycle anatomy for BaaS-adjacent SaaS deals (3&ndash;6 month cycles); NRR and churn analysis owned</li><li><strong>2 years:</strong> Moat assessment: is Core AI&rsquo;s last-mile thesis holding as BaaS providers vertically integrate?</li></ul></div>
+          <div class="profile-block"><h4>Alumni arc</h4><ul><li><strong>Strong:</strong> VP Finance or Chief of Staff at Series B fintech infrastructure &rarr; VC at fintech-focused fund</li><li><strong>Average:</strong> Strategy/BD at BaaS or embedded finance company</li><li><strong>Weak:</strong> Company fails without PMF; r&eacute;sum&eacute; is recoverable but not differentiated</li></ul></div>
+          <div class="profile-block"><h4>Critical diligence questions</h4><ul><li>Can Celcoin or Stark Bank build what Core AI does, and why haven&rsquo;t they?</li><li>Why are there only 5 clients after the seed close?</li><li>What is churn and expansion revenue at the existing 5 clients?</li><li>Is Eduardo&rsquo;s role commercial or generalist? Get it in writing.</li></ul></div>
+        </div>
+        <h4 style="font-size:11px;color:var(--text-3);text-transform:uppercase;letter-spacing:1.2px;margin-bottom:10px;font-family:sans-serif;border-bottom:1px solid var(--border);padding-bottom:6px">Realistic week at Core AI</h4>
+        <div class="week-narrative">
+          <p>Core AI at seed with 5 clients is a tight-knit technical team. Eduardo&rsquo;s commercial/strategy seat would be one of the few non-engineering roles. A realistic structure: <strong>1&ndash;2 client calls</strong> (relationship maintenance, expansion conversations, product feedback loops), <strong>financial model maintenance</strong> (runway, unit economics per client, revenue projections for Series A), <strong>regulatory research</strong> (BCB credit regulations and BaaS partner compliance updates are a recurring obligation), <strong>weekly founders sync</strong>, <strong>new prospect pipeline review</strong> (the next 5 clients need to be identified and engaged before the Series A process begins).</p>
+          <p><strong>Decision-making with founders:</strong> Flat but technical-biased. Commercial decisions &mdash; pricing, client selection, GTM sequencing &mdash; require Eduardo&rsquo;s explicit advocacy to move.</p>
+          <div class="week-caveat">Source basis: Brazil Journal and Crania reporting on Core AI&rsquo;s seed round, plus general patterns at seed-stage fintech infrastructure startups. Confirm with founders: &ldquo;What does a typical week look like for the commercial lead?&rdquo;</div>
+        </div>
+        <div class="intel-block" style="margin-top:18px">
+          <div class="intel-block-title">Further Reading</div>
+          <div class="reading-list">
+            <div class="reading-item"><div class="reading-num">01</div><div><a class="reading-title" href="https://braziljournal.com/core-ai-levanta-rodada-para-o-last-mile-do-credito-junto-com-os-baas/" target="_blank">Core AI levanta rodada para o &lsquo;last mile&rsquo; do cr&eacute;dito</a><div class="reading-source">Brazil Journal &middot; 2026</div><div class="reading-why">Definitive reported profile of Core AI: founders, thesis, BaaS partners. Read before any conversation with the founders.</div></div></div>
+            <div class="reading-item"><div class="reading-num">02</div><div><a class="reading-title" href="https://coreai.com.br/" target="_blank">Core AI company website</a><div class="reading-source">coreai.com.br</div><div class="reading-why">Product positioning and API documentation.</div></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ENTER AI -->
+  <div class="expander" id="exp-enter">
+    <div class="expander-header" style="border-left:3px solid var(--enter-ai)">
+      <div class="expander-icon">+</div>
+      <div style="flex:1">
+        <div class="expander-label">Enter AI <span class="pill enter-ai">Legal AI</span> <span class="pill unicorn">&#9670; Unicorn $1.2B</span></div>
+        <div class="expander-sub">Mateus Costa-Ribeiro (Harvard Law, youngest lawyer in BR) &middot; Series B $100M+ at $1.2B &middot; Founders Fund + Sequoia &middot; LatAm&rsquo;s first AI unicorn (May 2026)</div>
+      </div>
+    </div>
+    <div class="expander-body">
+      <div class="expander-inner">
+        <div class="callout purple" style="margin-top:0;margin-bottom:18px">
+          <span class="label">v3 correction &mdash; major upgrade</span>
+          <p>v3 scored Enter AI at 5.75 (last) and described the founder as &ldquo;unknown.&rdquo; This was a material error. Enter AI is now <strong>Latin America&rsquo;s first AI unicorn</strong> at $1.2B (May 2026), backed by Founders Fund, Sequoia Capital, Ribbit Capital, Atlantico, ONEVC, and Kaszek. v4 scores Enter AI at <strong>7.50 &mdash; second in this framework</strong>.</p>
+        </div>
+        <div class="dossier-block">
+          <div style="font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:1.8px;color:var(--text-3);margin-bottom:14px;font-family:sans-serif;padding-bottom:8px;border-bottom:1px solid var(--border)">Founder Dossier</div>
+          <div class="dossier-name">Mateus Costa-Ribeiro</div>
+          <div class="dossier-title">Co-Founder &amp; CEO, Enter AI &middot; Harvard Law &middot; New York Bar</div>
+          <div class="dossier-grid">
+            <div class="dossier-section"><h5>Education</h5><ul><li><strong>Harvard Law School</strong> &mdash; JD</li><li>Left a <strong>full-scholarship Stanford MBA</strong> to found Enter</li><li>Passed the <strong>New York Bar at age 20</strong></li><li>Brazil&rsquo;s <strong>youngest practicing lawyer at age 18</strong></li></ul></div>
+            <div class="dossier-section"><h5>Founding story</h5><p>Became youngest practicing lawyer in Brazil at 18. Went to Harvard Law. Passed New York Bar at 20. Left Stanford MBA full scholarship to build Enter. Co-founded with <strong>Henrique Vaz</strong> and <strong>Michael Mac-Vicar</strong>.</p></div>
+            <div class="dossier-section"><h5>Notable achievements</h5><ul><li>Founded LatAm&rsquo;s first AI unicorn by 2026</li><li>Raised from Founders Fund (Peter Thiel&rsquo;s fund) &mdash; among the most selective investors in the world</li><li>Built enterprise client list including Nubank, Bradesco, Mercado Livre, Airbnb, Azul, LATAM Airlines &mdash; all before unicorn status</li><li>300,000+ lawsuits processed annually &mdash; an operating product at scale</li></ul></div>
+            <div class="dossier-section"><h5>What his reputation signals</h5><ul><li>Founders Fund selecting a Brazilian legal AI startup signals a view that Enter&rsquo;s TAM extends beyond Brazil &mdash; the US legal market ($400B+/yr) is likely the Series B growth thesis</li><li>Harvard Law + NY Bar gives Mateus credibility in enterprise legal conversations that most technology founders cannot replicate</li><li>Left a full Stanford MBA scholarship: behavioral evidence of high conviction and extreme opportunity cost tolerance</li></ul></div>
+          </div>
+          <div class="why-matters"><strong>Why this matters for Eduardo:</strong> Eduardo called Mateus &ldquo;one of the most brilliant young Brazilians.&rdquo; The evidence supports that claim. The questions are: (1) Is Eduardo&rsquo;s role investment-shaped (BD, strategy, finance) or operational? (2) At $1.2B with institutional investors, does Eduardo get direct Mateus access or is he 2 layers removed? Both must be answered before Enter AI becomes the primary recommendation.</div>
+        </div>
+        <div class="intel-block">
+          <div class="intel-block-title">Company Intelligence <span class="badge">Sourced &mdash; Bloomberg &middot; Founders Fund &middot; Sequoia</span></div>
+          <div class="intel-grid">
+            <div>
+              <div class="intel-sub">What Enter AI actually does</div>
+              <p>Enter uses <strong>AI agents to handle end-to-end litigation management</strong> for enterprises: drafts initial legal petitions, builds legal defenses, calculates settlement costs, researches contextual case data. Not a summarization tool &mdash; it&rsquo;s a workflow automation system that replaces significant portions of junior legal labor at enterprise scale. Large Brazilian corporations have thousands of active lawsuits simultaneously; Enter&rsquo;s platform manages this at a cost structure impossible with human attorneys.</p>
+            </div>
+            <div>
+              <div class="intel-sub">Funding &amp; valuation trajectory</div>
+              <ul><li><strong>Series A (2024):</strong> $35M at $350M valuation &mdash; Founders Fund lead, Sequoia</li><li><strong>Series B (May 2026):</strong> $100M+ at <strong>$1.2B</strong> &mdash; Founders Fund, Sequoia, Ribbit Capital, Atlantico, ONEVC, Kaszek</li><li><strong>Status:</strong> Latin America&rsquo;s first AI unicorn</li></ul>
+              <div class="intel-sub" style="margin-top:14px">Traction</div>
+              <ul><li><strong>300,000+ lawsuits/year</strong> processed on platform</li><li><strong>45+ enterprise clients</strong>: Nubank, Bradesco, Mercado Livre, Airbnb, Azul, LATAM Airlines</li></ul>
+            </div>
+          </div>
+        </div>
+        <div class="profile-grid" style="margin-top:18px;margin-bottom:22px">
+          <div class="profile-block"><h4>Culture signals</h4><ul><li><strong>Harvard Law written culture:</strong> Structured arguments, cited evidence, clear conclusions. Most documentation-intensive culture of the four startups.</li><li><strong>Hours:</strong> 55&ndash;70h/week at Series B scale <span class="est">[est.]</span></li><li><strong>Enterprise client rhythm:</strong> 45 enterprise clients means weekly or bi-weekly client executive calls</li><li><strong>Founders Fund influence:</strong> Expect high performance standards explicitly defined</li></ul></div>
+          <div class="profile-block"><h4>Learning trajectory</h4><ul><li><strong>6 months:</strong> Enterprise SaaS mechanics at $1.2B scale; board reporting for Founders Fund/Sequoia; enterprise client success at Nubank/Bradesco tier</li><li><strong>1 year:</strong> International expansion thesis (US legal market?) built and pressure-tested; Series C prep</li><li><strong>Unique asset:</strong> Being a commercial leader at LatAm&rsquo;s first AI unicorn is a r&eacute;sum&eacute; credential immediately legible to every global VC and operator in 5 years</li></ul></div>
+          <div class="profile-block"><h4>Alumni arc</h4><ul><li><strong>Post-unicorn operator:</strong> VP BD or VP Strategy at a US-based legal AI company (Harvey, Ironclad, Clio), or early employee at the next LatAm AI unicorn</li><li><strong>VC track:</strong> Enter r&eacute;sum&eacute; with Founders Fund + Sequoia backing opens every major AI-focused fund globally</li><li><strong>International mobility:</strong> Very high. Founders Fund + Sequoia brand is global.</li></ul></div>
+          <div class="profile-block"><h4>What makes Enter special vs competitors</h4><ul><li><strong>Enterprise client quality:</strong> Nubank and Bradesco as reference clients are not easily replaceable &mdash; enterprise trust in legal AI takes years to build</li><li><strong>Scale moat:</strong> 300,000+ lawsuits creates a data flywheel that new entrants cannot replicate quickly</li><li><strong>Founder market fit:</strong> Mateus is a licensed attorney who built this for a market he intimately understands</li></ul></div>
+        </div>
+        <h4 style="font-size:11px;color:var(--text-3);text-transform:uppercase;letter-spacing:1.2px;margin-bottom:10px;font-family:sans-serif;border-bottom:1px solid var(--border);padding-bottom:6px">Realistic week at Enter AI (Series B, $1.2B)</h4>
+        <div class="week-narrative">
+          <p>Enter at Series B is post-product-market-fit and scaling aggressively. Eduardo&rsquo;s commercial or strategic role would operate in a structured institutional cadence: weekly leadership team reviews, monthly business reviews, quarterly board prep for Founders Fund and Sequoia. A realistic week: <strong>2&ndash;3 enterprise client executive calls</strong> (C-suite conversations at Nubank, Bradesco, Mercado Livre, Airbnb &mdash; real enterprise relationship management), <strong>financial model and NRR tracking</strong> (unit economics at this scale are genuinely complex), <strong>one large-account expansion analysis</strong>, and <strong>one strategic thread</strong> &mdash; likely US market entry research or competitive response.</p>
+          <p><strong>Mateus interaction:</strong> At $1.2B post-Series B, the risk is that Eduardo reports to a VP layer rather than Mateus directly. <em>Request from founder &mdash; this is the single most important question to resolve before accepting.</em> If the role reports directly to Mateus: exceptional learning and network value. If filtered through a VP of Strategy: closer to a strong Series B startup job than an exceptional career-defining role.</p>
+          <p><strong>Autonomy level:</strong> Higher than a seed company in terms of defined scope, lower in terms of existential ambiguity. For Eduardo&rsquo;s builder identity, the defined boundaries may feel constraining. Assess honestly.</p>
+          <div class="week-caveat">Source basis: Bloomberg, Yahoo Finance, and Rio Times coverage of Enter&rsquo;s Series B. Internal cadence estimated based on Founders Fund/Sequoia portfolio company operational patterns at Series B. Confirm with &ldquo;Walk me through how last month&rsquo;s board prep worked.&rdquo;</div>
+        </div>
+        <div class="intel-block" style="margin-top:18px">
+          <div class="intel-block-title">Further Reading</div>
+          <div class="reading-list">
+            <div class="reading-item"><div class="reading-num">01</div><div><a class="reading-title" href="https://www.bloomberg.com/news/articles/2026-05-05/brazilian-ai-legal-startup-enter-valued-at-1-2-billion-in-round" target="_blank">Brazilian AI Legal Startup Enter Valued at $1.2 Billion in Round</a><div class="reading-source">Bloomberg &middot; May 5, 2026</div><div class="reading-why">Bloomberg&rsquo;s authoritative coverage of the Series B. Confirms $1.2B valuation, $100M+ raise, full investor list, and key business metrics. Start here before any Enter AI conversation.</div></div></div>
+            <div class="reading-item"><div class="reading-num">02</div><div><a class="reading-title" href="https://www.getenter.ai/en" target="_blank">Enter AI &mdash; Company Website</a><div class="reading-source">getenter.ai</div><div class="reading-why">Product details, client case studies, and how Mateus&rsquo;s team describes their platform. Read the case studies to understand what &ldquo;end-to-end litigation management&rdquo; means in practice for Nubank&rsquo;s legal operations.</div></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ANIMA -->
+  <div class="expander" id="exp-anima">
+    <div class="expander-header" style="border-left:3px solid var(--anima)">
+      <div class="expander-icon">+</div>
+      <div style="flex:1">
+        <div class="expander-label">Anima Investimentos <span class="pill anima">Family Office</span></div>
+        <div class="expander-sub">Pedro Passos family (Natura co-founder) &middot; Founded 2011 &middot; ~20 direct positions &middot; Jardim Europa, S&atilde;o Paulo &middot; No exit horizon &mdash; concentrated, long-term</div>
+      </div>
+    </div>
+    <div class="expander-body">
+      <div class="expander-inner">
+        <div class="callout red" style="margin-top:0;margin-bottom:18px">
+          <span class="label">v3 material correction &mdash; entity misidentified</span>
+          <p>v3 confused Anima Investimentos with <strong>Anima Educa&ccedil;&atilde;o (B3: ANIM3)</strong> and treated the FO as unverifiable. <strong>Corrected:</strong> Anima Investimentos is a <strong>well-documented single-family office</strong> created in 2011 by the <strong>Passos family</strong> &mdash; specifically <strong>Pedro Luiz Barreiros Passos</strong>, one of Natura&rsquo;s three co-founders. The other two Natura co-founders &mdash; Guilherme Leal (Maraé Investimentos) and Luiz Seabra (separate arrangements) &mdash; each operate distinct vehicles. Anima Investimentos is the Pedro Passos branch specifically. All references to Anima Educa&ccedil;&atilde;o have been removed.</p>
+        </div>
+        <div class="dossier-block">
+          <div style="font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:1.8px;color:var(--text-3);margin-bottom:14px;font-family:sans-serif;padding-bottom:8px;border-bottom:1px solid var(--border)">Principal Dossier</div>
+          <div class="dossier-name">Pedro Luiz Barreiros Passos</div>
+          <div class="dossier-title">Patriarch, Anima Investimentos &middot; Co-Founder, Natura Cosm&eacute;ticos (1969)</div>
+          <div class="dossier-grid">
+            <div class="dossier-section"><h5>Background</h5><p>Pedro Passos co-founded Natura &mdash; Brazil&rsquo;s largest cosmetics company &mdash; alongside Guilherme Leal and Luiz Seabra. Natura went public on B3 in 2004 and at its peak was one of the most valuable consumer brands in Brazil. Passos&rsquo; succession planning is underway through Anima.</p></div>
+            <div class="dossier-section"><h5>Family governance</h5><ul><li><strong>Guilherme Ruggiero Passos</strong> &mdash; Administrator, Anima Investimentos</li><li><strong>Marcia Ruggiero Passos</strong> &mdash; shareholder</li><li><strong>Patricia Ruggiero Passos</strong> &mdash; shareholder</li><li><strong>Pedro Luiz Barreiros Passos</strong> &mdash; partner</li></ul></div>
+          </div>
+          <div class="why-matters" style="margin-top:14px"><strong>What this signals for Eduardo:</strong> Working for the Passos family means operating inside a generational wealth management structure, not a fund. If Eduardo performs well, the relationship compounds over decades &mdash; a qualitatively different career asset than a startup equity grant. The risk: patient, long-horizon investing is slow to reward; not a path for someone who needs external validation quickly.</div>
+        </div>
+        <div class="intel-block">
+          <div class="intel-block-title">Company Intelligence <span class="badge">Sourced &mdash; animainvestimentos.com.br &middot; CB Insights</span></div>
+          <div class="intel-grid">
+            <div>
+              <div class="intel-sub">Investment philosophy &amp; portfolio</div>
+              <p>Anima Investimentos is explicitly <strong>not a fund-of-funds</strong>. It makes concentrated direct investments in approximately 20 companies with &ldquo;no horizon for sale.&rdquo; Known portfolio positions include <strong>Natura</strong>, <strong>Raia Drogasil</strong> (Brazil&rsquo;s largest pharmacy chain), <strong>Mastercard</strong>, <strong>Microsoft</strong>, and <strong>Google</strong>. This is a <strong>direct-investing mandate</strong> &mdash; the single most important fact about Anima vs the original v3 uncertainty.</p>
+            </div>
+            <div>
+              <div class="intel-sub">Team &amp; key people</div>
+              <ul><li><strong>Vera Frascino</strong> &mdash; Director</li><li><strong>Diego Freitas</strong> &mdash; Partner, Investment Manager</li><li><strong>Rafael Gomes</strong> &mdash; Equity Investor</li><li><strong>Jos&eacute; C&eacute;spedes Jim&eacute;nez</strong> &mdash; Global Portfolio Manager, Equities</li></ul>
+              <p>Team size: 11&ndash;50 employees. Address: Rua Amauri, 255, 9&ordm; andar, Jardim Europa, S&atilde;o Paulo.</p>
+              <div class="intel-sub" style="margin-top:14px">AUM</div>
+              <p>Not publicly disclosed. Estimated R$1B&ndash;R$5B based on public Natura equity history. <span class="est">[est.]</span> Ask directly in diligence.</p>
+            </div>
+          </div>
+        </div>
+        <div class="profile-grid" style="margin-top:18px;margin-bottom:22px">
+          <div class="profile-block"><h4>Culture signals</h4><ul><li><strong>Written work is the currency:</strong> IC memos, investment theses, quarterly portfolio reviews. If Eduardo writes a compelling 15-page IC memo under pressure, he will thrive.</li><li><strong>Hours:</strong> 55&ndash;70h/week, predictable rhythm <span class="est">[est.]</span></li><li><strong>Concentrated portfolio philosophy:</strong> Deep sectoral conviction on a small number of names, not broad coverage</li><li><strong>Political environment:</strong> Lower than banks; higher than startups</li></ul></div>
+          <div class="profile-block"><h4>Learning trajectory</h4><ul><li><strong>6 months:</strong> First IC memo authored; one deal diligenced end-to-end; portfolio monitoring owned for 2&ndash;3 positions</li><li><strong>1 year:</strong> Cross-asset portfolio construction understood; first family interaction; deal sourcing process internalized</li><li><strong>2 years:</strong> 2&ndash;3 sectors with genuine depth; token carry begins; PE deal anatomy fully internalized</li><li><strong>Unique asset:</strong> Full-stack asset-class visibility under one roof (liquid + private equity + international)</li></ul></div>
+          <div class="profile-block"><h4>Alumni arc</h4><ul><li><strong>Most common:</strong> VP or CIO at another SP family office or SFO</li><li><strong>Second path:</strong> Portfolio Manager at Verde Asset, Adam Capital, Dynamo, or Vinland</li><li><strong>Third path:</strong> Own vehicle &mdash; micro-fund, SPV, or SFO for a new client family</li><li><strong>Partner ceiling:</strong> Long (8&ndash;12 years), gate-kept by family trust. Ask: &ldquo;Who has made partner here in the last 10 years?&rdquo;</li></ul></div>
+          <div class="profile-block"><h4>The confirmed direct-private question</h4><p>Anima is a direct-investing firm &mdash; Eduardo would participate in company selection, diligence, board monitoring, and portfolio management of actual equity positions. The firm&rsquo;s explicit philosophy of &ldquo;concentrated investments, no exit horizon&rdquo; means Eduardo develops genuine conviction-based analytical skills, not trading or fund-manager-evaluation skills.</p></div>
+        </div>
+        <h4 style="font-size:11px;color:var(--text-3);text-transform:uppercase;letter-spacing:1.2px;margin-bottom:10px;font-family:sans-serif;border-bottom:1px solid var(--border);padding-bottom:6px">Realistic week at Anima Investimentos</h4>
+        <div class="week-narrative">
+          <p>Anima&rsquo;s week is the most predictable of the four paths. The firm holds ~20 concentrated direct positions with no stated exit horizon. Based on Anima&rsquo;s public investment philosophy and CB Insights portfolio data, expect the working week to center on: <strong>IC memo work</strong> (3&ndash;5 hours of uninterrupted analytical writing &mdash; the dominant cognitive activity), <strong>portfolio monitoring</strong> (macro context, position P&amp;L, material news affecting Raia Drogasil, Mastercard, Natura, and other holdings), <strong>management meetings</strong> with portfolio company executives (board calls or management presentations from new deal candidates), <strong>sector research</strong> (Valor Econ&ocirc;mico, earnings call transcripts, analyst reports), and <strong>deal flow review</strong> (what came in this week, what merits a first call).</p>
+          <p><strong>Decision-making process:</strong> Partners make final calls. Eduardo&rsquo;s role is to produce analytical work of sufficient quality that partners can make better decisions faster. Meritocratic within that hierarchy.</p>
+          <p><strong>Interaction with principal (Pedro Passos family):</strong> <em>Request from house &mdash; confirm level of family access in the analyst role directly in diligence. Direct family interaction typically comes at VP+ level; varies significantly by house.</em></p>
+          <p><strong>Autonomy level:</strong> Low initially, growing meaningfully by year 2 as Eduardo&rsquo;s analytical track record builds.</p>
+          <div class="week-caveat">Source basis: Anima Investimentos&rsquo; public philosophy (&ldquo;concentrated, no exit horizon&rdquo;), CB Insights portfolio data, and general SP direct-investing FO operational patterns. Specific cadence unverified. Ask: &ldquo;Walk me through how the IC process works for a new position.&rdquo;</div>
+        </div>
+        <div class="intel-block" style="margin-top:18px">
+          <div class="intel-block-title">Further Reading</div>
+          <div class="reading-list">
+            <div class="reading-item"><div class="reading-num">01</div><div><a class="reading-title" href="https://animainvestimentos.com.br/en/about/" target="_blank">Anima Investimentos &mdash; About</a><div class="reading-source">animainvestimentos.com.br</div><div class="reading-why">The firm&rsquo;s own statement: concentrated positions, no exit horizon, multigenerational wealth management. Read the &ldquo;About&rdquo; and &ldquo;Team&rdquo; pages before any interaction.</div></div></div>
+            <div class="reading-item"><div class="reading-num">02</div><div><a class="reading-title" href="https://www.cbinsights.com/investor/anima-investimentos" target="_blank">Anima Investimentos &mdash; CB Insights Portfolio</a><div class="reading-source">CB Insights</div><div class="reading-why">Portfolio tracking and investment history. Useful for understanding deal velocity, sector focus, and check sizes &mdash; the data Eduardo would analyze on day one at Anima.</div></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
