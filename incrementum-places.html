@@ -230,25 +230,17 @@ footer{border-top:1px solid var(--border-soft);text-align:center;padding:28px;co
 <style>body{visibility:hidden}#pw-screen{position:fixed;inset:0;z-index:9999;background:#f4f1ec;display:flex;flex-direction:column;align-items:center;justify-content:center;font-family:system-ui,sans-serif;visibility:visible}.pw-box{background:#fff;border:1px solid #d4d0c8;border-radius:10px;padding:32px;text-align:center;max-width:340px;width:90%;box-shadow:0 2px 12px rgba(0,0,0,.06)}.pw-box h2{margin:0 0 4px;font-size:18px;color:#1a1a1a}.pw-box p{margin:0 0 20px;font-size:13px;color:#888}.pw-box input{width:100%;padding:10px 14px;border:1px solid #d4d0c8;border-radius:6px;font-size:15px;outline:none;box-sizing:border-box;margin-bottom:12px;font-family:system-ui,sans-serif}.pw-box input:focus{border-color:#9a7b2f}.pw-box button{width:100%;padding:10px;background:#9a7b2f;color:#fff;border:none;border-radius:6px;font-size:14px;font-weight:600;cursor:pointer}.pw-box button:hover{background:#c9a84c}.pw-error{color:#a82828;font-size:12px;margin-top:8px;display:none}</style>
 <div id="pw-screen"><div class="pw-box"><h2>🔒 Incrementum</h2><p>Conteúdo protegido</p><input type="password" id="pw-input" placeholder="Senha" autofocus><button onclick="checkPW()">Entrar</button><div id="pw-error" class="pw-error">Senha incorreta</div></div></div>
 <script>
-const PASS_HASH = "7611f1a57f80b0a87b4178e2e5f16bafa30dd0d9947d99f953c091d8c96abd0e"; // admin
-const COOKIE = document.cookie.split('; ').find(r=>r.startsWith('ip_pass='));
-if(COOKIE && COOKIE.split('=')[1]==='1'){document.getElementById('pw-screen').remove();document.body.style.visibility='visible'}
-else{
-  document.getElementById('pw-input').addEventListener('keydown',e=>{if(e.key==='Enter')checkPW()});
-  async function checkPW(){
-    const pw = document.getElementById('pw-input').value;
-    const enc = new TextEncoder();
-    const buf = await crypto.subtle.digest('SHA-256', enc.encode(pw));
-    const hash = Array.from(new Uint8Array(buf)).map(b=>b.toString(16).padStart(2,'0')).join('');
-    if(hash===PASS_HASH){
-      document.cookie='ip_pass=1;path=/;max-age=86400';
-      document.getElementById('pw-screen').remove();
-      document.body.style.visibility='visible';
-    } else {
-      document.getElementById('pw-error').style.display='block';
-    }
+(function(){
+  function unlock(){document.getElementById('pw-screen').remove();document.body.style.visibility='visible';}
+  function checkPW(){
+    var pw=document.getElementById('pw-input').value;
+    if(pw==='1311'){try{localStorage.setItem('ip_auth','1');}catch(e){}unlock();}
+    else{document.getElementById('pw-error').style.display='block';}
   }
-}
+  try{if(localStorage.getItem('ip_auth')==='1'){unlock();return;}}catch(e){}
+  document.getElementById('pw-input').addEventListener('keydown',function(e){if(e.key==='Enter')checkPW();});
+  window.checkPW=checkPW;
+})();
 </script>
 
 <!-- HEADER -->
