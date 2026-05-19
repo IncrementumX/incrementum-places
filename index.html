@@ -79,7 +79,8 @@ body{background:var(--bg);color:var(--text);font-family:var(--font);font-size:14
 .card-hood{font-size:11px;color:var(--text-dim);position:relative;cursor:help;border-bottom:1px dotted rgba(0,0,0,0.15)}
 .card-hood-tooltip{display:none;position:absolute;bottom:calc(100% + 4px);left:50%;transform:translateX(-50%);background:#1a1a1a;color:#fff;font-size:10px;padding:7px 10px;border-radius:6px;white-space:normal;width:240px;max-width:260px;z-index:50;pointer-events:none;font-weight:400;line-height:1.4;box-shadow:0 4px 12px rgba(0,0,0,.2)}
 .card-hood:hover .card-hood-tooltip{display:block}
-.city-tag{font-size:9px;font-weight:700;padding:2px 6px;border-radius:4px;white-space:nowrap;letter-spacing:.03em;background:var(--card2);color:var(--text-muted);border:1px solid var(--border)}
+.city-tag{font-size:9px;font-weight:700;padding:2px 7px;border-radius:4px;white-space:nowrap;letter-spacing:.03em;background:var(--card2);color:var(--text-muted);border:1px solid var(--border)}
+.card-footer{display:flex;justify-content:flex-end;margin-top:8px}
 .card-cuisine{font-size:11px;color:var(--text-muted);margin-top:3px;letter-spacing:-.01em}
 .badges-row{display:flex;flex-wrap:wrap;gap:4px;margin-bottom:8px}
 .badge{font-size:9px;font-weight:700;padding:2px 7px;border-radius:99px;white-space:nowrap;letter-spacing:.02em}
@@ -771,8 +772,7 @@ function statusPill(d, idx) {
 }
 
 function cityPill(city) {
-  if (!city || city==='SP') return '';
-  return `<span class="city-tag">${escHtml(city)}</span>`;
+  return `<span class="city-tag">${escHtml(city || 'SP')}</span>`;
 }
 
 function buildOcc(oc) {
@@ -822,12 +822,13 @@ function render() {
     const notes = d.notes ? `<div style="margin-top:6px;padding:6px 8px;background:var(--accent-soft);border-radius:6px;font-size:11px;color:var(--text-dim);letter-spacing:-.01em">📝 ${escHtml(d.notes)}</div>` : '';
     return `<div class="card" data-idx="${i}" tabindex="0">
 <div class="card-top"><div class="card-name-block"><div class="card-name">${escHtml(d.n)}</div>
-<div class="card-meta-row">${hoodTip(d.h)}${cityPill(d.city)}</div>
+<div class="card-meta-row">${hoodTip(d.h)}</div>
 <div class="card-cuisine">${escHtml(d.c)}</div></div>${statusPill(d,i)}<button class="card-menu-btn" onclick="event.stopPropagation();showCardActionSheet(${i})" title="Opções">⋮</button></div>
 ${(badges||awardsTip)?'<div class="badges-row">'+badges+awardsTip+'</div>':''}
 ${d.vb?'<div class="card-vibe">'+escHtml(d.vb)+'</div>':''}
 ${occs?'<div class="occ-row" style="margin-bottom:8px">'+occs+'</div>':''}
 ${linksRow?'<div class="card-links">'+linksRow+'</div>':''}${notes}
+<div class="card-footer">${cityPill(d.city)}</div>
 </div>`;
   }).join('');
   activeIdx = -1;
