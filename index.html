@@ -119,12 +119,8 @@ body{background:var(--bg);color:var(--text);font-family:var(--font);font-size:14
 .sp-want{background:var(--amber-soft);color:var(--amber);border-color:rgba(184,134,11,0.18)}
 .sp-fav{background:var(--red-soft);color:var(--red);border-color:rgba(168,40,40,0.18)}
 .sp-user{background:rgba(0,113,227,0.08);color:var(--accent);border-color:rgba(0,113,227,0.2)}
-.card-actions{position:absolute;top:10px;right:10px;display:flex;gap:4px;opacity:0;transition:opacity var(--t)}
-.card:hover .card-actions{opacity:1}
-.card-action-btn{width:26px;height:26px;border-radius:6px;border:none;background:rgba(0,0,0,0.05);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:11px;color:var(--text-dim);transition:all var(--t)}
-.card-action-btn:hover{background:rgba(0,0,0,0.09)}
-.card-action-btn.del:hover{background:var(--red-soft);color:var(--red)}
-.card-action-btn.edit:hover{background:var(--accent-soft);color:var(--accent)}
+.card-menu-btn{background:none;border:none;font-size:20px;color:var(--text-muted);cursor:pointer;padding:0 2px;line-height:1;flex-shrink:0;transition:color var(--t);align-self:flex-start;margin-top:2px}
+.card-menu-btn:hover{color:var(--text)}
 /* EMPTY */
 #empty-state{text-align:center;padding:64px 20px;color:var(--text-muted)}
 #empty-state .empty-icon{font-size:48px;margin-bottom:14px;opacity:.6}
@@ -216,9 +212,6 @@ footer{border-top:1px solid var(--border-soft);text-align:center;padding:28px;co
   #main{padding:12px 10px 80px}
   .card{padding:14px 16px}
   .card-name{font-size:15px}
-  .card-actions{display:none}
-  .card-action-btn{width:28px;height:28px;font-size:13px}
-
   #fab{bottom:16px;right:16px;width:46px;height:46px;font-size:20px}
 
   .modal-overlay{padding:0;align-items:flex-end}
@@ -277,7 +270,6 @@ footer{border-top:1px solid var(--border-soft);text-align:center;padding:28px;co
 <button class="filter-chip fc-status fc-active-all" data-status="all">Todos</button>
 <button class="filter-chip fc-status" data-status="visited">Visitados</button>
 <button class="filter-chip fc-status" data-status="want">Watchlist</button>
-<button class="filter-chip fc-status" data-status="fav">★ Fav</button>
 <span class="filter-sep"></span>
 <button class="filter-chip fc-cat" data-tab="bar">Bar</button>
 <button class="filter-chip fc-cat" data-tab="brazilian">Brasileiro</button>
@@ -530,7 +522,7 @@ const _RAW = [
 {n:"Novilho de Prata",h:"Jardins",c:"Carnes Premium",t:"steakhouse",ch:"—",p:3,sel:1,vj:1,st:"want",oc:["biz"],vb:"Tradição em carnes em Jardins — cortes maturados com excelência, selecionado Michelin e eleito pela VEJA.",ig:"",tel:"",site:"https://novilhodeprata.com.br",reserva:"",notes:""},
 {n:"Rodeio",h:"Jardim América",c:"Churrasco Brasileiro Premium",t:"steakhouse",ch:"—",p:3,vj:1,mu:1,st:"want",oc:["impress","biz"],vb:"O melhor churrasco brasileiro clássico de SP — old-school com classe, eleito pelo VEJA.",ig:"rodeiosteak",tel:"",site:"https://rodeiosp.com.br",reserva:"",notes:""},
 {n:"Charcoal",h:"Itaim Bibi",c:"Steakhouse Premium",t:"steakhouse",ch:"—",p:4,st:"want",oc:["impress"],vb:"Fogo como linguagem — cortes premium defumados e braseados, luxo e rusticidade.",ig:"",tel:"",site:"",reserva:"",notes:""},
-{n:"Baires",h:"Brickell",c:"Argentina Contemporânea",t:"steakhouse",ch:"—",p:3,st:"want",oc:["biz"],city:"MIA",vb:"Buenos Aires em Miami — cortes portenhos premium, Malbec e alma argentina.",ig:"bairesmiami",tel:"",site:"https://www.bairesgrill.com",reserva:"",notes:""},
+{n:"Baires",h:"Sunny Isles",c:"Argentina Contemporânea",t:"steakhouse",ch:"—",p:3,st:"want",oc:["biz"],city:"MIA",vb:"Buenos Aires em Miami — cortes portenhos premium, Malbec e alma argentina.",ig:"bairesmiami",tel:"",site:"https://www.bairesgrill.com",reserva:"",notes:""},
 
 /* ── BAR ── */
 {n:"Baretto",h:"Jardins",c:"Bar Italiano",t:"bar",ch:"Fasano Group",p:3,vg:1,mu:1,st:"visited",oc:["late","date"],vb:"O bar do Fasano — coquetéis e o see-and-be-seen da elite paulistana.",ig:"fasanohotels",tel:"",site:"https://fasano.com.br/en/gastronomia/baretto/",reserva:"",notes:""},
@@ -815,16 +807,11 @@ function render() {
     const linksRow = [ig,telHtml,siteHtml,reservaHtml].filter(Boolean).join('');
     const notes = d.notes ? `<div style="margin-top:6px;padding:6px 8px;background:var(--accent-soft);border-radius:6px;font-size:11px;color:var(--text-dim);letter-spacing:-.01em">📝 ${escHtml(d.notes)}</div>` : '';
     return `<div class="card" data-idx="${i}" tabindex="0">
-<div class="card-actions">
-<button class="card-action-btn edit" onclick="event.stopPropagation();editRestaurant(${i})" title="Editar">✏️</button>
-<button class="card-action-btn del" onclick="event.stopPropagation();deleteRestaurant(${i})" title="Remover">🗑</button>
-</div>
 <div class="card-top"><div class="card-name-block"><div class="card-name">${escHtml(d.n)}</div>
 <div class="card-meta-row">${hoodTip(d.h)}${cityPill(d.city)}</div>
-<div class="card-cuisine">${escHtml(d.c)}</div></div>${statusPill(d,i)}</div>
+<div class="card-cuisine">${escHtml(d.c)}</div></div>${statusPill(d,i)}<button class="card-menu-btn" onclick="event.stopPropagation();showCardActionSheet(${i})" title="Opções">⋮</button></div>
 ${(badges||awardsTip)?'<div class="badges-row">'+badges+awardsTip+'</div>':''}
 ${d.vb?'<div class="card-vibe">'+escHtml(d.vb)+'</div>':''}
-<div class="card-chef"><strong style="font-weight:600">Chef</strong> ${escHtml(d.ch||'—')}</div>
 ${occs?'<div class="occ-row" style="margin-bottom:8px">'+occs+'</div>':''}
 ${linksRow?'<div class="card-links">'+linksRow+'</div>':''}${notes}
 </div>`;
@@ -832,12 +819,6 @@ ${linksRow?'<div class="card-links">'+linksRow+'</div>':''}${notes}
   activeIdx = -1;
   grid.querySelectorAll('.card').forEach(c => {
     c.addEventListener('click', () => setActive(parseInt(c.dataset.idx)));
-    let holdTimer;
-    c.addEventListener('touchstart', () => {
-      holdTimer = setTimeout(() => showCardActionSheet(parseInt(c.dataset.idx)), 500);
-    }, {passive:true});
-    c.addEventListener('touchend', () => clearTimeout(holdTimer));
-    c.addEventListener('touchmove', () => clearTimeout(holdTimer));
   });
 }
 
