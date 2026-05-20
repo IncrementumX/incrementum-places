@@ -635,52 +635,49 @@ const F = { tab:"all", status:"all", q:"", city:"all" };
 let activeIdx = -1;
 let visibleData = [];
 
-// Persistência robusta: OPFS + localStorage fallback + export/import
-const OPFS_FILE = 'places-data-v1.json';
-let DELETED_NATIVES = [];
-
-function buildPayload() {
-  return {
-    natives: RESTAURANTS.filter(r => !r._user).map(r => ({
-      n:r.n, st:r.st, notes:r.notes, ig:r.ig, tel:r.tel, site:r.site, reserva:r.reserva
-    })),
-    users: RESTAURANTS.filter(r => r._user),
-    deleted: DELETED_NATIVES
-  };
-}
-
-async function saveState() {
-  const payload = buildPayload();
-  let savedOPFS = false;
-  // 1. OPFS (Origin Private File System)
+// Persistência simples e robusta: localStorage + export/import
+// Salva TODOS os restaurantes (natives + users + deletados) em uma única fonte de verdade
+function saveState() {
   try {
-    const root = await navigator.storage.getDirectory();
-    const file = await root.getFileHandle(OPFS_FILE, {create:true});
-    const writable = await file.createWritable();
-    await writable.write(JSON.stringify(payload));
-    await writable.close();
-    savedOPFS = true;
-  } catch(e) {}
-  // 2. Fallback localStorage
-  try { localStorage.setItem('ip_data', JSON.stringify(payload.natives)); } catch(e) {}
-  try { localStorage.setItem('ip_user_data', JSON.stringify(payload.users)); } catch(e) {}
-  showToast(savedOPFS ? 'Salvo no disco ✓' : 'Salvo no navegador');
+    const payload = {
+      restaurants: RESTAURANTS,
+      deleted: (typeof DELETED_NATIVES !== 'undefined') ? DELETED_NATIVES : [],
+      ts: Date.now()
+    };
+    localStorage.setItem('ip_all_data', JSON.stringify(payload));
+    showToast('Salvo ✓');
+  } catch(e) {
+    console.error('saveState failed:', e);
+    showToast('Erro ao salvar');
+  }
 }
 
-async function loadFromOPFS() {
+// Carrega do localStorage se existir
+function loadPersisted() {
   try {
-    const root = await navigator.storage.getDirectory();
-    const file = await root.getFileHandle(OPFS_FILE, {create:true});
-    const blob = await file.getFile();
-    const text = await blob.text();
-    if (!text) return null;
-    return JSON.parse(text);
-  } catch(e) { return null; }
+    const raw = localStorage.getItem('ip_all_data');
+    if (!raw) return false;
+    const data = JSON.parse(raw);
+    if (data.restaurants && Array.isArray(data.restaurants)) {
+      RESTAURANTS.length = 0;
+      data.restaurants.forEach(r => RESTAURANTS.push(r));
+    }
+    if (data.deleted && Array.isArray(data.deleted)) {
+      DELETED_NATIVES = data.deleted;
+    }
+    return true;
+  } catch(e) {
+    console.error('loadPersisted failed:', e);
+    return false;
+  }
 }
 
-// Exportar JSON
+// Exportar JSON (backup manual)
 function exportData() {
-  const payload = buildPayload();
+  const payload = {
+    restaurants: RESTAURANTS,
+    deleted: (typeof DELETED_NATIVES !== 'undefined') ? DELETED_NATIVES : []
+  };
   const blob = new Blob([JSON.stringify(payload, null, 2)], {type:'application/json'});
   const url = URL.createObjectURL(blob);
   const a = document.createElement('a');
@@ -700,19 +697,11 @@ function importData() {
     try {
       const text = await input.files[0].text();
       const data = JSON.parse(text);
-      if (!data.natives || !Array.isArray(data.users)) { alert('JSON inválido'); return; }
-      // Remove current user restaurants
-      for (let i = RESTAURANTS.length - 1; i >= 0; i--) {
-        if (RESTAURANTS[i]._user) RESTAURANTS.splice(i, 1);
-      }
-      // Apply imported users
-      data.users.forEach(r => { r._user = true; RESTAURANTS.push(r); });
-      // Apply native overrides
-      data.natives.forEach(s => {
-        const idx = RESTAURANTS.findIndex(r => r.n === s.n && !r._user);
-        if (idx >= 0) Object.assign(RESTAURANTS[idx], s);
-      });
-      await saveState();
+      if (!data.restaurants || !Array.isArray(data.restaurants)) { alert('JSON inválido'); return; }
+      RESTAURANTS.length = 0;
+      data.restaurants.forEach(r => RESTAURANTS.push(r));
+      if (data.deleted && Array.isArray(data.deleted)) DELETED_NATIVES = data.deleted;
+      saveState();
       render();
       showToast('Importado ✓');
     } catch(e) { alert('Erro ao importar: ' + e.message); }
@@ -735,33 +724,29 @@ function showToast(msg) {
   t._tm = setTimeout(() => { t.style.opacity = '0'; }, 2200);
 }
 
-// Inicializar OPFS ao carregar (sobrescreve localStorage se houver dados no OPFS)
-(async function initPersist() {
-  const opfs = await loadFromOPFS();
-  if (opfs && Array.isArray(opfs.natives) && Array.isArray(opfs.users)) {
-    // Load deleted list
-    if (opfs.deleted && Array.isArray(opfs.deleted)) {
-      DELETED_NATIVES = opfs.deleted;
-      // Remove deleted natives from RESTAURANTS
-      for (let i = RESTAURANTS.length - 1; i >= 0; i--) {
-        if (!RESTAURANTS[i]._user && DELETED_NATIVES.includes(RESTAURANTS[i].n)) {
-          RESTAURANTS.splice(i, 1);
-        }
+// Inicialização: tenta carregar do localStorage, senão usa o default
+let DELETED_NATIVES = [];
+(function initPersist() {
+  const loaded = loadPersisted();
+  if (!loaded) {
+    // Primeira vez: aplica apenas overrides antigos do formato legacy (migração)
+    try {
+      const legacy = localStorage.getItem('ip_data');
+      const legacyUsers = localStorage.getItem('ip_user_data');
+      if (legacy) {
+        const natives = JSON.parse(legacy);
+        natives.forEach(s => {
+          const idx = RESTAURANTS.findIndex(r => r.n === s.n && !r._user);
+          if (idx >= 0) Object.assign(RESTAURANTS[idx], s);
+        });
       }
-    }
-    // Remove legacy loaded user restaurants
-    for (let i = RESTAURANTS.length - 1; i >= 0; i--) {
-      if (RESTAURANTS[i]._user) RESTAURANTS.splice(i, 1);
-    }
-    // Load from OPFS
-    opfs.users.forEach(r => { r._user = true; RESTAURANTS.push(r); });
-    if (opfs.natives) {
-      opfs.natives.forEach(s => {
-        const idx = RESTAURANTS.findIndex(r => r.n === s.n && !r._user);
-        if (idx >= 0) Object.assign(RESTAURANTS[idx], s);
-      });
-    }
-    render();
+      if (legacyUsers) {
+        const users = JSON.parse(legacyUsers);
+        users.forEach(r => { r._user = true; RESTAURANTS.push(r); });
+      }
+      // Salva no novo formato
+      saveState();
+    } catch(e) {}
   }
 })();
 
