@@ -17,6 +17,9 @@ body{background:var(--bg);color:var(--text);font-family:var(--font);font-size:14
 .brand{display:flex;align-items:center}
 .brand-name{font-size:15px;font-weight:700;color:var(--text);letter-spacing:-.02em}
 .stats-row{display:flex;gap:6px;flex-wrap:wrap}
+.header-actions{display:flex;gap:6px;align-items:center}
+.ha-btn{background:var(--card2);border:1px solid var(--border);border-radius:var(--r-sm);padding:6px 10px;font-size:13px;cursor:pointer;color:var(--text-dim);transition:all var(--t)}
+.ha-btn:hover{background:var(--accent-soft);border-color:var(--accent);color:var(--accent)}
 .stat-chip{display:flex;align-items:center;gap:5px;padding:5px 11px;border-radius:99px;font-size:11px;font-weight:600;white-space:nowrap;border:1px solid var(--border);background:var(--card2);color:var(--text-dim);transition:border-color var(--t)}
 .stat-chip .sv{font-weight:800;font-size:13px}
 .sc-total .sv{color:var(--text)}.sc-visited .sv{color:var(--green)}.sc-want .sv{color:var(--amber)}
@@ -253,7 +256,12 @@ footer{border-top:1px solid var(--border-soft);text-align:center;padding:28px;co
 <div class="stat-chip sc-total"><span class="sv" id="st-total">—</span><span class="sl">Total</span></div>
 <div class="stat-chip sc-visited"><span class="sv" id="st-visited">—</span><span class="sl">Visitados</span></div>
 <div class="stat-chip sc-want"><span class="sv" id="st-want">—</span><span class="sl">Shortlist</span></div>
-</div></div></header>
+</div>
+<div class="header-actions">
+<button class="ha-btn" onclick="exportData()" title="Exportar JSON">⬇</button>
+<button class="ha-btn" onclick="importData()" title="Importar JSON">⬆</button>
+</div>
+</div></header>
 <!-- LEGEND -->
 <div id="legend-bar"><div class="legend-inner"><button id="legend-toggle"><span>Legenda</span><span class="arrow">↓</span></button>
 <div id="legend-content"><div class="legend-grid">
@@ -423,7 +431,7 @@ const _RAW = [
 {n:"Kosho",h:"Jardins",c:"Kaiseki Japonês",t:"japanese",ch:"—",p:3,st:"visited",oc:["date","hidden"],vb:"Kaiseki-inspired com progressão sazonal belíssima.",ig:"",tel:"",site:"https://www.kosho.com.br",reserva:"",notes:""},
 {n:"Watanabe",h:"Jardins",c:"Sushi Japonês",t:"japanese",ch:"—",p:3,st:"visited",oc:["biz"],vb:"Old-school Tokyo sushi transplantado para Jardins.",ig:"watanaberestaurante",tel:"",site:"",reserva:"",notes:""},
 {n:"Maza",h:"Jardins",c:"Japonesa",t:"japanese",ch:"—",p:3,st:"visited",oc:["date","biz"],vb:"Omakase e sushi craftsmanship, refinado.",ig:"",tel:"",site:"",reserva:"",notes:""},
-{n:"Aima",h:"Itaim Bibi",c:"Japonesa Contemporânea",t:"japanese",ch:"—",p:3,st:"visited",oc:["date","impress"],vb:"Omakase moderno com toques tropicais — criatividade japonesa calibrada pelos ingredientes brasileiros.",ig:"",tel:"",site:"",reserva:"",notes:""},
+{n:"Aima",h:"Itaim Bibi",c:"Japonesa Contemporânea",t:"japanese",ch:"—",p:3,st:"visited",oc:["date","impress"],vb:"Japonesa contemporânea com toques tropicais — criatividade japonesa calibrada pelos ingredientes brasileiros num counter do Itaim que surpreende.",ig:"",tel:"",site:"",reserva:"",notes:""},
 {n:"Naga",h:"Jardins",c:"Fusão Japonesa-Brasileira",t:"japanese",ch:"—",p:3,st:"visited",oc:["date"],vb:"Fusão criativa em Jardins — o japonês-brasileiro que agrada a todos sem comprometer ninguém.",ig:"",tel:"",site:"",reserva:"",notes:""},
 {n:"Kitchin",h:"Jardins",c:"Japonesa",t:"japanese",ch:"—",p:3,st:"visited",oc:["date","hidden"],vb:"Counter íntimo com seleção sazonal de peixe — o endereço que o cliente fiel não quer que você descubra.",ig:"restaurantekitchin",tel:"",site:"https://kitchin.com.br",reserva:"",notes:""},
 {n:"Kazuo",h:"Jardins",c:"Sushi Japonês",t:"japanese",ch:"Kazuo",p:3,st:"visited",oc:["date"],vb:"Nigiri counter tradicional, refinado e preciso.",ig:"kazuo.restaurante",tel:"",site:"https://kazuorestaurante.com.br",reserva:"",notes:""},
@@ -627,17 +635,123 @@ const F = { tab:"all", status:"all", q:"", city:"all" };
 let activeIdx = -1;
 let visibleData = [];
 
-// Save to localStorage
-function saveState() {
-  // Overrides for native restaurants
-  const natives = RESTAURANTS.filter(r => !r._user);
-  try { localStorage.setItem('ip_data', JSON.stringify(natives.map(r => ({
-    n:r.n, st:r.st, notes:r.notes, ig:r.ig, tel:r.tel, site:r.site, reserva:r.reserva
-  })))); } catch(e) {}
-  // Persist user-added restaurants in full
-  const users = RESTAURANTS.filter(r => r._user);
-  try { localStorage.setItem('ip_user_data', JSON.stringify(users)); } catch(e) {}
+// Persistência robusta: OPFS + localStorage fallback + export/import
+const OPFS_FILE = 'places-data-v1.json';
+
+function buildPayload() {
+  return {
+    natives: RESTAURANTS.filter(r => !r._user).map(r => ({
+      n:r.n, st:r.st, notes:r.notes, ig:r.ig, tel:r.tel, site:r.site, reserva:r.reserva
+    })),
+    users: RESTAURANTS.filter(r => r._user)
+  };
 }
+
+async function saveState() {
+  const payload = buildPayload();
+  let savedOPFS = false;
+  // 1. OPFS (Origin Private File System)
+  try {
+    const root = await navigator.storage.getDirectory();
+    const file = await root.getFileHandle(OPFS_FILE, {create:true});
+    const writable = await file.createWritable();
+    await writable.write(JSON.stringify(payload));
+    await writable.close();
+    savedOPFS = true;
+  } catch(e) {}
+  // 2. Fallback localStorage
+  try { localStorage.setItem('ip_data', JSON.stringify(payload.natives)); } catch(e) {}
+  try { localStorage.setItem('ip_user_data', JSON.stringify(payload.users)); } catch(e) {}
+  showToast(savedOPFS ? 'Salvo no disco ✓' : 'Salvo no navegador');
+}
+
+async function loadFromOPFS() {
+  try {
+    const root = await navigator.storage.getDirectory();
+    const file = await root.getFileHandle(OPFS_FILE, {create:true});
+    const blob = await file.getFile();
+    const text = await blob.text();
+    if (!text) return null;
+    return JSON.parse(text);
+  } catch(e) { return null; }
+}
+
+// Exportar JSON
+function exportData() {
+  const payload = buildPayload();
+  const blob = new Blob([JSON.stringify(payload, null, 2)], {type:'application/json'});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = 'incrementum-places-' + new Date().toISOString().slice(0,10) + '.json';
+  document.body.appendChild(a); a.click(); a.remove();
+  URL.revokeObjectURL(url);
+  showToast('Exportado ✓');
+}
+
+// Importar JSON
+function importData() {
+  const input = document.createElement('input');
+  input.type = 'file'; input.accept = '.json';
+  input.onchange = async () => {
+    if (!input.files[0]) return;
+    try {
+      const text = await input.files[0].text();
+      const data = JSON.parse(text);
+      if (!data.natives || !Array.isArray(data.users)) { alert('JSON inválido'); return; }
+      // Remove current user restaurants
+      for (let i = RESTAURANTS.length - 1; i >= 0; i--) {
+        if (RESTAURANTS[i]._user) RESTAURANTS.splice(i, 1);
+      }
+      // Apply imported users
+      data.users.forEach(r => { r._user = true; RESTAURANTS.push(r); });
+      // Apply native overrides
+      data.natives.forEach(s => {
+        const idx = RESTAURANTS.findIndex(r => r.n === s.n && !r._user);
+        if (idx >= 0) Object.assign(RESTAURANTS[idx], s);
+      });
+      await saveState();
+      render();
+      showToast('Importado ✓');
+    } catch(e) { alert('Erro ao importar: ' + e.message); }
+  };
+  input.click();
+}
+
+// Toast
+function showToast(msg) {
+  let t = document.getElementById('ip-toast');
+  if (!t) {
+    t = document.createElement('div');
+    t.id = 'ip-toast';
+    t.style.cssText = 'position:fixed;bottom:72px;left:50%;transform:translateX(-50%);background:#1d1d1f;color:#fff;padding:8px 16px;border-radius:8px;font-size:13px;font-weight:500;z-index:999;opacity:0;transition:opacity .3s;pointer-events:none;letter-spacing:-.01em;';
+    document.body.appendChild(t);
+  }
+  t.textContent = msg;
+  requestAnimationFrame(() => { t.style.opacity = '1'; });
+  clearTimeout(t._tm);
+  t._tm = setTimeout(() => { t.style.opacity = '0'; }, 2200);
+}
+
+// Inicializar OPFS ao carregar (sobrescreve localStorage se houver dados no OPFS)
+(async function initPersist() {
+  const opfs = await loadFromOPFS();
+  if (opfs && opfs.natives && Array.isArray(opfs.users)) {
+    // Remove legacy loaded user restaurants
+    for (let i = RESTAURANTS.length - 1; i >= 0; i--) {
+      if (RESTAURANTS[i]._user) RESTAURANTS.splice(i, 1);
+    }
+    // Load from OPFS
+    opfs.users.forEach(r => { r._user = true; RESTAURANTS.push(r); });
+    if (opfs.natives) {
+      opfs.natives.forEach(s => {
+        const idx = RESTAURANTS.findIndex(r => r.n === s.n && !r._user);
+        if (idx >= 0) Object.assign(RESTAURANTS[idx], s);
+      });
+    }
+    render();
+  }
+})();
 
 // Cycle status: want -> visited -> fav -> want
 function cycleStatus(idx) {
