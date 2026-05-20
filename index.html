@@ -637,13 +637,15 @@ let visibleData = [];
 
 // Persistência robusta: OPFS + localStorage fallback + export/import
 const OPFS_FILE = 'places-data-v1.json';
+let DELETED_NATIVES = [];
 
 function buildPayload() {
   return {
     natives: RESTAURANTS.filter(r => !r._user).map(r => ({
       n:r.n, st:r.st, notes:r.notes, ig:r.ig, tel:r.tel, site:r.site, reserva:r.reserva
     })),
-    users: RESTAURANTS.filter(r => r._user)
+    users: RESTAURANTS.filter(r => r._user),
+    deleted: DELETED_NATIVES
   };
 }
 
@@ -736,7 +738,17 @@ function showToast(msg) {
 // Inicializar OPFS ao carregar (sobrescreve localStorage se houver dados no OPFS)
 (async function initPersist() {
   const opfs = await loadFromOPFS();
-  if (opfs && opfs.natives && Array.isArray(opfs.users)) {
+  if (opfs && Array.isArray(opfs.natives) && Array.isArray(opfs.users)) {
+    // Load deleted list
+    if (opfs.deleted && Array.isArray(opfs.deleted)) {
+      DELETED_NATIVES = opfs.deleted;
+      // Remove deleted natives from RESTAURANTS
+      for (let i = RESTAURANTS.length - 1; i >= 0; i--) {
+        if (!RESTAURANTS[i]._user && DELETED_NATIVES.includes(RESTAURANTS[i].n)) {
+          RESTAURANTS.splice(i, 1);
+        }
+      }
+    }
     // Remove legacy loaded user restaurants
     for (let i = RESTAURANTS.length - 1; i >= 0; i--) {
       if (RESTAURANTS[i]._user) RESTAURANTS.splice(i, 1);
@@ -778,7 +790,11 @@ function deleteRestaurant(idx) {
   const d = visibleData[idx];
   if (!confirm(`Remover "${d.n}"?`)) return;
   const ri = RESTAURANTS.findIndex(r => r.n === d.n && r.h === d.h);
-  if (ri >= 0) RESTAURANTS.splice(ri, 1);
+  if (ri >= 0) {
+    const wasNative = !RESTAURANTS[ri]._user;
+    RESTAURANTS.splice(ri, 1);
+    if (wasNative && !DELETED_NATIVES.includes(d.n)) DELETED_NATIVES.push(d.n);
+  }
   saveState();
   render();
 }
