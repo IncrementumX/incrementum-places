@@ -379,6 +379,15 @@ async function loadFromSupabase() {
     mapped.forEach(x => RESTAURANTS.push(x));
     DELETED_NATIVES = deletions.map(d => d.name);
     SUPABASE_AVAILABLE = true;
+    
+    // MERGE: aplicar overrides e deleções do localStorage por cima do Supabase
+    // Isso garante que deleções locais (ainda não syncadas) sejam preservadas
+    const loaded = loadPersisted();
+    if (loaded) {
+      DELETED_NATIVES = [...new Set([...DELETED_NATIVES, ...BUILTIN_DELETED])];
+      filterDeleted();
+    }
+    
     return true;
   } catch (e) {
     console.log('Supabase load failed (expected if tables not created):', e.message);
