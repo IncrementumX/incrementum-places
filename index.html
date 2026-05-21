@@ -331,6 +331,8 @@ footer{border-top:1px solid var(--border-soft);text-align:center;padding:28px;co
 <script>
 const HOODS = {"Jardins":"O coração gastronômico da elite paulistana","Pinheiros":"Bairro boêmio e criativo, polo cultural","Itaim Bibi":"Centro financeiro e gastronômico de alto padrão","Jardim Europa":"Enclave de luxo com mansões","Jardim Paulista":"Bairro nobre tranquilo","Higienópolis":"Bairro histórico e intelectual","Vila Madalena":"Bairro boêmio com grafites","Vila Olímpia":"Polo corporativo e gastronômico","Moema":"Bairro residencial arborizado","Liberdade":"O bairro japonês histórico","Bixiga":"Bairro italiano histórico","Campo Belo":"Bairro residencial discreto","Perdizes":"Bairro intelectual","Centro":"Coração histórico de SP","Casa Verde":"Bairro ao norte — Mocotó","Jardim América":"Enclave residencial verde","Vila Nova Conceição":"Bairro residencial chique","Consolação":"Bairro boêmio central","Saúde":"Bairro tradicional ao sul","Mooca":"Bairro italiano histórico","Alto da Mooca":"Tradição italiana","Juquehy":"Paraíso caiçara no litoral norte","Miami Beach":"Praia glamourosa","South Beach":"Coração do nightlife de Miami","Brickell":"Distrito financeiro de Miami","Design District":"Distrito de grifes e gastronomia","Bal Harbour":"Enclave de ultra luxo","Wynwood":"Bairro das artes","Downtown MIA":"Centro underground de Miami","West Village":"Bairro mais charmoso de Manhattan","Greenwich Village":"Village boêmio de NYC","DUMBO":"Brooklyn com vistas deslumbrantes","Chelsea":"Bairro de galerias de arte","LES":"Lower East Side hipster","Bela Vista":"Bar scene crescente","Manhattan":"A ilha que nunca dorme"};
 
+const BUILTIN_DELETED = [];
+
 const _RAW = [
 /* ── CONTEMPORARY ── */
 {n:"D.O.M.",h:"Jardins",c:"Contemporânea",t:"contemporary",ch:"Alex Atala",p:4,mi:3,l50:4,w50:14,st:"want",oc:["impress","date","biz"],vb:"Alex Atala — tucupi, formiga saúva, cumaru. Amazônia em 10 tempos.",ig:"d.o.m.restaurante",tel:"",site:"https://domrestaurante.com.br",reserva:"",notes:""},
@@ -662,15 +664,42 @@ function saveState() {
   }
 }
 
-// Carrega do localStorage se existir
+// Carrega do localStorage se existir (merge inteligente, nunca replace)
 function loadPersisted() {
   try {
     const raw = localStorage.getItem('ip_all_data');
     if (!raw) return false;
     const data = JSON.parse(raw);
     if (data.restaurants && Array.isArray(data.restaurants)) {
-      RESTAURANTS.length = 0;
-      data.restaurants.forEach(r => RESTAURANTS.push(r));
+      const persistedByName = new Map();
+      const persistedUsers = [];
+      data.restaurants.forEach(r => {
+        if (r._user) persistedUsers.push(r);
+        else persistedByName.set(r.n, r);
+      });
+      // Overlay mutable fields onto current _RAW natives
+      RESTAURANTS.forEach(r => {
+        if (r._user) return;
+        const p = persistedByName.get(r.n);
+        if (p) {
+          if (p.st !== undefined) r.st = p.st;
+          if (p.notes !== undefined) r.notes = p.notes;
+          if (p.ch !== undefined) r.ch = p.ch;
+          if (p.ig !== undefined) r.ig = p.ig;
+          if (p.tel !== undefined) r.tel = p.tel;
+          if (p.site !== undefined) r.site = p.site;
+          if (p.reserva !== undefined) r.reserva = p.reserva;
+          if (p.vb !== undefined) r.vb = p.vb;
+          if (p.mi !== undefined) r.mi = p.mi;
+          if (p.bib !== undefined) r.bib = p.bib;
+          if (p.l50 !== undefined) r.l50 = p.l50;
+          if (p.w50 !== undefined) r.w50 = p.w50;
+        }
+      });
+      // Inject user-added restaurants not already present
+      persistedUsers.forEach(ur => {
+        if (!RESTAURANTS.some(r => r.n === ur.n && r._user)) RESTAURANTS.push(ur);
+      });
     }
     if (data.deleted && Array.isArray(data.deleted)) {
       DELETED_NATIVES = data.deleted;
@@ -734,10 +763,22 @@ function showToast(msg) {
   t._tm = setTimeout(() => { t.style.opacity = '0'; }, 2200);
 }
 
+// Remove nativos deletados do array visível
+function filterDeleted() {
+  for (let i = RESTAURANTS.length - 1; i >= 0; i--) {
+    if (!RESTAURANTS[i]._user && DELETED_NATIVES.includes(RESTAURANTS[i].n)) {
+      RESTAURANTS.splice(i, 1);
+    }
+  }
+}
+
 // Inicialização: tenta carregar do localStorage, senão usa o default
 let DELETED_NATIVES = [];
 (function initPersist() {
   const loaded = loadPersisted();
+  // Merge built-in deletions from source with user's local deletions
+  DELETED_NATIVES = [...new Set([...BUILTIN_DELETED, ...DELETED_NATIVES])];
+  filterDeleted();
   if (!loaded) {
     // Primeira vez: aplica apenas overrides antigos do formato legacy (migração)
     try {
@@ -757,6 +798,9 @@ let DELETED_NATIVES = [];
       // Salva no novo formato
       saveState();
     } catch(e) {}
+    // Re-apply built-in deletions after legacy migration
+    DELETED_NATIVES = [...new Set([...BUILTIN_DELETED, ...DELETED_NATIVES])];
+    filterDeleted();
   }
 })();
 
