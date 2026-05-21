@@ -1,5 +1,7 @@
 -- ================================================================
--- Incrementum Places — Schema Supabase (DDL via CLI)
+-- Incrementum Places — Schema Supabase
+-- ================================================================
+-- Criar este schema no SQL Editor do Supabase Dashboard
 -- ================================================================
 
 -- 1. Tabela principal de restaurantes
@@ -36,7 +38,8 @@ CREATE TABLE IF NOT EXISTS restaurant_deletions (
     device_info TEXT DEFAULT ''
 );
 
--- 3. Tabela de estado por usuário (para uso futuro)
+-- 3. Tabela de estado por usuário (status, notas, overrides)
+-- Para uso futuro com autenticação
 CREATE TABLE IF NOT EXISTS restaurant_states (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     restaurant_name TEXT REFERENCES restaurants(name) ON DELETE CASCADE,
@@ -46,20 +49,24 @@ CREATE TABLE IF NOT EXISTS restaurant_states (
 );
 
 -- ================================================================
--- RLS Policies
+-- RLS Policies — Permitir leitura pública, inserção de deleções
 -- ================================================================
+
+-- Restaurants: leitura pública
 ALTER TABLE restaurants ENABLE ROW LEVEL SECURITY;
-CREATE POLICY "Allow public read restaurants"
+CREATE POLICY IF NOT EXISTS "Allow public read restaurants"
     ON restaurants FOR SELECT USING (true);
 
+-- Deletions: leitura pública + inserção anônima
 ALTER TABLE restaurant_deletions ENABLE ROW LEVEL SECURITY;
-CREATE POLICY "Allow public read deletions"
+CREATE POLICY IF NOT EXISTS "Allow public read deletions"
     ON restaurant_deletions FOR SELECT USING (true);
-CREATE POLICY "Allow public insert deletions"
+CREATE POLICY IF NOT EXISTS "Allow public insert deletions"
     ON restaurant_deletions FOR INSERT WITH CHECK (true);
 
+-- States: leitura pública (para MVP; futuro: por user_id)
 ALTER TABLE restaurant_states ENABLE ROW LEVEL SECURITY;
-CREATE POLICY "Allow public read states"
+CREATE POLICY IF NOT EXISTS "Allow public read states"
     ON restaurant_states FOR SELECT USING (true);
 
 -- ================================================================
