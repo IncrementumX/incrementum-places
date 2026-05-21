@@ -333,105 +333,6 @@ const HOODS = {"Jardins":"O coração gastronômico da elite paulistana","Pinhei
 
 const BUILTIN_DELETED = [];
 
-// ── SUPABASE CONFIG ──
-const SUPABASE_URL = 'https://oziequrhypzbfdynnnda.supabase.co';
-const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im96aWVxdXJoeXB6YmZkeW5ubmRhIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQwNTU3OTEsImV4cCI6MjA4OTYzMTc5MX0.dU0_ISLUdDVAh0XQ4wLFlDXf4ZTOuRh__4_mcp0aFxo';
-let SUPABASE_AVAILABLE = false;
-
-async function sbFetch(path, opts = {}) {
-  const url = `${SUPABASE_URL}/rest/v1${path}`;
-  const res = await fetch(url, {
-    ...opts,
-    headers: {
-      'apikey': SUPABASE_ANON_KEY,
-      'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
-      'Content-Type': 'application/json',
-      ...(opts.headers || {})
-    }
-  });
-  if (!res.ok) throw new Error(`Supabase ${res.status}: ${await res.text()}`);
-  return res;
-}
-
-async function loadFromSupabase() {
-  try {
-    const [rRes, dRes] = await Promise.all([
-      sbFetch('/restaurants?select=*'),
-      sbFetch('/restaurant_deletions?select=restaurant_name')
-    ]);
-    const rows = await rRes.json();
-    const deletions = await dRes.json();
-    if (!Array.isArray(rows) || rows.length === 0) return false;
-    // Map Supabase schema -> app schema
-    const mapped = rows.map(r => ({
-      n: r.name, h: r.location || '', c: r.category || '', t: 'contemporary',
-      ch: r.status || '', p: parseInt(r.price) || 2,
-      st: (r.rating || 'want').toLowerCase(),
-      ig: r.instagram || '', tel: r.phone || '', site: r.website || '',
-      vb: r.description || '', notes: r.notes || '',
-      mi: r.awards?.includes('Michelin') ? 1 : undefined,
-      bib: r.awards?.includes('Bib') ? 1 : undefined,
-      _supabase: true
-    }));
-    RESTAURANTS.length = 0;
-    mapped.forEach(x => RESTAURANTS.push(x));
-    DELETED_NATIVES = deletions.map(d => d.restaurant_name);
-    SUPABASE_AVAILABLE = true;
-    return true;
-  } catch (e) {
-    console.log('Supabase load failed (expected if tables not created):', e.message);
-    SUPABASE_AVAILABLE = false;
-    return false;
-  }
-}
-
-async function saveToSupabase() {
-  if (!SUPABASE_AVAILABLE) return false;
-  try {
-    // Upsert each restaurant
-    for (const r of RESTAURANTS) {
-      if (r._user) continue; // skip user-added for now
-      const body = {
-        name: r.n,
-        category: r.c,
-        status: r.ch,
-        price: String(r.p),
-        rating: r.st,
-        location: r.h,
-        instagram: r.ig,
-        phone: r.tel,
-        website: r.site,
-        description: r.vb,
-        notes: r.notes
-      };
-      await sbFetch('/restaurants', {
-        method: 'POST',
-        body: JSON.stringify(body),
-        headers: { 'Prefer': 'resolution=merge-duplicates' }
-      });
-    }
-    return true;
-  } catch (e) {
-    console.error('Supabase save failed:', e);
-    return false;
-  }
-}
-
-async function syncDeletionToSupabase(name) {
-  if (!SUPABASE_AVAILABLE) return false;
-  try {
-    await sbFetch('/restaurant_deletions', {
-      method: 'POST',
-      body: JSON.stringify({ restaurant_name: name }),
-      headers: { 'Prefer': 'resolution=ignore-duplicates' }
-    });
-    return true;
-  } catch (e) {
-    console.error('Supabase deletion sync failed:', e);
-    return false;
-  }
-}
-
 const _RAW = [
 /* ── CONTEMPORARY ── */
 {n:"D.O.M.",h:"Jardins",c:"Contemporânea",t:"contemporary",ch:"Alex Atala",p:4,mi:3,l50:4,w50:14,st:"want",oc:["impress","date","biz"],vb:"Alex Atala — tucupi, formiga saúva, cumaru. Amazônia em 10 tempos.",ig:"d.o.m.restaurante",tel:"",site:"https://domrestaurante.com.br",reserva:"",notes:""},
@@ -756,11 +657,7 @@ function saveState() {
       ts: Date.now()
     };
     localStorage.setItem('ip_all_data', JSON.stringify(payload));
-    // Tentar Supabase em background (não bloqueia)
-    saveToSupabase().then(ok => {
-      if (ok) showToast('Sincronizado ☁️');
-      else showToast('Salvo ✓');
-    }).catch(() => showToast('Salvo ✓'));
+    showToast('Salvo ✓');
   } catch(e) {
     console.error('saveState failed:', e);
     showToast('Erro ao salvar');
@@ -875,18 +772,9 @@ function filterDeleted() {
   }
 }
 
-// Inicialização: tenta Supabase -> localStorage -> _RAW default
+// Inicialização: tenta carregar do localStorage, senão usa o default
 let DELETED_NATIVES = [];
-(async function initPersist() {
-  // 1. Tenta Supabase primeiro
-  const sbLoaded = await loadFromSupabase();
-  if (sbLoaded) {
-    console.log('Loaded from Supabase');
-    render();
-    return;
-  }
-  
-  // 2. Fallback para localStorage
+(function initPersist() {
   const loaded = loadPersisted();
   // Merge built-in deletions from source with user's local deletions
   DELETED_NATIVES = [...new Set([...BUILTIN_DELETED, ...DELETED_NATIVES])];
@@ -914,7 +802,6 @@ let DELETED_NATIVES = [];
     DELETED_NATIVES = [...new Set([...BUILTIN_DELETED, ...DELETED_NATIVES])];
     filterDeleted();
   }
-  render();
 })();
 
 // Cycle status: want -> visited -> fav -> want
@@ -945,10 +832,7 @@ function deleteRestaurant(idx) {
   if (ri >= 0) {
     const wasNative = !RESTAURANTS[ri]._user;
     RESTAURANTS.splice(ri, 1);
-    if (wasNative && !DELETED_NATIVES.includes(d.n)) {
-      DELETED_NATIVES.push(d.n);
-      syncDeletionToSupabase(d.n); // background sync
-    }
+    if (wasNative && !DELETED_NATIVES.includes(d.n)) DELETED_NATIVES.push(d.n);
   }
   saveState();
   render();
@@ -1272,7 +1156,7 @@ function toggleGuides() {
 }
 
 // Init
-// render() chamado dentro de initPersist() após carregar dados
+render();
 </script>
 </body>
 </html>

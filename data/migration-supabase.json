@@ -1,0 +1,4471 @@
+[
+  {
+    "name": "D.O.M.",
+    "neighborhood": "Jardins",
+    "cuisine": "Contemporânea",
+    "type": "contemporary",
+    "chef": "Alex Atala",
+    "price": 4,
+    "michelin": 3,
+    "latam50": 4,
+    "world50": 14,
+    "status": "want",
+    "occasions": [
+      "impress",
+      "date",
+      "biz"
+    ],
+    "vibe": "Alex Atala — tucupi, formiga saúva, cumaru. Amazônia em 10 tempos.",
+    "instagram": "d.o.m.restaurante",
+    "website": "https://domrestaurante.com.br",
+    "city": "SP",
+    "is_builtin": true
+  },
+  {
+    "name": "Evvai",
+    "neighborhood": "Pinheiros",
+    "cuisine": "Contemporânea",
+    "type": "contemporary",
+    "chef": "Luiz Filipe Souza",
+    "price": 4,
+    "michelin": 3,
+    "latam50": 6,
+    "world50": 30,
+    "status": "visited",
+    "occasions": [
+      "impress",
+      "date"
+    ],
+    "vibe": "Luiz Filipe Souza — ítalo-brasileiro, 3 estrelas Michelin, #6 LatAm 50 Best.",
+    "instagram": "evvairestaurante",
+    "website": "https://www.evvai.com.br",
+    "city": "SP",
+    "is_builtin": true
+  },
+  {
+    "name": "Tuju",
+    "neighborhood": "Jardins",
+    "cuisine": "Contemporânea",
+    "type": "contemporary",
+    "chef": "Ivan Ralston",
+    "price": 4,
+    "michelin": 3,
+    "latam50": 9,
+    "world50": 48,
+    "status": "want",
+    "occasions": [
+      "impress",
+      "date"
+    ],
+    "vibe": "Ivan Ralston — insumos da Mata Atlântica, 3 estrelas Michelin, Green Star.",
+    "instagram": "tujurestaurante",
+    "website": "https://www.tuju.com.br",
+    "city": "SP",
+    "is_builtin": true
+  },
+  {
+    "name": "Mani",
+    "neighborhood": "Jardim América",
+    "cuisine": "Contemporânea",
+    "type": "contemporary",
+    "chef": "Helena Rizzo",
+    "price": 4,
+    "michelin": 1,
+    "latam50": 13,
+    "status": "visited",
+    "occasions": [
+      "date",
+      "impress"
+    ],
+    "vibe": "Helena Rizzo — horta própria no telhado, orgânica brasileira, 1 estrela Michelin.",
+    "instagram": "manirestaurante",
+    "website": "https://www.restaurantemani.com.br",
+    "city": "SP",
+    "is_builtin": true
+  },
+  {
+    "name": "Soho",
+    "neighborhood": "Jardins",
+    "cuisine": "Contemporânea",
+    "type": "contemporary",
+    "chef": "—",
+    "price": 3,
+    "michelin": 1,
+    "status": "want",
+    "occasions": [
+      "date",
+      "impress"
+    ],
+    "vibe": "Michelin ★, Jardins — menu enxuto, ingredientes sazonais, execução precisa.",
+    "instagram": "soho.restaurante",
+    "city": "SP",
+    "is_builtin": true
+  },
+  {
+    "name": "Carlota",
+    "neighborhood": "Jardins",
+    "cuisine": "Contemporânea",
+    "type": "contemporary",
+    "chef": "Carla Pernambuco",
+    "price": 3,
+    "status": "want",
+    "occasions": [
+      "date",
+      "biz"
+    ],
+    "vibe": "Carla Pernambuco — soufflé de goiabada, bistrô multicultural, Selecionado Michelin.",
+    "instagram": "carlotarestaurante_",
+    "website": "https://carlota.com.br",
+    "city": "SP",
+    "is_builtin": true
+  },
+  {
+    "name": "Spot",
+    "neighborhood": "Jardins",
+    "cuisine": "Contemporânea",
+    "type": "contemporary",
+    "chef": "—",
+    "price": 2,
+    "status": "want",
+    "occasions": [
+      "date",
+      "biz"
+    ],
+    "vibe": "Contemporâneo paulistano desde 1994, Selecionado Michelin, Alameda Rocha Azevedo.",
+    "instagram": "spotsp",
+    "website": "https://www.restaurantespot.com.br",
+    "city": "SP",
+    "is_builtin": true
+  },
+  {
+    "name": "Pato Rei",
+    "neighborhood": "Centro",
+    "cuisine": "Contemporânea",
+    "type": "contemporary",
+    "chef": "—",
+    "price": 2,
+    "status": "want",
+    "occasions": [
+      "date",
+      "hidden"
+    ],
+    "vibe": "Selecionado Michelin, aclamado pelo NYT — cozinha brasileira no Centro histórico.",
+    "instagram": "patoreisp",
+    "website": "https://patoreisp.com.br",
+    "city": "SP",
+    "is_builtin": true
+  },
+  {
+    "name": "Simone",
+    "neighborhood": "Higienópolis",
+    "cuisine": "Contemporânea",
+    "type": "contemporary",
+    "chef": "Simone Zogbi",
+    "price": 3,
+    "status": "visited",
+    "occasions": [
+      "date",
+      "hidden"
+    ],
+    "vibe": "Simone Zogbi — cozinha de mercado sazonal, farm-to-table em Higienópolis.",
+    "city": "SP",
+    "is_builtin": true
+  },
+  {
+    "name": "Taraz",
+    "neighborhood": "Jardins",
+    "cuisine": "Contemporânea",
+    "type": "contemporary",
+    "chef": "Rosewood SP",
+    "price": 4,
+    "status": "visited",
+    "occasions": [
+      "date",
+      "impress"
+    ],
+    "vibe": "Rosewood SP — rooftop, gastronomia contemporânea e drinques de autor.",
+    "instagram": "taraz.saopaulo",
+    "website": "https://www.rosewoodhotels.com/en/sao-paulo/dining/taraz",
+    "city": "SP",
+    "is_builtin": true
+  },
+  {
+    "name": "Badauê",
+    "neighborhood": "Jardins",
+    "cuisine": "Contemporânea",
+    "type": "contemporary",
+    "chef": "—",
+    "price": 2,
+    "status": "visited",
+    "occasions": [
+      "date"
+    ],
+    "vibe": "Criativa e despretenciosa em Jardins — contemporânea brasileira com espírito autêntico do bairro.",
+    "instagram": "restaurantebadaue",
+    "website": "https://www.restaurantebadauesp.com.br",
+    "city": "SP",
+    "is_builtin": true
+  },
+  {
+    "name": "Ema",
+    "neighborhood": "Jardins",
+    "cuisine": "Contemporânea",
+    "type": "contemporary",
+    "chef": "—",
+    "price": 3,
+    "status": "visited",
+    "occasions": [
+      "date",
+      "hidden"
+    ],
+    "vibe": "Chef-driven, menu sazonal semanal, counter íntimo nos Jardins.",
+    "instagram": "restauranteema",
+    "website": "https://www.grupoemerestaurantes.com.br/ema",
+    "city": "SP",
+    "is_builtin": true
+  },
+  {
+    "name": "Cozinha 212",
+    "neighborhood": "Jardins",
+    "cuisine": "Contemporânea",
+    "type": "contemporary",
+    "chef": "—",
+    "price": 3,
+    "status": "visited",
+    "occasions": [
+      "biz"
+    ],
+    "vibe": "Bistrô casual de Jardins, almoço de negócios, menu executivo preciso.",
+    "instagram": "cozinha212",
+    "website": "https://www.cozinha212.com.br",
+    "city": "SP",
+    "is_builtin": true
+  },
+  {
+    "name": "Roi",
+    "neighborhood": "Jardins",
+    "cuisine": "Contemporânea",
+    "type": "contemporary",
+    "chef": "—",
+    "price": 3,
+    "status": "visited",
+    "occasions": [
+      "date",
+      "hidden"
+    ],
+    "vibe": "Menu sazonal, counter íntimo, execução precisa — cozinha autoral paulistana.",
+    "instagram": "roimediterranee",
+    "city": "SP",
+    "is_builtin": true
+  },
+  {
+    "name": "Jacó",
+    "neighborhood": "Pinheiros",
+    "cuisine": "Contemporânea",
+    "type": "contemporary",
+    "chef": "—",
+    "price": 3,
+    "status": "visited",
+    "occasions": [
+      "date"
+    ],
+    "vibe": "Cozinha autoral e sazonal em Pinheiros, muito disputada.",
+    "instagram": "jaco__sp",
+    "website": "https://restaurantejaco.com",
+    "city": "SP",
+    "is_builtin": true
+  },
+  {
+    "name": "Charco",
+    "neighborhood": "Jardins",
+    "cuisine": "Contemporânea",
+    "type": "contemporary",
+    "chef": "—",
+    "price": 3,
+    "status": "want",
+    "occasions": [
+      "impress",
+      "date"
+    ],
+    "vibe": "Carvão vivo, cortes premium, legumes grelhados — grill autoral em Jardins.",
+    "instagram": "charcorestaurante",
+    "city": "SP",
+    "is_builtin": true
+  },
+  {
+    "name": "Arturito",
+    "neighborhood": "Jardins",
+    "cuisine": "Contemporânea",
+    "type": "contemporary",
+    "chef": "—",
+    "price": 2,
+    "status": "want",
+    "occasions": [
+      "date",
+      "hidden"
+    ],
+    "vibe": "Arte e cozinha criativa num espaço lúdico em Jardins.",
+    "instagram": "restaurantearturito",
+    "website": "https://arturito.com.br",
+    "city": "SP",
+    "is_builtin": true
+  },
+  {
+    "name": "Trindade",
+    "neighborhood": "Jardins",
+    "cuisine": "Contemporânea",
+    "type": "contemporary",
+    "chef": "Pedro Aranha",
+    "price": 4,
+    "status": "want",
+    "occasions": [
+      "date",
+      "impress"
+    ],
+    "vibe": "Chef Pedro Aranha — fine dining autoral de vanguarda em SP.",
+    "instagram": "acozinhadotrindade",
+    "city": "SP",
+    "is_builtin": true
+  },
+  {
+    "name": "Manu",
+    "neighborhood": "Jardim América",
+    "cuisine": "Contemporânea",
+    "type": "contemporary",
+    "chef": "Manu Buffara",
+    "price": 4,
+    "status": "want",
+    "occasions": [
+      "impress",
+      "date"
+    ],
+    "vibe": "Chef Manu Buffara — menu degustação sazonal, ingredientes regionais brasileiros.",
+    "instagram": "restaurantemanu",
+    "website": "https://restaurantemanu.com.br",
+    "city": "SP",
+    "is_builtin": true
+  },
+  {
+    "name": "Bossa",
+    "neighborhood": "Itaim Bibi",
+    "cuisine": "Contemporânea",
+    "type": "contemporary",
+    "chef": "—",
+    "price": 3,
+    "status": "want",
+    "occasions": [
+      "date"
+    ],
+    "vibe": "Inspirado na Bossa Nova — gastronomia brasileira criativa com leveza e sofisticação.",
+    "instagram": "bossa.restaurant",
+    "city": "SP",
+    "is_builtin": true
+  },
+  {
+    "name": "Fame",
+    "neighborhood": "Jardins",
+    "cuisine": "Contemporânea",
+    "type": "contemporary",
+    "chef": "—",
+    "price": 3,
+    "status": "want",
+    "occasions": [
+      "date"
+    ],
+    "vibe": "Mesa autoral disputada em Jardins, reservas esgotadas com semanas.",
+    "instagram": "fame_osteria",
+    "city": "SP",
+    "is_builtin": true
+  },
+  {
+    "name": "Vista",
+    "neighborhood": "Jardins",
+    "cuisine": "Contemporânea",
+    "type": "contemporary",
+    "chef": "—",
+    "price": 2,
+    "status": "visited",
+    "occasions": [
+      "date"
+    ],
+    "vibe": "Rooftop, coquetéis de autor e gastronomia contemporânea em Jardins.",
+    "instagram": "vistajardins",
+    "website": "https://vistajardins.com.br",
+    "city": "SP",
+    "is_builtin": true
+  },
+  {
+    "name": "Mi.Ado",
+    "neighborhood": "Jardins",
+    "cuisine": "Contemporânea",
+    "type": "contemporary",
+    "chef": "—",
+    "price": 3,
+    "status": "visited",
+    "occasions": [
+      "date"
+    ],
+    "vibe": "Oriente encontra América Latina — combinações que desafiam categorias e quase sempre acertam.",
+    "instagram": "restaurante.miado",
+    "website": "https://www.grupoemerestaurantes.com.br/mi-ado",
+    "city": "SP",
+    "is_builtin": true
+  },
+  {
+    "name": "Nit",
+    "neighborhood": "Pinheiros",
+    "cuisine": "Contemporânea",
+    "type": "contemporary",
+    "chef": "—",
+    "price": 2,
+    "status": "visited",
+    "occasions": [
+      "late"
+    ],
+    "vibe": "Bar noturno em Pinheiros, cozinha contemporânea e atmosfera dark.",
+    "instagram": "nit_bardetapas",
+    "city": "SP",
+    "is_builtin": true
+  },
+  {
+    "name": "Taberna 474",
+    "neighborhood": "Jardins",
+    "cuisine": "Contemporânea",
+    "type": "contemporary",
+    "chef": "—",
+    "price": 2,
+    "status": "visited",
+    "occasions": [
+      "date"
+    ],
+    "vibe": "Moderno conceito de taverna — pratos generosos para compartilhar num espaço acolhedor.",
+    "instagram": "taberna474",
+    "website": "https://www.taberna474.com.br",
+    "city": "SP",
+    "is_builtin": true
+  },
+  {
+    "name": "Cala del Tanit",
+    "neighborhood": "Jardins",
+    "cuisine": "Contemporânea",
+    "type": "contemporary",
+    "chef": "—",
+    "price": 3,
+    "status": "visited",
+    "occasions": [
+      "date"
+    ],
+    "vibe": "Vibes de Ibiza transplantadas para Jardins — terraço mediterrâneo com gastronomia de qualidade.",
+    "instagram": "caladeltanit",
+    "city": "SP",
+    "is_builtin": true
+  },
+  {
+    "name": "Fasano",
+    "neighborhood": "Jardins",
+    "cuisine": "Italiana",
+    "type": "italian",
+    "chef": "Rogério Fasano",
+    "price": 4,
+    "status": "visited",
+    "occasions": [
+      "impress",
+      "biz"
+    ],
+    "vibe": "Chef Luca Gozzani — alta gastronomia italiana clássica, adegas Barolo e Brunello.",
+    "instagram": "fasanohotels",
+    "website": "https://www.fasano.com.br",
+    "city": "SP",
+    "is_builtin": true
+  },
+  {
+    "name": "Nelita",
+    "neighborhood": "Jardins",
+    "cuisine": "Italiana",
+    "type": "italian",
+    "chef": "Telma Shiraishi",
+    "price": 3,
+    "status": "visited",
+    "occasions": [
+      "date",
+      "impress"
+    ],
+    "vibe": "Telma Shiraishi — massas artesanais, cozinha italiana, raízes no Vale do Paraíba.",
+    "instagram": "nelitarestaurante",
+    "website": "https://nelitarestaurante.com.br",
+    "city": "SP",
+    "is_builtin": true
+  },
+  {
+    "name": "Serafina",
+    "neighborhood": "Itaim Bibi",
+    "cuisine": "Italiana",
+    "type": "italian",
+    "chef": "—",
+    "price": 3,
+    "michelin": 1,
+    "status": "want",
+    "occasions": [
+      "date",
+      "impress"
+    ],
+    "vibe": "Trattoria italiana clássica, massas frescas, pizzas napolitanas no forno.",
+    "instagram": "serafinabrasil",
+    "website": "https://serafinarestaurante.com.br",
+    "city": "SP",
+    "is_builtin": true
+  },
+  {
+    "name": "Tatini",
+    "neighborhood": "Jardins",
+    "cuisine": "Italiana",
+    "type": "italian",
+    "chef": "—",
+    "price": 2,
+    "bib": 1,
+    "status": "want",
+    "occasions": [
+      "date",
+      "biz"
+    ],
+    "vibe": "Clássico italiano familiar desde 1954, massas artesanais nos Jardins.",
+    "instagram": "tatinirestaurante_oficial",
+    "website": "https://tatinirestaurante.com.br",
+    "city": "SP",
+    "is_builtin": true
+  },
+  {
+    "name": "Terraço Itália",
+    "neighborhood": "Centro",
+    "cuisine": "Italiana",
+    "type": "italian",
+    "chef": "—",
+    "price": 3,
+    "status": "want",
+    "occasions": [
+      "impress",
+      "date"
+    ],
+    "vibe": "Vista 360° do skyline de SP no 41º andar. Selecionado Michelin.",
+    "instagram": "terracoitalia",
+    "website": "https://www.terracoitalia.com.br",
+    "city": "SP",
+    "is_builtin": true
+  },
+  {
+    "name": "Picchi",
+    "neighborhood": "Jardins",
+    "cuisine": "Italiana",
+    "type": "italian",
+    "chef": "Pier Paolo Picchi",
+    "price": 3,
+    "michelin": 1,
+    "status": "want",
+    "occasions": [
+      "impress",
+      "date"
+    ],
+    "vibe": "Pier Paolo Picchi — clássicos italianos com precisão, 1 estrela Michelin.",
+    "instagram": "restaurantepicchi",
+    "website": "https://restaurantepicchi.com.br",
+    "city": "SP",
+    "is_builtin": true
+  },
+  {
+    "name": "Casal",
+    "neighborhood": "Jardins",
+    "cuisine": "Italiana",
+    "type": "italian",
+    "chef": "—",
+    "price": 3,
+    "status": "want",
+    "occasions": [
+      "date"
+    ],
+    "vibe": "Menu degustação ítalo-contemporâneo, espaço intimista em Jardins.",
+    "city": "SP",
+    "is_builtin": true
+  },
+  {
+    "name": "Oro",
+    "neighborhood": "Jardim Paulista",
+    "cuisine": "Italiana",
+    "type": "italian",
+    "chef": "Felipe Bronze",
+    "price": 4,
+    "michelin": 1,
+    "latam50": 10,
+    "status": "want",
+    "occasions": [
+      "impress",
+      "date"
+    ],
+    "vibe": "Felipe Bronze — cozinha brasileira de vanguarda, #10 LatAm, estrela Michelin.",
+    "instagram": "oro_restaurante",
+    "website": "https://ororestaurante.com.br",
+    "city": "SP",
+    "is_builtin": true
+  },
+  {
+    "name": "Eataly",
+    "neighborhood": "Higienópolis",
+    "cuisine": "Italiana",
+    "type": "italian",
+    "chef": "—",
+    "price": 2,
+    "status": "visited",
+    "occasions": [
+      "biz"
+    ],
+    "vibe": "Mercado italiano com massas frescas, vinhos importados e múltiplos corners.",
+    "instagram": "eataly_saopaulo",
+    "website": "https://www.eataly.com.br",
+    "city": "SP",
+    "is_builtin": true
+  },
+  {
+    "name": "Pomodori",
+    "neighborhood": "Moema",
+    "cuisine": "Italiana",
+    "type": "italian",
+    "chef": "—",
+    "price": 2,
+    "bib": 1,
+    "status": "want",
+    "occasions": [
+      "date"
+    ],
+    "vibe": "Trattoria italiana desde 2003, massas frescas e serviço impecável, Moema.",
+    "instagram": "pomodoritrattoria",
+    "website": "https://www.pomodori.com.br",
+    "city": "SP",
+    "is_builtin": true
+  },
+  {
+    "name": "Rizzolio",
+    "neighborhood": "Pinheiros",
+    "cuisine": "Italiana",
+    "type": "italian",
+    "chef": "—",
+    "price": 2,
+    "bib": 1,
+    "status": "want",
+    "occasions": [
+      "date"
+    ],
+    "vibe": "Italiana generosa em Pinheiros, Bib Gourmand, pratos clássicos e risotto.",
+    "city": "SP",
+    "is_builtin": true
+  },
+  {
+    "name": "Speranza",
+    "neighborhood": "Mooca",
+    "cuisine": "Italiana",
+    "type": "italian",
+    "chef": "—",
+    "price": 1,
+    "bib": 1,
+    "status": "want",
+    "occasions": [
+      "casual"
+    ],
+    "vibe": "Cantina napolitana desde 1958, pioneira da pizza margherita no Brasil.",
+    "instagram": "pizzariasperanza",
+    "website": "https://pizzaria.com.br",
+    "city": "SP",
+    "is_builtin": true
+  },
+  {
+    "name": "Piccini",
+    "neighborhood": "Jardins",
+    "cuisine": "Italiana",
+    "type": "italian",
+    "chef": "—",
+    "price": 3,
+    "status": "visited",
+    "occasions": [
+      "biz",
+      "impress"
+    ],
+    "vibe": "Bistecca alla fiorentina com elegância toscana.",
+    "instagram": "piccinicucina",
+    "website": "https://piccinicucina.com.br",
+    "city": "SP",
+    "is_builtin": true
+  },
+  {
+    "name": "Tre Bicchieri",
+    "neighborhood": "Jardins",
+    "cuisine": "Italiana",
+    "type": "italian",
+    "chef": "—",
+    "price": 2,
+    "status": "visited",
+    "occasions": [
+      "date"
+    ],
+    "vibe": "O endereço perfeito quando o vinho é co-protagonista.",
+    "instagram": "trebicchieri_",
+    "website": "https://www.trebicchieri.com.br",
+    "city": "SP",
+    "is_builtin": true
+  },
+  {
+    "name": "Da Marino",
+    "neighborhood": "Jardins",
+    "cuisine": "Italiana",
+    "type": "italian",
+    "chef": "—",
+    "price": 2,
+    "status": "visited",
+    "occasions": [
+      "biz"
+    ],
+    "vibe": "Trattoria clássica e confiável em Jardins.",
+    "instagram": "da.marino",
+    "city": "SP",
+    "is_builtin": true
+  },
+  {
+    "name": "Tratoritta",
+    "neighborhood": "Pinheiros",
+    "cuisine": "Italiana",
+    "type": "italian",
+    "chef": "—",
+    "price": 2,
+    "status": "visited",
+    "occasions": [
+      "date"
+    ],
+    "vibe": "Irmão casual do Evvai — qualidade sem cerimônia.",
+    "instagram": "trattorita",
+    "website": "https://www.evvai.com.br",
+    "city": "SP",
+    "is_builtin": true
+  },
+  {
+    "name": "Casa di Pri",
+    "neighborhood": "Jardim Europa",
+    "cuisine": "Italiana",
+    "type": "italian",
+    "chef": "—",
+    "price": 3,
+    "status": "want",
+    "occasions": [
+      "date",
+      "hidden"
+    ],
+    "vibe": "Italiana romana autêntica — uma das mesas mais reservadas de SP.",
+    "city": "SP",
+    "is_builtin": true
+  },
+  {
+    "name": "La Piana",
+    "neighborhood": "Jardins",
+    "cuisine": "Italiana",
+    "type": "italian",
+    "chef": "—",
+    "price": 3,
+    "status": "visited",
+    "occasions": [
+      "impress"
+    ],
+    "vibe": "Tradições sicilianas de frutos do mar — elegante, sazonal e fiel à ilha mediterrânea.",
+    "instagram": "lapianacucina",
+    "city": "SP",
+    "is_builtin": true
+  },
+  {
+    "name": "Due Cuochi",
+    "neighborhood": "Jardins",
+    "cuisine": "Italiana",
+    "type": "italian",
+    "chef": "—",
+    "price": 3,
+    "status": "visited",
+    "occasions": [
+      "date",
+      "hidden"
+    ],
+    "vibe": "Dois chefs, menus sazonais criativos, counter íntimo em Jardins.",
+    "instagram": "duecuochi",
+    "website": "https://duecuochi.com.br",
+    "city": "SP",
+    "is_builtin": true
+  },
+  {
+    "name": "Ristorantino",
+    "neighborhood": "Jardins",
+    "cuisine": "Italiana",
+    "type": "italian",
+    "chef": "—",
+    "price": 2,
+    "status": "visited",
+    "occasions": [
+      "date",
+      "hidden"
+    ],
+    "vibe": "Trattoria romana, cacio e pepe e amatriciana artesanal em Jardins.",
+    "instagram": "ristorantino_",
+    "website": "https://gruppotrevisani.com.br",
+    "city": "SP",
+    "is_builtin": true
+  },
+  {
+    "name": "Nino",
+    "neighborhood": "Jardins",
+    "cuisine": "Italiana",
+    "type": "italian",
+    "chef": "—",
+    "price": 3,
+    "status": "visited",
+    "occasions": [
+      "biz"
+    ],
+    "vibe": "Trattoria clássica em Jardins, almoço de poder há décadas.",
+    "instagram": "ninocucina",
+    "website": "https://ninocucina.com",
+    "city": "SP",
+    "is_builtin": true
+  },
+  {
+    "name": "Il Carpaccio",
+    "neighborhood": "Jardins",
+    "cuisine": "Italiana",
+    "type": "italian",
+    "chef": "—",
+    "price": 3,
+    "status": "visited",
+    "occasions": [
+      "biz"
+    ],
+    "vibe": "Carpaccio artesanal em Jardins há décadas, italiana clássica e confiável.",
+    "instagram": "ilcarpacciorestaurante",
+    "city": "SP",
+    "is_builtin": true
+  },
+  {
+    "name": "Luce",
+    "neighborhood": "Jardins",
+    "cuisine": "Italiana",
+    "type": "italian",
+    "chef": "Grand Hyatt SP",
+    "price": 3,
+    "status": "visited",
+    "occasions": [
+      "biz",
+      "impress"
+    ],
+    "vibe": "Dining do Grand Hyatt — italiana contemporânea num ambiente que combina eficiência hoteleira com elegância.",
+    "instagram": "lucegastronomia",
+    "website": "https://www.luce.com.br",
+    "city": "SP",
+    "is_builtin": true
+  },
+  {
+    "name": "Mondo",
+    "neighborhood": "Pinheiros",
+    "cuisine": "Italiana",
+    "type": "italian",
+    "chef": "—",
+    "price": 3,
+    "status": "visited",
+    "occasions": [
+      "date"
+    ],
+    "vibe": "Italiana sazonal e criativa em Pinheiros, menu que muda por estação.",
+    "instagram": "mondogastronomicooficial",
+    "website": "https://mondogastronomico.com.br",
+    "city": "SP",
+    "is_builtin": true
+  },
+  {
+    "name": "Zucco",
+    "neighborhood": "Jardins",
+    "cuisine": "Italiana",
+    "type": "italian",
+    "chef": "—",
+    "price": 3,
+    "status": "visited",
+    "occasions": [
+      "date",
+      "hidden"
+    ],
+    "vibe": "Menu degustação focado e preciso — italiana que usa a abóbora como ponto de partida.",
+    "instagram": "zuccorestaurantes",
+    "website": "https://ristorante.zucco.com.br",
+    "city": "SP",
+    "is_builtin": true
+  },
+  {
+    "name": "Mata Città",
+    "neighborhood": "Jardins",
+    "cuisine": "Italiana",
+    "type": "italian",
+    "chef": "—",
+    "price": 3,
+    "status": "visited",
+    "occasions": [
+      "date",
+      "hidden"
+    ],
+    "vibe": "Italiana com horta urbana própria, ervas cultivadas no local.",
+    "instagram": "matacitta",
+    "website": "https://www.matacitta.com",
+    "city": "SP",
+    "is_builtin": true
+  },
+  {
+    "name": "Fiaschetteria",
+    "neighborhood": "Jardins",
+    "cuisine": "Italiana",
+    "type": "italian",
+    "chef": "—",
+    "price": 2,
+    "status": "visited",
+    "occasions": [
+      "date"
+    ],
+    "vibe": "Wine bar italiano que vira trattoria à noite, bom vinho.",
+    "instagram": "fiaschetteriadelcapitale",
+    "city": "SP",
+    "is_builtin": true
+  },
+  {
+    "name": "Basq",
+    "neighborhood": "Jardins",
+    "cuisine": "Italiana",
+    "type": "italian",
+    "chef": "—",
+    "price": 2,
+    "status": "visited",
+    "occasions": [
+      "late"
+    ],
+    "vibe": "Pintxos bascos encontram aperitivos italianos — criativo e informal.",
+    "instagram": "basq.sp",
+    "website": "https://basq.com.br",
+    "city": "SP",
+    "is_builtin": true
+  },
+  {
+    "name": "Donna",
+    "neighborhood": "Jardins",
+    "cuisine": "Italiana",
+    "type": "italian",
+    "chef": "—",
+    "price": 2,
+    "status": "visited",
+    "occasions": [
+      "date"
+    ],
+    "vibe": "Italiana contemporânea delicada e leve, ingredientes de qualidade.",
+    "instagram": "restaurantedonna_",
+    "city": "SP",
+    "is_builtin": true
+  },
+  {
+    "name": "Assim",
+    "neighborhood": "Jardins",
+    "cuisine": "Italiana",
+    "type": "italian",
+    "chef": "—",
+    "price": 2,
+    "status": "want",
+    "occasions": [
+      "date"
+    ],
+    "vibe": "Napolitana descontraída em Jardins — pizza com borda alta e ingredientes genuínos.",
+    "city": "SP",
+    "is_builtin": true
+  },
+  {
+    "name": "Supra",
+    "neighborhood": "Jardins",
+    "cuisine": "Italiana",
+    "type": "italian",
+    "chef": "—",
+    "price": 2,
+    "status": "visited",
+    "occasions": [
+      "biz"
+    ],
+    "vibe": "Generosa e convivial — italiana para grupos que querem compartilhar pratos fartos sem cerimônia.",
+    "instagram": "supradimauromaia",
+    "city": "SP",
+    "is_builtin": true
+  },
+  {
+    "name": "Peppino",
+    "neighborhood": "Jardins",
+    "cuisine": "Italiana",
+    "type": "italian",
+    "chef": "—",
+    "price": 2,
+    "status": "visited",
+    "occasions": [
+      "biz"
+    ],
+    "vibe": "Rusticidade romana no coração de SP — cozinha robusta que não precisa de mise en scène.",
+    "instagram": "peppinocantina",
+    "website": "https://alifenino.com.br/peppino/",
+    "city": "SP",
+    "is_builtin": true
+  },
+  {
+    "name": "Shihoma",
+    "neighborhood": "Jardins",
+    "cuisine": "Italiana",
+    "type": "italian",
+    "chef": "—",
+    "price": 3,
+    "status": "want",
+    "occasions": [
+      "date",
+      "hidden"
+    ],
+    "vibe": "Massas artesanais encontram técnica japonesa — conceito de nicho que funciona com elegância.",
+    "instagram": "pastashihoma",
+    "website": "https://shihoma.com/",
+    "city": "SP",
+    "is_builtin": true
+  },
+  {
+    "name": "Tappo Trattoria",
+    "neighborhood": "Jardins",
+    "cuisine": "Italiana",
+    "type": "italian",
+    "chef": "—",
+    "price": 2,
+    "status": "want",
+    "occasions": [
+      "date"
+    ],
+    "vibe": "Rolha de cortiça e garrafa aberta — trattoria casual premium onde a adega é protagonista.",
+    "instagram": "tappotrattoria",
+    "city": "SP",
+    "is_builtin": true
+  },
+  {
+    "name": "Bosco",
+    "neighborhood": "Jardins",
+    "cuisine": "Italiana",
+    "type": "italian",
+    "chef": "—",
+    "price": 3,
+    "status": "visited",
+    "occasions": [
+      "date",
+      "hidden"
+    ],
+    "vibe": "Conceito de floresta — funghi e ingredientes forragiados em pratos que trazem o bosco ao prato.",
+    "instagram": "bosco.restaurante",
+    "city": "SP",
+    "is_builtin": true
+  },
+  {
+    "name": "Lina",
+    "neighborhood": "Jardins",
+    "cuisine": "Italiana",
+    "type": "italian",
+    "chef": "—",
+    "price": 3,
+    "status": "want",
+    "occasions": [
+      "date"
+    ],
+    "vibe": "Abordagem delicada da italiana — sazonalidade e leveza numa proposta elegante.",
+    "instagram": "linaristorante",
+    "website": "https://linaristorante.com/",
+    "city": "SP",
+    "is_builtin": true
+  },
+  {
+    "name": "Pipo",
+    "neighborhood": "Jardins",
+    "cuisine": "Italiana",
+    "type": "italian",
+    "chef": "—",
+    "price": 2,
+    "status": "want",
+    "occasions": [
+      "date"
+    ],
+    "vibe": "Pizza premium com coberturas criativas — a pizza elevada ao gourmet num espaço descontraído.",
+    "instagram": "pipo_sp",
+    "website": "https://piporestaurante.com/en/",
+    "city": "SP",
+    "is_builtin": true
+  },
+  {
+    "name": "Lita",
+    "neighborhood": "Jardins",
+    "cuisine": "Italiana",
+    "type": "italian",
+    "chef": "—",
+    "price": 3,
+    "status": "want",
+    "occasions": [
+      "date"
+    ],
+    "vibe": "Italiana delicada e sazonal — ingredientes que priorizam a elegância sobre a robustez.",
+    "instagram": "lita.restaurante",
+    "website": "https://www.winelita.com/",
+    "city": "SP",
+    "is_builtin": true
+  },
+  {
+    "name": "Mamma Vanzetto",
+    "neighborhood": "Jardins",
+    "cuisine": "Italiana",
+    "type": "italian",
+    "chef": "Pier Paolo Picchi",
+    "price": 2,
+    "status": "want",
+    "occasions": [
+      "biz"
+    ],
+    "vibe": "As receitas da avó elevadas à arte — Chef Picchi homenageia a tradição italiana com precisão.",
+    "instagram": "mammavanzetto",
+    "city": "SP",
+    "is_builtin": true
+  },
+  {
+    "name": "Trattoria Fasano",
+    "neighborhood": "Jardins",
+    "cuisine": "Italiana",
+    "type": "italian",
+    "chef": "Fasano Group",
+    "price": 3,
+    "status": "want",
+    "occasions": [
+      "biz"
+    ],
+    "vibe": "O irmão descontraído do Fasano — espaço atemporal com o rigor do grupo.",
+    "instagram": "fasanohotels",
+    "website": "https://www.fasano.com.br/en/gastronomia/trattoria/",
+    "city": "SP",
+    "is_builtin": true
+  },
+  {
+    "name": "Quartieri",
+    "neighborhood": "Jardins",
+    "cuisine": "Italiana",
+    "type": "italian",
+    "chef": "—",
+    "price": 3,
+    "status": "want",
+    "occasions": [
+      "date"
+    ],
+    "vibe": "O espírito dos bairros de Roma transplantado para SP — cada prato evoca um rione com afeto.",
+    "city": "SP",
+    "is_builtin": true
+  },
+  {
+    "name": "Osteria Insieme",
+    "neighborhood": "Itaim Bibi",
+    "cuisine": "Italiana",
+    "type": "italian",
+    "chef": "—",
+    "price": 2,
+    "status": "want",
+    "occasions": [
+      "date"
+    ],
+    "vibe": "Mesa coletiva e convívio — osteria que celebra o comer junto com ingredientes sazonais.",
+    "city": "SP",
+    "is_builtin": true
+  },
+  {
+    "name": "Porta",
+    "neighborhood": "Higienópolis",
+    "cuisine": "Italiana",
+    "type": "italian",
+    "chef": "—",
+    "price": 2,
+    "status": "want",
+    "occasions": [
+      "date",
+      "casual"
+    ],
+    "vibe": "A verdadeira pinsa romana em Higienópolis — alternativa sofisticada à napolitana.",
+    "instagram": "portaromanaristorante",
+    "city": "SP",
+    "is_builtin": true
+  },
+  {
+    "name": "Margutta",
+    "neighborhood": "Jardim Europa",
+    "cuisine": "Italiana",
+    "type": "italian",
+    "chef": "—",
+    "price": 2,
+    "status": "want",
+    "occasions": [
+      "date"
+    ],
+    "vibe": "Tradições romanas centradas nos vegetais — leve e fiel à Via Margutta que inspira o lugar.",
+    "city": "SP",
+    "is_builtin": true
+  },
+  {
+    "name": "Pici",
+    "neighborhood": "Pinheiros",
+    "cuisine": "Italiana",
+    "type": "italian",
+    "chef": "—",
+    "price": 2,
+    "status": "want",
+    "occasions": [
+      "date",
+      "hidden"
+    ],
+    "vibe": "Pici toscano e massa artesanal num counter íntimo em Pinheiros que prioriza o produto.",
+    "instagram": "picitrattoria",
+    "city": "SP",
+    "is_builtin": true
+  },
+  {
+    "name": "Antonietta",
+    "neighborhood": "Pinheiros",
+    "cuisine": "Italiana",
+    "type": "italian",
+    "chef": "—",
+    "price": 3,
+    "status": "want",
+    "occasions": [
+      "date",
+      "hidden"
+    ],
+    "vibe": "Italiana pessoal e íntima — counter sazonal em Pinheiros, revelação unânime de 2024.",
+    "instagram": "antoniettacucina",
+    "city": "SP",
+    "is_builtin": true
+  },
+  {
+    "name": "Nona",
+    "neighborhood": "Itaim Bibi",
+    "cuisine": "Italiana",
+    "type": "italian",
+    "chef": "—",
+    "price": 2,
+    "status": "want",
+    "occasions": [
+      "date"
+    ],
+    "vibe": "A nonna napolitana elevada — honesta e refinada com afeto da cozinha doméstica italiana.",
+    "city": "SP",
+    "is_builtin": true
+  },
+  {
+    "name": "Il Borghese",
+    "neighborhood": "Jardim Europa",
+    "cuisine": "Italiana",
+    "type": "italian",
+    "chef": "—",
+    "price": 3,
+    "status": "want",
+    "occasions": [
+      "biz",
+      "date"
+    ],
+    "vibe": "Calor e precisão de vilarejo — fine dining com a warmth de um borgo toscano em Jardim Europa.",
+    "instagram": "villaborgheserestaurante",
+    "city": "SP",
+    "is_builtin": true
+  },
+  {
+    "name": "Stravaganza",
+    "neighborhood": "Itaim Bibi",
+    "cuisine": "Italiana",
+    "type": "italian",
+    "chef": "—",
+    "price": 3,
+    "status": "want",
+    "occasions": [
+      "date",
+      "impress"
+    ],
+    "vibe": "Italiana teatral e extravagante — degustação flamboyant que transforma o jantar em performance.",
+    "city": "SP",
+    "is_builtin": true
+  },
+  {
+    "name": "Vinheria Percussi",
+    "neighborhood": "Vila Madalena",
+    "cuisine": "Italiana",
+    "type": "italian",
+    "chef": "—",
+    "price": 3,
+    "status": "want",
+    "occasions": [
+      "date",
+      "impress",
+      "hidden"
+    ],
+    "vibe": "Legado familiar com a lista de vinhos old-world mais extraordinária de SP.",
+    "instagram": "vinheriapercussi",
+    "website": "https://www.percussi.com.br/",
+    "city": "SP",
+    "is_builtin": true
+  },
+  {
+    "name": "Carbone Miami",
+    "neighborhood": "South Beach",
+    "cuisine": "Italiana",
+    "type": "italian",
+    "chef": "MAJOR Group",
+    "price": 4,
+    "status": "visited",
+    "occasions": [
+      "impress"
+    ],
+    "vibe": "Red sauce power dining — reserva meses antes.",
+    "instagram": "carbonemiamibeach",
+    "website": "https://carbonemiami.com/",
+    "city": "MIA",
+    "is_builtin": true
+  },
+  {
+    "name": "Via Carota",
+    "neighborhood": "West Village",
+    "cuisine": "Italiana",
+    "type": "italian",
+    "chef": "Rita Sodi & Jody Williams",
+    "price": 2,
+    "status": "want",
+    "occasions": [
+      "date"
+    ],
+    "vibe": "A joia do West Village — rusticidade italiana perfeita.",
+    "instagram": "viacarotanyc",
+    "website": "https://www.viacarota.com/",
+    "city": "NY",
+    "is_builtin": true
+  },
+  {
+    "name": "Cecconi's",
+    "neighborhood": "DUMBO",
+    "cuisine": "Italiana",
+    "type": "italian",
+    "chef": "Soho House",
+    "price": 3,
+    "status": "want",
+    "occasions": [
+      "impress"
+    ],
+    "vibe": "À beira do rio em DUMBO com Manhattan ao fundo.",
+    "instagram": "cecconisnyc",
+    "website": "https://www.cecconisrestaurants.com/dumbo/",
+    "city": "NY",
+    "is_builtin": true
+  },
+  {
+    "name": "Carbone NYC",
+    "neighborhood": "Greenwich Village",
+    "cuisine": "Italiana",
+    "type": "italian",
+    "chef": "MAJOR Group",
+    "price": 4,
+    "status": "want",
+    "occasions": [
+      "impress"
+    ],
+    "vibe": "O Carbone original de NYC — power dining.",
+    "instagram": "carbonenewyork",
+    "website": "https://carbonenewyork.com/",
+    "city": "NY",
+    "is_builtin": true
+  },
+  {
+    "name": "Kotori",
+    "neighborhood": "Consolação",
+    "cuisine": "Japonesa",
+    "type": "japanese",
+    "chef": "—",
+    "price": 4,
+    "latam50": 18,
+    "status": "want",
+    "occasions": [
+      "impress",
+      "date"
+    ],
+    "vibe": "Omakase japonês de precisão excepcional — #18 LatAm, Vogue, Bloomberg.",
+    "instagram": "kotorisushi",
+    "city": "SP",
+    "is_builtin": true
+  },
+  {
+    "name": "Jun Sakamoto",
+    "neighborhood": "Pinheiros",
+    "cuisine": "Japonesa",
+    "type": "japanese",
+    "chef": "Jun Sakamoto",
+    "price": 4,
+    "michelin": 1,
+    "status": "visited",
+    "occasions": [
+      "impress",
+      "biz"
+    ],
+    "vibe": "Jun Sakamoto — sushi omakase de precisão, 1 estrela Michelin, Pinheiros.",
+    "instagram": "restaurante_junsakamoto",
+    "website": "https://www.junsakamoto.com.br",
+    "city": "SP",
+    "is_builtin": true
+  },
+  {
+    "name": "Kinoshita",
+    "neighborhood": "Vila Olímpia",
+    "cuisine": "Japonesa",
+    "type": "japanese",
+    "chef": "—",
+    "price": 4,
+    "michelin": 1,
+    "latam50": 44,
+    "status": "want",
+    "occasions": [
+      "impress",
+      "date"
+    ],
+    "vibe": "Kappo japonês, único Krug Ambassade da América do Sul, 1 estrela Michelin.",
+    "instagram": "kinoshitarestaurante",
+    "website": "https://restaurantekinoshita.com.br",
+    "city": "SP",
+    "is_builtin": true
+  },
+  {
+    "name": "Huto",
+    "neighborhood": "Itaim Bibi",
+    "cuisine": "Japonesa",
+    "type": "japanese",
+    "chef": "—",
+    "price": 3,
+    "michelin": 1,
+    "status": "want",
+    "occasions": [
+      "date",
+      "hidden"
+    ],
+    "vibe": "Omakase japonês íntimo com estrela Michelin desde a abertura.",
+    "instagram": "grupo_huto",
+    "website": "https://www.grupohuto.com.br",
+    "city": "SP",
+    "is_builtin": true
+  },
+  {
+    "name": "Shin-Zushi",
+    "neighborhood": "Moema",
+    "cuisine": "Japonesa",
+    "type": "japanese",
+    "chef": "—",
+    "price": 4,
+    "michelin": 1,
+    "status": "want",
+    "occasions": [
+      "impress"
+    ],
+    "vibe": "Sushi tradicional japonês em Paraíso, 50 anos de técnica e frescor.",
+    "instagram": "shinzushioficial",
+    "city": "SP",
+    "is_builtin": true
+  },
+  {
+    "name": "Aizomê",
+    "neighborhood": "Liberdade",
+    "cuisine": "Japonesa",
+    "type": "japanese",
+    "chef": "Telma Shiraishi",
+    "price": 3,
+    "michelin": 1,
+    "status": "want",
+    "occasions": [
+      "date",
+      "impress"
+    ],
+    "vibe": "Telma Shiraishi — nipo-brasileira, Japan House SP, 1 estrela Michelin.",
+    "instagram": "aizomerestaurante",
+    "website": "https://www.aizome.com.br",
+    "city": "SP",
+    "is_builtin": true
+  },
+  {
+    "name": "Murakami",
+    "neighborhood": "Jardins",
+    "cuisine": "Japonesa",
+    "type": "japanese",
+    "chef": "Tsuyoshi Murakami",
+    "price": 3,
+    "michelin": 1,
+    "status": "want",
+    "occasions": [
+      "date"
+    ],
+    "vibe": "Tsuyoshi Murakami — menu vivo autoral, 1 estrela Michelin, Jardins.",
+    "instagram": "restaurantemurakami",
+    "website": "https://www.murakamimu.com",
+    "city": "SP",
+    "is_builtin": true
+  },
+  {
+    "name": "Kan Suke",
+    "neighborhood": "Jardins",
+    "cuisine": "Japonesa",
+    "type": "japanese",
+    "chef": "Keisuke Egashira",
+    "price": 3,
+    "michelin": 1,
+    "status": "want",
+    "occasions": [
+      "date",
+      "impress"
+    ],
+    "vibe": "Keisuke Egashira solo — sushi de balcão para 8, 1 estrela Michelin.",
+    "instagram": "kan.suke",
+    "city": "SP",
+    "is_builtin": true
+  },
+  {
+    "name": "Sushi Yassu",
+    "neighborhood": "Jardins",
+    "cuisine": "Japonesa",
+    "type": "japanese",
+    "chef": "—",
+    "price": 3,
+    "michelin": 1,
+    "status": "want",
+    "occasions": [
+      "impress"
+    ],
+    "vibe": "Referência histórica do sushi paulistano com estrela Michelin.",
+    "city": "SP",
+    "is_builtin": true
+  },
+  {
+    "name": "Ikeda",
+    "neighborhood": "Jardins",
+    "cuisine": "Japonesa",
+    "type": "japanese",
+    "chef": "—",
+    "price": 3,
+    "michelin": 1,
+    "status": "want",
+    "occasions": [
+      "impress",
+      "hidden"
+    ],
+    "vibe": "Counter omakase discreto e preciso — estrela Michelin que não precisa de marketing.",
+    "city": "SP",
+    "is_builtin": true
+  },
+  {
+    "name": "Sushi Rika",
+    "neighborhood": "Campo Belo",
+    "cuisine": "Japonesa",
+    "type": "japanese",
+    "chef": "—",
+    "price": 3,
+    "michelin": 1,
+    "status": "want",
+    "occasions": [
+      "impress"
+    ],
+    "vibe": "Campo Belo abriga um dos counters mais disputados de SP — omakase que combina tradição japonesa com peixe brasileiro de primeira linha.",
+    "city": "SP",
+    "is_builtin": true
+  },
+  {
+    "name": "Hachi",
+    "neighborhood": "Perdizes",
+    "cuisine": "Japonesa",
+    "type": "japanese",
+    "chef": "—",
+    "price": 3,
+    "michelin": 1,
+    "status": "want",
+    "occasions": [
+      "impress",
+      "hidden"
+    ],
+    "vibe": "Oito assentos, estrela Michelin — o counter mais intimista e puro da cidade.",
+    "city": "SP",
+    "is_builtin": true
+  },
+  {
+    "name": "Temae",
+    "neighborhood": "Vila Nova Conceição",
+    "cuisine": "Japonesa",
+    "type": "japanese",
+    "chef": "—",
+    "price": 3,
+    "michelin": 1,
+    "status": "want",
+    "occasions": [
+      "date",
+      "impress"
+    ],
+    "vibe": "Kaiseki íntimo preparado diante de você — estrela Michelin em Vila Nova Conceição.",
+    "city": "SP",
+    "is_builtin": true
+  },
+  {
+    "name": "Ohka",
+    "neighborhood": "Jardim Paulista",
+    "cuisine": "Japonesa",
+    "type": "japanese",
+    "chef": "Shin Koike",
+    "price": 4,
+    "status": "visited",
+    "occasions": [
+      "impress",
+      "date"
+    ],
+    "vibe": "Chef Shin Koike — kaiseki japonês requintado, frutos do mar frescos.",
+    "instagram": "ohkasushi",
+    "website": "https://ohka.com.br",
+    "city": "SP",
+    "is_builtin": true
+  },
+  {
+    "name": "Kosushi",
+    "neighborhood": "Jardins",
+    "cuisine": "Japonesa",
+    "type": "japanese",
+    "chef": "—",
+    "price": 4,
+    "status": "visited",
+    "occasions": [
+      "biz",
+      "impress"
+    ],
+    "vibe": "Instituição japonesa de décadas — precisão de Tóquio, ambiente de poder.",
+    "instagram": "kosushi",
+    "website": "https://www.kosushi.com.br",
+    "city": "SP",
+    "is_builtin": true
+  },
+  {
+    "name": "Hon Maguro",
+    "neighborhood": "Jardins",
+    "cuisine": "Japonesa",
+    "type": "japanese",
+    "chef": "—",
+    "price": 4,
+    "status": "visited",
+    "occasions": [
+      "impress",
+      "hidden"
+    ],
+    "vibe": "Especialista em atum azul — neta sazonal de bluefin voada semanalmente do Japão.",
+    "instagram": "hon_magurobr",
+    "website": "https://www.honmaguro.com.br",
+    "city": "SP",
+    "is_builtin": true
+  },
+  {
+    "name": "Kosho",
+    "neighborhood": "Jardins",
+    "cuisine": "Japonesa",
+    "type": "japanese",
+    "chef": "—",
+    "price": 3,
+    "status": "visited",
+    "occasions": [
+      "date",
+      "hidden"
+    ],
+    "vibe": "Kaiseki-inspired com progressão sazonal belíssima.",
+    "website": "https://www.kosho.com.br",
+    "city": "SP",
+    "is_builtin": true
+  },
+  {
+    "name": "Watanabe",
+    "neighborhood": "Jardins",
+    "cuisine": "Japonesa",
+    "type": "japanese",
+    "chef": "—",
+    "price": 3,
+    "status": "visited",
+    "occasions": [
+      "biz"
+    ],
+    "vibe": "Old-school Tokyo sushi transplantado para Jardins.",
+    "instagram": "watanaberestaurante",
+    "city": "SP",
+    "is_builtin": true
+  },
+  {
+    "name": "Maza",
+    "neighborhood": "Jardins",
+    "cuisine": "Japonesa",
+    "type": "japanese",
+    "chef": "—",
+    "price": 3,
+    "status": "visited",
+    "occasions": [
+      "date",
+      "biz"
+    ],
+    "vibe": "Omakase e sushi craftsmanship, refinado.",
+    "city": "SP",
+    "is_builtin": true
+  },
+  {
+    "name": "Aima",
+    "neighborhood": "Itaim Bibi",
+    "cuisine": "Japonesa",
+    "type": "japanese",
+    "chef": "—",
+    "price": 3,
+    "status": "visited",
+    "occasions": [
+      "date",
+      "impress"
+    ],
+    "vibe": "Japonesa contemporânea com toques tropicais — criatividade japonesa calibrada pelos ingredientes brasileiros num counter do Itaim que surpreende.",
+    "city": "SP",
+    "is_builtin": true
+  },
+  {
+    "name": "Naga",
+    "neighborhood": "Jardins",
+    "cuisine": "Japonesa",
+    "type": "japanese",
+    "chef": "—",
+    "price": 3,
+    "status": "visited",
+    "occasions": [
+      "date"
+    ],
+    "vibe": "Fusão criativa em Jardins — o japonês-brasileiro que agrada a todos sem comprometer ninguém.",
+    "city": "SP",
+    "is_builtin": true
+  },
+  {
+    "name": "Kitchin",
+    "neighborhood": "Jardins",
+    "cuisine": "Japonesa",
+    "type": "japanese",
+    "chef": "—",
+    "price": 3,
+    "status": "visited",
+    "occasions": [
+      "date",
+      "hidden"
+    ],
+    "vibe": "Counter íntimo com seleção sazonal de peixe — o endereço que o cliente fiel não quer que você descubra.",
+    "instagram": "restaurantekitchin",
+    "website": "https://kitchin.com.br",
+    "city": "SP",
+    "is_builtin": true
+  },
+  {
+    "name": "Kazuo",
+    "neighborhood": "Jardins",
+    "cuisine": "Japonesa",
+    "type": "japanese",
+    "chef": "Kazuo",
+    "price": 3,
+    "status": "visited",
+    "occasions": [
+      "date"
+    ],
+    "vibe": "Nigiri counter tradicional, refinado e preciso.",
+    "instagram": "kazuo.restaurante",
+    "website": "https://kazuorestaurante.com.br",
+    "city": "SP",
+    "is_builtin": true
+  },
+  {
+    "name": "Ohkinha",
+    "neighborhood": "Jardins",
+    "cuisine": "Japonesa",
+    "type": "japanese",
+    "chef": "—",
+    "price": 2,
+    "status": "visited",
+    "occasions": [
+      "date"
+    ],
+    "vibe": "Casual sibling do Ohka, mesma precisão, menos formal.",
+    "instagram": "ohkasushi",
+    "website": "https://ohka.com.br",
+    "city": "SP",
+    "is_builtin": true
+  },
+  {
+    "name": "Kensei",
+    "neighborhood": "Itaim Bibi",
+    "cuisine": "Japonesa",
+    "type": "japanese",
+    "chef": "—",
+    "price": 4,
+    "status": "want",
+    "occasions": [
+      "hidden",
+      "impress"
+    ],
+    "vibe": "6 assentos, reserva com meses de antecedência — o omakase mais exclusivo de SP.",
+    "city": "SP",
+    "is_builtin": true
+  },
+  {
+    "name": "Nakayoshi",
+    "neighborhood": "Pinheiros",
+    "cuisine": "Japonesa",
+    "type": "japanese",
+    "chef": "Frederico Kanô",
+    "price": 4,
+    "status": "want",
+    "occasions": [
+      "hidden",
+      "impress"
+    ],
+    "vibe": "8 assentos, mercado fresco, nigiri ritual — o Chef Kanô transforma cada noite numa cerimônia.",
+    "instagram": "nakayoshisushi",
+    "city": "SP",
+    "is_builtin": true
+  },
+  {
+    "name": "Kuro",
+    "neighborhood": "Jardins",
+    "cuisine": "Japonesa",
+    "type": "japanese",
+    "chef": "—",
+    "price": 4,
+    "status": "want",
+    "occasions": [
+      "impress",
+      "date"
+    ],
+    "vibe": "Dark e exclusivo — omakase num ambiente moody que transforma o jantar em cerimônia.",
+    "instagram": "kurorestaurante",
+    "website": "https://kuroeshiro.com.br",
+    "city": "SP",
+    "is_builtin": true
+  },
+  {
+    "name": "Sushimuyo",
+    "neighborhood": "Itaim Bibi",
+    "cuisine": "Japonesa",
+    "type": "japanese",
+    "chef": "—",
+    "price": 3,
+    "status": "want",
+    "occasions": [
+      "date",
+      "hidden"
+    ],
+    "vibe": "Omakase de alto nível — um dos counters mais disputados de SP.",
+    "city": "SP",
+    "is_builtin": true
+  },
+  {
+    "name": "Naoki",
+    "neighborhood": "Itaim Bibi",
+    "cuisine": "Japonesa",
+    "type": "japanese",
+    "chef": "—",
+    "price": 3,
+    "status": "want",
+    "occasions": [
+      "date"
+    ],
+    "vibe": "Criativa e refinada — cozinha japonesa com alma brasileira.",
+    "city": "SP",
+    "is_builtin": true
+  },
+  {
+    "name": "Hisho",
+    "neighborhood": "Itaim Bibi",
+    "cuisine": "Japonesa",
+    "type": "japanese",
+    "chef": "—",
+    "price": 4,
+    "status": "want",
+    "occasions": [
+      "impress",
+      "hidden"
+    ],
+    "vibe": "Peixe raro voado de Tóquio — counter de altíssimo nível para os que levam nigiri a sério.",
+    "city": "SP",
+    "is_builtin": true
+  },
+  {
+    "name": "João",
+    "neighborhood": "Itaim Bibi",
+    "cuisine": "Japonesa",
+    "type": "japanese",
+    "chef": "—",
+    "price": 3,
+    "status": "want",
+    "occasions": [
+      "date"
+    ],
+    "vibe": "Omakase premiado que combina técnica japonesa com alma brasileira.",
+    "city": "SP",
+    "is_builtin": true
+  },
+  {
+    "name": "Tanuki",
+    "neighborhood": "Jardins",
+    "cuisine": "Bar",
+    "type": "bar",
+    "chef": "—",
+    "price": 2,
+    "status": "want",
+    "occasions": [
+      "late"
+    ],
+    "vibe": "Izakaya autêntico — o bar japonês mais querido de Jardins.",
+    "instagram": "tanukisushioficial",
+    "website": "https://izakayatanuki.com.br",
+    "city": "SP",
+    "is_builtin": true
+  },
+  {
+    "name": "Koya",
+    "neighborhood": "Jardim Paulista",
+    "cuisine": "Japonesa",
+    "type": "japanese",
+    "chef": "—",
+    "price": 3,
+    "status": "want",
+    "occasions": [
+      "date",
+      "impress"
+    ],
+    "vibe": "Kaiseki-inspirado onde o Japão encontra o Brasil em cada curso.",
+    "city": "SP",
+    "is_builtin": true
+  },
+  {
+    "name": "Ichirin",
+    "neighborhood": "Pinheiros",
+    "cuisine": "Japonesa",
+    "type": "japanese",
+    "chef": "—",
+    "price": 3,
+    "status": "want",
+    "occasions": [
+      "date",
+      "hidden"
+    ],
+    "vibe": "Um petisco de cada vez — harmonização com sake premium numa experiência que prioriza o momento.",
+    "city": "SP",
+    "is_builtin": true
+  },
+  {
+    "name": "Genko",
+    "neighborhood": "Itaim Bibi",
+    "cuisine": "Japonesa",
+    "type": "japanese",
+    "chef": "—",
+    "price": 3,
+    "status": "want",
+    "occasions": [
+      "date",
+      "hidden"
+    ],
+    "vibe": "Minimalismo japonês num cardápio sazonal e chef-driven — clean, preciso e sem concessões.",
+    "city": "SP",
+    "is_builtin": true
+  },
+  {
+    "name": "Sushi Oze",
+    "neighborhood": "Pinheiros",
+    "cuisine": "Japonesa",
+    "type": "japanese",
+    "chef": "Chef Oze",
+    "price": 4,
+    "status": "want",
+    "occasions": [
+      "impress"
+    ],
+    "vibe": "Abordagem purista de Tóquio — neta sazonal importada, o Chef Oze entrega nigiri sem ornamentos.",
+    "city": "SP",
+    "is_builtin": true
+  },
+  {
+    "name": "Iwa",
+    "neighborhood": "Vila Nova Conceição",
+    "cuisine": "Japonesa",
+    "type": "japanese",
+    "chef": "—",
+    "price": 4,
+    "status": "want",
+    "occasions": [
+      "impress"
+    ],
+    "vibe": "Técnica sólida como pedra e sourcing premium — omakase que cresce a cada estação.",
+    "city": "SP",
+    "is_builtin": true
+  },
+  {
+    "name": "Goya Zushi",
+    "neighborhood": "Jardins",
+    "cuisine": "Japonesa",
+    "type": "japanese",
+    "chef": "—",
+    "price": 4,
+    "status": "want",
+    "occasions": [
+      "impress"
+    ],
+    "vibe": "Técnica de Tóquio pura — counter de sushi para os que não precisam de entretenimento, só qualidade.",
+    "instagram": "goyazushi",
+    "city": "SP",
+    "is_builtin": true
+  },
+  {
+    "name": "Sushi Vaz",
+    "neighborhood": "Jardins",
+    "cuisine": "Japonesa",
+    "type": "japanese",
+    "chef": "Chef Vaz",
+    "price": 3,
+    "status": "want",
+    "occasions": [
+      "date"
+    ],
+    "vibe": "Chef's table íntimo — Vaz e sua equipe numa experiência personalizada e próxima.",
+    "instagram": "sushi_vaz",
+    "website": "https://sushivaz.com.br",
+    "city": "SP",
+    "is_builtin": true
+  },
+  {
+    "name": "Ryo",
+    "neighborhood": "Jardins",
+    "cuisine": "Japonesa",
+    "type": "japanese",
+    "chef": "Chef Ryo",
+    "price": 4,
+    "status": "want",
+    "occasions": [
+      "impress"
+    ],
+    "vibe": "Omakase com sourcing premium e neta sazonais — um dos counters mais disputados do momento.",
+    "city": "SP",
+    "is_builtin": true
+  },
+  {
+    "name": "Komah",
+    "neighborhood": "Jardins",
+    "cuisine": "Japonesa",
+    "type": "japanese",
+    "chef": "—",
+    "price": 4,
+    "status": "want",
+    "occasions": [
+      "impress",
+      "date"
+    ],
+    "vibe": "Atmosfera zen — minimalismo rigoroso onde cada nigiri é um haiku. VEJA Revelação do Ano.",
+    "instagram": "komahrestaurante",
+    "city": "SP",
+    "is_builtin": true
+  },
+  {
+    "name": "Kazan",
+    "neighborhood": "Moema",
+    "cuisine": "Japonesa",
+    "type": "japanese",
+    "chef": "Chef Kazan",
+    "price": 3,
+    "status": "want",
+    "occasions": [
+      "date",
+      "hidden"
+    ],
+    "vibe": "Perfis de sabor vulcânicos — omakase criativo que desafia a tradição com respeito.",
+    "city": "SP",
+    "is_builtin": true
+  },
+  {
+    "name": "Shiro",
+    "neighborhood": "Jardim Paulista",
+    "cuisine": "Japonesa",
+    "type": "japanese",
+    "chef": "—",
+    "price": 3,
+    "status": "want",
+    "occasions": [
+      "date",
+      "hidden"
+    ],
+    "vibe": "Inspirado na folha de shiso — cardápio herbáceo num counter íntimo, revelação de 2024.",
+    "instagram": "restauranteshiro",
+    "website": "https://kuroeshiro.com.br",
+    "city": "SP",
+    "is_builtin": true
+  },
+  {
+    "name": "Nobu",
+    "neighborhood": "Miami Beach",
+    "cuisine": "Japonesa",
+    "type": "japanese",
+    "chef": "Nobu Matsuhisa",
+    "price": 4,
+    "status": "visited",
+    "occasions": [
+      "impress"
+    ],
+    "vibe": "O ícone de Miami Beach — a fusão japonesa-peruana que definiu uma era na gastronomia global.",
+    "instagram": "nobumiamibeach",
+    "website": "https://noburestaurants.com/miami/home",
+    "city": "MIA",
+    "is_builtin": true
+  },
+  {
+    "name": "Makoto",
+    "neighborhood": "Bal Harbour",
+    "cuisine": "Japonesa",
+    "type": "japanese",
+    "chef": "Makoto Okuwa",
+    "price": 4,
+    "status": "visited",
+    "occasions": [
+      "biz",
+      "impress"
+    ],
+    "vibe": "Japonesa sofisticada no Bal Harbour Shops — rigor japonês no enclave de ultra luxo de Miami.",
+    "instagram": "makotobalharbour",
+    "website": "https://makoto-restaurant.com",
+    "city": "MIA",
+    "is_builtin": true
+  },
+  {
+    "name": "Motai",
+    "neighborhood": "Brickell",
+    "cuisine": "Japonesa",
+    "type": "japanese",
+    "chef": "—",
+    "price": 4,
+    "status": "want",
+    "occasions": [
+      "impress"
+    ],
+    "vibe": "Omakase japonês encontra a sofisticação de Brickell — alta gastronomia no coração financeiro.",
+    "city": "MIA",
+    "is_builtin": true
+  },
+  {
+    "name": "Nami Nori",
+    "neighborhood": "West Village",
+    "cuisine": "Japonesa",
+    "type": "japanese",
+    "chef": "—",
+    "price": 2,
+    "status": "want",
+    "occasions": [
+      "date"
+    ],
+    "vibe": "Temaki hand-rolled no West Village — informal e preciso, japonês sem a cerimônia do omakase.",
+    "instagram": "naminorinyc",
+    "website": "https://www.naminori.us",
+    "city": "NY",
+    "is_builtin": true
+  },
+  {
+    "name": "Kazu Nori",
+    "neighborhood": "West Village",
+    "cuisine": "Japonesa",
+    "type": "japanese",
+    "chef": "—",
+    "price": 2,
+    "status": "want",
+    "occasions": [
+      "date"
+    ],
+    "vibe": "Bar de hand roll criativo e rápido — premium sem pretensão, um dos mais divertidos em NYC.",
+    "instagram": "kazunori",
+    "website": "https://www.handrollbar.com",
+    "city": "NY",
+    "is_builtin": true
+  },
+  {
+    "name": "Sugarfish",
+    "neighborhood": "Manhattan",
+    "cuisine": "Japonesa",
+    "type": "japanese",
+    "chef": "Nozawa Tradition",
+    "price": 3,
+    "status": "visited",
+    "occasions": [
+      "biz"
+    ],
+    "vibe": "Treinado na escola Nozawa — nigiri purista onde o shoyu é desnecessário.",
+    "instagram": "sugarfishbynobi",
+    "website": "https://sugarfishsushi.com",
+    "city": "NY",
+    "is_builtin": true
+  },
+  {
+    "name": "Cantaloup",
+    "neighborhood": "Jardim Paulista",
+    "cuisine": "Francesa",
+    "type": "french",
+    "chef": "Valdir Oliveira",
+    "price": 3,
+    "status": "want",
+    "occasions": [
+      "impress",
+      "date"
+    ],
+    "vibe": "Valdir Oliveira — menu internacional sofisticado, maior adega da cidade.",
+    "instagram": "cantaloupsp",
+    "website": "https://cantaloup.com.br",
+    "city": "SP",
+    "is_builtin": true
+  },
+  {
+    "name": "Tête à Tête",
+    "neighborhood": "Jardins",
+    "cuisine": "Francesa",
+    "type": "french",
+    "chef": "—",
+    "price": 3,
+    "michelin": 1,
+    "status": "want",
+    "occasions": [
+      "date",
+      "impress"
+    ],
+    "vibe": "Matteuzzi e Vinha — contemporâneo com horta própria, 1 estrela Michelin.",
+    "instagram": "__tete_a_tete__",
+    "website": "https://teteatete.com.br",
+    "city": "SP",
+    "is_builtin": true
+  },
+  {
+    "name": "La Brasserie",
+    "neighborhood": "Itaim Bibi",
+    "cuisine": "Francesa",
+    "type": "french",
+    "chef": "—",
+    "price": 3,
+    "michelin": 1,
+    "status": "want",
+    "occasions": [
+      "date",
+      "biz"
+    ],
+    "vibe": "Brasserie francesa clássica no Itaim com uma estrela Michelin — steak frites, frutos do mar do dia e a energia de uma brasserie parisiense autêntica.",
+    "city": "SP",
+    "is_builtin": true
+  },
+  {
+    "name": "Charlô",
+    "neighborhood": "Jardim Europa",
+    "cuisine": "Francesa",
+    "type": "french",
+    "chef": "Pulso Hotel",
+    "price": 3,
+    "status": "visited",
+    "occasions": [
+      "biz"
+    ],
+    "vibe": "A joia gastronômica do Pulso Hotel em Jardim Europa.",
+    "instagram": "charlo.bistro",
+    "website": "https://charlo.com.br",
+    "city": "SP",
+    "is_builtin": true
+  },
+  {
+    "name": "Loup",
+    "neighborhood": "Jardim Europa",
+    "cuisine": "Francesa",
+    "type": "french",
+    "chef": "Elia Schramm",
+    "price": 4,
+    "status": "want",
+    "occasions": [
+      "date",
+      "impress"
+    ],
+    "vibe": "Cozinha contemporânea sem fronteiras, teto de vidro, jardim vertical em SP.",
+    "instagram": "louprestaurante",
+    "website": "https://www.louprestaurante.com.br",
+    "city": "SP",
+    "is_builtin": true
+  },
+  {
+    "name": "Soeta",
+    "neighborhood": "Pinheiros",
+    "cuisine": "Francesa",
+    "type": "french",
+    "chef": "André Mifano",
+    "price": 3,
+    "status": "want",
+    "occasions": [
+      "date",
+      "impress"
+    ],
+    "vibe": "André Mifano — técnica francesa clássica, menu sazonal em Pinheiros.",
+    "instagram": "soetarestaurante",
+    "website": "https://soeta.com.br",
+    "city": "SP",
+    "is_builtin": true
+  },
+  {
+    "name": "Tangará Jean Georges",
+    "neighborhood": "Jardim Europa",
+    "cuisine": "Francesa",
+    "type": "french",
+    "chef": "Jean-Georges Vongerichten",
+    "price": 4,
+    "status": "want",
+    "occasions": [
+      "impress",
+      "biz"
+    ],
+    "vibe": "Jean-Georges Vongerichten — técnica francesa, ingredientes brasileiros, Parque Burle Marx.",
+    "instagram": "tangarajeangeorges",
+    "website": "https://www.jean-georges.com/restaurants/brazil/sao-paulo/tangara-jean-georges",
+    "city": "SP",
+    "is_builtin": true
+  },
+  {
+    "name": "Millet",
+    "neighborhood": "Higienópolis",
+    "cuisine": "Francesa",
+    "type": "french",
+    "chef": "—",
+    "price": 2,
+    "bib": 1,
+    "status": "want",
+    "occasions": [
+      "date",
+      "casual"
+    ],
+    "vibe": "Bistrô francês acessível com Bib Gourmand — leveza parisiense e relação preço-qualidade imbatível.",
+    "instagram": "millet_place",
+    "city": "SP",
+    "is_builtin": true
+  },
+  {
+    "name": "La Parisienne",
+    "neighborhood": "Higienópolis",
+    "cuisine": "Francesa",
+    "type": "french",
+    "chef": "—",
+    "price": 1,
+    "bib": 1,
+    "status": "want",
+    "occasions": [
+      "casual"
+    ],
+    "vibe": "Padaria francesa premiada com Bib Gourmand — croissants au beurre que rivalizam com Paris.",
+    "instagram": "laparisienne_cafe",
+    "city": "SP",
+    "is_builtin": true
+  },
+  {
+    "name": "La Villette",
+    "neighborhood": "Jardins",
+    "cuisine": "Francesa",
+    "type": "french",
+    "chef": "—",
+    "price": 2,
+    "bib": 1,
+    "status": "want",
+    "occasions": [
+      "date"
+    ],
+    "vibe": "Bistrô francês na Praça Vilaboim, steak frites, vinho por jarra, Bib.",
+    "instagram": "villettevilaboim",
+    "website": "https://www.villette.com.br",
+    "city": "SP",
+    "is_builtin": true
+  },
+  {
+    "name": "Le Cordon Bleu",
+    "neighborhood": "Jardins",
+    "cuisine": "Francesa",
+    "type": "french",
+    "chef": "—",
+    "price": 3,
+    "bib": 1,
+    "status": "want",
+    "occasions": [
+      "biz",
+      "impress"
+    ],
+    "vibe": "A escola mais famosa do mundo com Bib Gourmand em SP — técnica clássica servida com maestria.",
+    "instagram": "lecordonbleubrasil",
+    "website": "https://www.cordonbleu.edu/sao-paulo/home/en",
+    "city": "SP",
+    "is_builtin": true
+  },
+  {
+    "name": "Paris 6",
+    "neighborhood": "Jardins",
+    "cuisine": "Francesa",
+    "type": "french",
+    "chef": "—",
+    "price": 2,
+    "bib": 1,
+    "status": "want",
+    "occasions": [
+      "late",
+      "date"
+    ],
+    "vibe": "Brasserie 24h com Bib Gourmand — moules-frites às 3h da manhã em Jardins.",
+    "instagram": "paris6sp",
+    "website": "https://paris6.com.br",
+    "city": "SP",
+    "is_builtin": true
+  },
+  {
+    "name": "Votre",
+    "neighborhood": "Jardins",
+    "cuisine": "Francesa",
+    "type": "french",
+    "chef": "—",
+    "price": 2,
+    "status": "visited",
+    "occasions": [
+      "date"
+    ],
+    "vibe": "Atmosfera parisiense, vinhos naturais e culinária bistronômica.",
+    "city": "SP",
+    "is_builtin": true
+  },
+  {
+    "name": "Le Quartier",
+    "neighborhood": "Jardins",
+    "cuisine": "Francesa",
+    "type": "french",
+    "chef": "—",
+    "price": 2,
+    "status": "visited",
+    "occasions": [
+      "biz"
+    ],
+    "vibe": "Brasserie clássica que nunca sai de moda — o endereço francês de conforto em Jardins.",
+    "instagram": "lequartiersp",
+    "city": "SP",
+    "is_builtin": true
+  },
+  {
+    "name": "Petit Le Jazz",
+    "neighborhood": "Jardins",
+    "cuisine": "Francesa",
+    "type": "french",
+    "chef": "—",
+    "price": 3,
+    "status": "want",
+    "occasions": [
+      "date"
+    ],
+    "vibe": "Jazz ao vivo e culinária francesa num encontro romântico inevitável.",
+    "instagram": "lejazzpetitbar",
+    "website": "https://www.lejazz.com.br",
+    "city": "SP",
+    "is_builtin": true
+  },
+  {
+    "name": "Marie",
+    "neighborhood": "Jardins",
+    "cuisine": "Francesa",
+    "type": "french",
+    "chef": "—",
+    "price": 2,
+    "status": "want",
+    "occasions": [
+      "date"
+    ],
+    "vibe": "Inspirado em Marie Antoinette — boudoir chic, pastelaria e culinária francesa.",
+    "instagram": "_mariecuisine",
+    "city": "SP",
+    "is_builtin": true
+  },
+  {
+    "name": "Balthazar",
+    "neighborhood": "Jardim Paulista",
+    "cuisine": "Francesa",
+    "type": "french",
+    "chef": "—",
+    "price": 3,
+    "status": "want",
+    "occasions": [
+      "biz",
+      "date"
+    ],
+    "vibe": "Grand brasserie parisiense com energia de Jardim Paulista — ostras, steak frites.",
+    "instagram": "barbalthazar.sp",
+    "city": "SP",
+    "is_builtin": true
+  },
+  {
+    "name": "Chez Auguste",
+    "neighborhood": "Pinheiros",
+    "cuisine": "Francesa",
+    "type": "french",
+    "chef": "—",
+    "price": 3,
+    "status": "want",
+    "occasions": [
+      "date",
+      "hidden"
+    ],
+    "vibe": "Técnica francesa autêntica num encontro íntimo em Pinheiros.",
+    "instagram": "auguste_cafe",
+    "city": "SP",
+    "is_builtin": true
+  },
+  {
+    "name": "Chez Marie",
+    "neighborhood": "Higienópolis",
+    "cuisine": "Francesa",
+    "type": "french",
+    "chef": "—",
+    "price": 3,
+    "status": "want",
+    "occasions": [
+      "date",
+      "hidden"
+    ],
+    "vibe": "Parisiense íntimo e autoral em Higienópolis — vinhos naturais e cozinha sazonal.",
+    "instagram": "chezmariabistro",
+    "city": "SP",
+    "is_builtin": true
+  },
+  {
+    "name": "Glouton",
+    "neighborhood": "Jardim Paulista",
+    "cuisine": "Francesa",
+    "type": "french",
+    "chef": "—",
+    "price": 3,
+    "status": "want",
+    "occasions": [
+      "date"
+    ],
+    "vibe": "O paraíso dos gulosos — menus sazonais harmonizados e filosofia de celebração plena.",
+    "city": "SP",
+    "is_builtin": true
+  },
+  {
+    "name": "Pour Vous",
+    "neighborhood": "Jardins",
+    "cuisine": "Francesa",
+    "type": "french",
+    "chef": "—",
+    "price": 4,
+    "status": "want",
+    "occasions": [
+      "date",
+      "impress"
+    ],
+    "vibe": "Íntimo e refinado — cozinha francesa contemporânea que Vogue elegeu como o mais sedutor de SP.",
+    "city": "SP",
+    "is_builtin": true
+  },
+  {
+    "name": "La Tambouille",
+    "neighborhood": "Jardim Europa",
+    "cuisine": "Francesa",
+    "type": "french",
+    "chef": "Giancarlo Bolla",
+    "price": 4,
+    "status": "want",
+    "occasions": [
+      "biz",
+      "impress"
+    ],
+    "vibe": "Giancarlo Bolla — alta cozinha franco-italiana clássica em São Paulo desde 1971.",
+    "instagram": "latambouille",
+    "website": "https://www.tambouille.com.br",
+    "city": "SP",
+    "is_builtin": true
+  },
+  {
+    "name": "Chou",
+    "neighborhood": "Jardins",
+    "cuisine": "Francesa",
+    "type": "french",
+    "chef": "—",
+    "price": 3,
+    "status": "want",
+    "occasions": [
+      "date"
+    ],
+    "vibe": "Fusão que constrói pontes entre técnica francesa e ingredientes brasileiros.",
+    "instagram": "restaurantechou",
+    "website": "https://chou.com.br",
+    "city": "SP",
+    "is_builtin": true
+  },
+  {
+    "name": "Casa do Porco",
+    "neighborhood": "Higienópolis",
+    "cuisine": "Brasileira",
+    "type": "brazilian",
+    "chef": "Jefferson Rueda",
+    "price": 2,
+    "bib": 1,
+    "latam50": 15,
+    "status": "want",
+    "occasions": [
+      "impress",
+      "date"
+    ],
+    "vibe": "Jefferson Rueda — porco integral nose-to-tail, menu IN.TE.RI.OR, Green Star.",
+    "instagram": "casadoporcobr",
+    "website": "https://acasadoporco.com.br",
+    "city": "SP",
+    "is_builtin": true
+  },
+  {
+    "name": "Mocotó",
+    "neighborhood": "Casa Verde",
+    "cuisine": "Brasileira",
+    "type": "brazilian",
+    "chef": "Rodrigo Oliveira",
+    "price": 2,
+    "bib": 1,
+    "status": "want",
+    "occasions": [
+      "casual",
+      "impress"
+    ],
+    "vibe": "Rodrigo Oliveira — caldinho, baião, carne seca. Nordestino #1 de SP.",
+    "instagram": "restaurantemocoto",
+    "website": "https://mocoto.com.br",
+    "city": "SP",
+    "is_builtin": true
+  },
+  {
+    "name": "Bar da Dona Onça",
+    "neighborhood": "Centro",
+    "cuisine": "Brasileira",
+    "type": "brazilian",
+    "chef": "Janaína Rueda",
+    "price": 2,
+    "bib": 1,
+    "status": "want",
+    "occasions": [
+      "casual",
+      "date"
+    ],
+    "vibe": "Janaína Rueda — boteco no Copan, cozinha brasileira de pressão, Bib.",
+    "instagram": "bardadonaonca",
+    "website": "https://bardadonaonca.com.br",
+    "city": "SP",
+    "is_builtin": true
+  },
+  {
+    "name": "Capim Santo",
+    "neighborhood": "Jardins",
+    "cuisine": "Brasileira",
+    "type": "brazilian",
+    "chef": "Morena Leite",
+    "price": 3,
+    "status": "visited",
+    "occasions": [
+      "date",
+      "biz"
+    ],
+    "vibe": "Morena Leite e as ervas frescas da Bahia.",
+    "instagram": "restaurantecapimsanto",
+    "website": "https://www.restaurantecapimsanto.com.br",
+    "city": "SP",
+    "is_builtin": true
+  },
+  {
+    "name": "Jiquitaia",
+    "neighborhood": "Pinheiros",
+    "cuisine": "Brasileira",
+    "type": "brazilian",
+    "chef": "Marcelo Corrêa Bastos",
+    "price": 3,
+    "michelin": 1,
+    "latam50": 36,
+    "status": "want",
+    "occasions": [
+      "impress",
+      "date"
+    ],
+    "vibe": "Marcelo Corrêa Bastos — moqueca, coxinha caipira, ingredientes brasileiros autorais.",
+    "instagram": "jiquitaia",
+    "website": "https://jiquitaia.com.br",
+    "city": "SP",
+    "is_builtin": true
+  },
+  {
+    "name": "Banzeiro",
+    "neighborhood": "Pinheiros",
+    "cuisine": "Brasileira",
+    "type": "brazilian",
+    "chef": "Felipe Schaedler",
+    "price": 3,
+    "michelin": 1,
+    "latam50": 30,
+    "status": "want",
+    "occasions": [
+      "impress"
+    ],
+    "vibe": "Felipe Schaedler — gastronomia amazônica, brasa e ingredientes do norte.",
+    "instagram": "banzeiro",
+    "website": "https://grupobanzeiro.com.br",
+    "city": "SP",
+    "is_builtin": true
+  },
+  {
+    "name": "Kaa",
+    "neighborhood": "Itaim Bibi",
+    "cuisine": "Brasileira",
+    "type": "brazilian",
+    "chef": "Ivan Ralston",
+    "price": 4,
+    "michelin": 1,
+    "status": "want",
+    "occasions": [
+      "impress",
+      "date"
+    ],
+    "vibe": "Jardim suspenso na Av. JK, cozinha franco-brasileira, projeto de Arthur Casas.",
+    "instagram": "kaarestaurante",
+    "website": "https://kaarestaurante.com.br",
+    "city": "SP",
+    "is_builtin": true
+  },
+  {
+    "name": "Dalva e Dito",
+    "neighborhood": "Jardins",
+    "cuisine": "Brasileira",
+    "type": "brazilian",
+    "chef": "Alex Atala",
+    "price": 3,
+    "status": "want",
+    "occasions": [
+      "date",
+      "biz"
+    ],
+    "vibe": "Alex Atala — ingredientes nativos, cozinha brasileira afetiva, Selecionado Michelin.",
+    "instagram": "dalvaedito",
+    "website": "https://dalvaedito.com.br",
+    "city": "SP",
+    "is_builtin": true
+  },
+  {
+    "name": "Maníoca",
+    "neighborhood": "Jardins",
+    "cuisine": "Brasileira",
+    "type": "brazilian",
+    "chef": "—",
+    "price": 3,
+    "status": "want",
+    "occasions": [
+      "date"
+    ],
+    "vibe": "A mandioca elevada a protagonista — raízes brasileiras reinterpretadas com técnica contemporânea, um dos segredos mais saborosos de Jardins.",
+    "instagram": "manimanioca",
+    "website": "https://manimanioca.com.br",
+    "city": "SP",
+    "is_builtin": true
+  },
+  {
+    "name": "Tordesilhas",
+    "neighborhood": "Vila Madalena",
+    "cuisine": "Brasileira",
+    "type": "brazilian",
+    "chef": "Mara Salles",
+    "price": 2,
+    "bib": 1,
+    "status": "want",
+    "occasions": [
+      "impress",
+      "biz"
+    ],
+    "vibe": "Mara Salles — 12 regiões do Brasil num menu afetivo, Bib Gourmand.",
+    "instagram": "tordesilhas",
+    "website": "https://www.tordesilhas.com",
+    "city": "SP",
+    "is_builtin": true
+  },
+  {
+    "name": "Brasil a Gosto",
+    "neighborhood": "Higienópolis",
+    "cuisine": "Brasileira",
+    "type": "brazilian",
+    "chef": "—",
+    "price": 3,
+    "michelin": 1,
+    "status": "want",
+    "occasions": [
+      "date",
+      "biz"
+    ],
+    "vibe": "A cozinha brasileira de identidade celebrada com rigor — ingredientes de cada região do país transformados em pratos que emocionam e educam o paladar.",
+    "city": "SP",
+    "is_builtin": true
+  },
+  {
+    "name": "Sal",
+    "neighborhood": "Pinheiros",
+    "cuisine": "Brasileira",
+    "type": "brazilian",
+    "chef": "—",
+    "price": 3,
+    "michelin": 1,
+    "status": "want",
+    "occasions": [
+      "date",
+      "impress"
+    ],
+    "vibe": "Sal, peixe e criatividade em Pinheiros — uma estrela Michelin que exalta os sabores do mar brasileiro com técnica contemporânea e ingredientes locais.",
+    "instagram": "salgastronomia",
+    "website": "https://salgastronomia.com.br",
+    "city": "SP",
+    "is_builtin": true
+  },
+  {
+    "name": "Eñe",
+    "neighborhood": "Jardins",
+    "cuisine": "Brasileira",
+    "type": "brazilian",
+    "chef": "—",
+    "price": 3,
+    "michelin": 1,
+    "status": "want",
+    "occasions": [
+      "date"
+    ],
+    "vibe": "Brasas e fogo como linguagem criativa — ingredientes brasileiros tratados com técnica de grelha que Vogue elegeu como uma das melhores mesas de SP.",
+    "website": "https://www.enerestaurante.com.br",
+    "city": "SP",
+    "is_builtin": true
+  },
+  {
+    "name": "Tonka",
+    "neighborhood": "Pinheiros",
+    "cuisine": "Brasileira",
+    "type": "brazilian",
+    "chef": "—",
+    "price": 3,
+    "michelin": 1,
+    "status": "want",
+    "occasions": [
+      "date"
+    ],
+    "vibe": "Feijão, raízes e ingredientes brasileiros elevados à alta gastronomia — a cozinha de raiz que conquistou uma estrela Michelin em Pinheiros.",
+    "city": "SP",
+    "is_builtin": true
+  },
+  {
+    "name": "Figueira Rubaiyat",
+    "neighborhood": "Jardins",
+    "cuisine": "Brasileira",
+    "type": "brazilian",
+    "chef": "—",
+    "price": 4,
+    "status": "want",
+    "occasions": [
+      "impress",
+      "date"
+    ],
+    "vibe": "Carnes da fazenda ao prato sob figueira centenária, Michelin Selecionado.",
+    "website": "https://gruporubaiyat.com",
+    "city": "SP",
+    "is_builtin": true
+  },
+  {
+    "name": "Labuta",
+    "neighborhood": "Pinheiros",
+    "cuisine": "Brasileira",
+    "type": "brazilian",
+    "chef": "Felipe Schaedler",
+    "price": 3,
+    "status": "want",
+    "occasions": [
+      "date",
+      "hidden"
+    ],
+    "vibe": "Peixe do Rio Negro, jambu e ervas nativas.",
+    "city": "SP",
+    "is_builtin": true
+  },
+  {
+    "name": "Cuia",
+    "neighborhood": "Pinheiros",
+    "cuisine": "Brasileira",
+    "type": "brazilian",
+    "chef": "—",
+    "price": 2,
+    "status": "want",
+    "occasions": [
+      "date",
+      "hidden"
+    ],
+    "vibe": "Açaí do Rio Negro servido na cuia — Amazônia portátil.",
+    "instagram": "cuiaacaioficial",
+    "city": "SP",
+    "is_builtin": true
+  },
+  {
+    "name": "Sagrado",
+    "neighborhood": "Vila Madalena",
+    "cuisine": "Brasileira",
+    "type": "brazilian",
+    "chef": "—",
+    "price": 2,
+    "bib": 1,
+    "status": "want",
+    "occasions": [
+      "casual",
+      "date"
+    ],
+    "vibe": "Gastrobar na Rua Fidalga, petiscos, chopps e ambiente descontraído, Bib.",
+    "instagram": "sagrado_gastro_bar",
+    "city": "SP",
+    "is_builtin": true
+  },
+  {
+    "name": "Senzala",
+    "neighborhood": "Centro",
+    "cuisine": "Brasileira",
+    "type": "brazilian",
+    "chef": "—",
+    "price": 1,
+    "bib": 1,
+    "status": "want",
+    "occasions": [
+      "casual"
+    ],
+    "vibe": "Comida brasileira no Centro histórico com Bib Gourmand — honesta e enraizada na tradição popular.",
+    "instagram": "senzalarestaurante",
+    "city": "SP",
+    "is_builtin": true
+  },
+  {
+    "name": "Zé Carlos",
+    "neighborhood": "Pinheiros",
+    "cuisine": "Brasileira",
+    "type": "brazilian",
+    "chef": "—",
+    "price": 1,
+    "bib": 1,
+    "status": "want",
+    "occasions": [
+      "casual"
+    ],
+    "vibe": "Boteco brasileiro clássico com Bib Gourmand — o endereço que você frequenta sem precisar de motivo.",
+    "instagram": "botecoodoseuze",
+    "city": "SP",
+    "is_builtin": true
+  },
+  {
+    "name": "Baianeira",
+    "neighborhood": "Pinheiros",
+    "cuisine": "Brasileira",
+    "type": "brazilian",
+    "chef": "—",
+    "price": 2,
+    "status": "want",
+    "occasions": [
+      "date",
+      "casual"
+    ],
+    "vibe": "Cozinha baiana autêntica selecionada pelo Michelin — dendê, vatapá e acarajé com alma nordestina.",
+    "instagram": "abaianeira",
+    "city": "SP",
+    "is_builtin": true
+  },
+  {
+    "name": "Empório Santa Maria",
+    "neighborhood": "Jardins",
+    "cuisine": "Brasileira",
+    "type": "brazilian",
+    "chef": "—",
+    "price": 2,
+    "bib": 1,
+    "status": "want",
+    "occasions": [
+      "casual",
+      "biz"
+    ],
+    "vibe": "Delicatessen com Bib Gourmand — produtos premium e cardápio sofisticado, mercado e restaurante.",
+    "instagram": "stamariaemporio",
+    "website": "https://www.emporiosantamaria.com.br",
+    "city": "SP",
+    "is_builtin": true
+  },
+  {
+    "name": "Jund",
+    "neighborhood": "Jardins",
+    "cuisine": "Brasileira",
+    "type": "brazilian",
+    "chef": "—",
+    "price": 2,
+    "bib": 1,
+    "status": "want",
+    "occasions": [
+      "date",
+      "casual"
+    ],
+    "vibe": "Bib Gourmand e criatividade brasileira acessível — qualidade que não precisa custar uma fortuna.",
+    "city": "SP",
+    "is_builtin": true
+  },
+  {
+    "name": "Toro Burger",
+    "neighborhood": "Pinheiros",
+    "cuisine": "Brasileira",
+    "type": "brazilian",
+    "chef": "—",
+    "price": 2,
+    "bib": 1,
+    "status": "want",
+    "occasions": [
+      "casual"
+    ],
+    "vibe": "O hambúrguer premium de SP com Bib Gourmand — carnes nobres e ingredientes de qualidade.",
+    "instagram": "toroburgerbrasil",
+    "city": "SP",
+    "is_builtin": true
+  },
+  {
+    "name": "Mergulho",
+    "neighborhood": "Jardins",
+    "cuisine": "Frutos do Mar",
+    "type": "seafood",
+    "chef": "—",
+    "price": 3,
+    "bib": 1,
+    "status": "want",
+    "occasions": [
+      "date",
+      "impress"
+    ],
+    "vibe": "Peixes frescos, linguado, robalo — preparações que respeitam o produto, Bib.",
+    "city": "SP",
+    "is_builtin": true
+  },
+  {
+    "name": "Vila Caiçara",
+    "neighborhood": "Saúde",
+    "cuisine": "Frutos do Mar",
+    "type": "seafood",
+    "chef": "—",
+    "price": 2,
+    "bib": 1,
+    "status": "want",
+    "occasions": [
+      "casual",
+      "date"
+    ],
+    "vibe": "Caiçara autêntico no sul de SP — peixe fresco na brasa, pirão e a alma do litoral paulista servida sem frescura há décadas.",
+    "city": "SP",
+    "is_builtin": true
+  },
+  {
+    "name": "Oceania",
+    "neighborhood": "Itaim Bibi",
+    "cuisine": "Frutos do Mar",
+    "type": "seafood",
+    "chef": "—",
+    "price": 3,
+    "status": "want",
+    "occasions": [
+      "date"
+    ],
+    "vibe": "VEJA destaque — frutos do mar no Itaim.",
+    "city": "SP",
+    "is_builtin": true
+  },
+  {
+    "name": "Cais",
+    "neighborhood": "Jardins",
+    "cuisine": "Frutos do Mar",
+    "type": "seafood",
+    "chef": "—",
+    "price": 3,
+    "status": "visited",
+    "occasions": [
+      "impress",
+      "date"
+    ],
+    "vibe": "Conceito de cais urbano — ostras, ceviches e peixes frescos num ambiente sofisticado.",
+    "instagram": "restaurantecais",
+    "city": "SP",
+    "is_builtin": true
+  },
+  {
+    "name": "Atlântico 212",
+    "neighborhood": "Jardins",
+    "cuisine": "Frutos do Mar",
+    "type": "seafood",
+    "chef": "—",
+    "price": 3,
+    "status": "visited",
+    "occasions": [
+      "biz"
+    ],
+    "vibe": "Inspirações atlânticas em Jardins — frutos do mar com técnica contemporânea.",
+    "instagram": "atlantico212_",
+    "city": "SP",
+    "is_builtin": true
+  },
+  {
+    "name": "Naia",
+    "neighborhood": "Jardins",
+    "cuisine": "Frutos do Mar",
+    "type": "seafood",
+    "chef": "—",
+    "price": 3,
+    "status": "visited",
+    "occasions": [
+      "impress"
+    ],
+    "vibe": "Bar de crus premium — ostras, tartar e crudo num setting elegante.",
+    "instagram": "naiarestaurante",
+    "city": "SP",
+    "is_builtin": true
+  },
+  {
+    "name": "Teus",
+    "neighborhood": "Jardins",
+    "cuisine": "Frutos do Mar",
+    "type": "seafood",
+    "chef": "—",
+    "price": 3,
+    "status": "visited",
+    "occasions": [
+      "date"
+    ],
+    "vibe": "Peixe fresco na brasa à maneira grega — charcoal e sal marinho.",
+    "city": "SP",
+    "is_builtin": true
+  },
+  {
+    "name": "Mico",
+    "neighborhood": "Jardins",
+    "cuisine": "Frutos do Mar",
+    "type": "seafood",
+    "chef": "—",
+    "price": 2,
+    "status": "visited",
+    "occasions": [
+      "date"
+    ],
+    "vibe": "Raw bar moderno e descontraído — ostras frescas e cocktails para iniciar a noite.",
+    "instagram": "restaurantemico",
+    "city": "SP",
+    "is_builtin": true
+  },
+  {
+    "name": "Acqua",
+    "neighborhood": "Juquehy",
+    "cuisine": "Frutos do Mar",
+    "type": "seafood",
+    "chef": "—",
+    "price": 2,
+    "status": "visited",
+    "occasions": [
+      "date"
+    ],
+    "vibe": "Fuga para o litoral caiçara — peixe fresco direto do mar em Juquehy.",
+    "website": "https://www.restauranteacqua.com.br",
+    "city": "SP",
+    "is_builtin": true
+  },
+  {
+    "name": "Barú Marischeria",
+    "neighborhood": "Jardins",
+    "cuisine": "Frutos do Mar",
+    "type": "seafood",
+    "chef": "—",
+    "price": 3,
+    "status": "want",
+    "occasions": [
+      "impress"
+    ],
+    "vibe": "Bar de mariscos premium — energia latina e excelência de produto numa proposta vibrante.",
+    "instagram": "barumarisqueria",
+    "website": "https://www.barumarisqueria.com",
+    "city": "SP",
+    "is_builtin": true
+  },
+  {
+    "name": "Avra",
+    "neighborhood": "Miami Beach",
+    "cuisine": "Frutos do Mar",
+    "type": "seafood",
+    "chef": "—",
+    "price": 4,
+    "status": "visited",
+    "occasions": [
+      "impress",
+      "date"
+    ],
+    "vibe": "Peixe inteiro por quilo à maneira do Egeu em Miami Beach — elegância grega e frescor.",
+    "instagram": "avramiami",
+    "website": "https://theavragroup.com",
+    "city": "MIA",
+    "is_builtin": true
+  },
+  {
+    "name": "Roy Fish",
+    "neighborhood": "Manhattan",
+    "cuisine": "Frutos do Mar",
+    "type": "seafood",
+    "chef": "Chef Roy",
+    "price": 3,
+    "status": "want",
+    "occasions": [
+      "date"
+    ],
+    "vibe": "Frutos do mar de precisão em NYC — peixe fresco e técnica chef-driven.",
+    "city": "NY",
+    "is_builtin": true
+  },
+  {
+    "name": "A Figueira Rubaiyat",
+    "neighborhood": "Jardim Europa",
+    "cuisine": "Carnes",
+    "type": "steakhouse",
+    "chef": "—",
+    "price": 4,
+    "status": "want",
+    "occasions": [
+      "impress",
+      "biz"
+    ],
+    "vibe": "Carnes da fazenda ao prato sob figueira centenária, Michelin Selecionado.",
+    "instagram": "afigueirarubaiyat",
+    "website": "https://gruporubaiyat.com",
+    "city": "SP",
+    "is_builtin": true
+  },
+  {
+    "name": "Rubaiyat",
+    "neighborhood": "Itaim Bibi",
+    "cuisine": "Carnes",
+    "type": "steakhouse",
+    "chef": "—",
+    "price": 4,
+    "status": "want",
+    "occasions": [
+      "impress",
+      "biz"
+    ],
+    "vibe": "Referência em carnes nobres de SP desde os anos 50, Michelin Selecionado.",
+    "instagram": "rubaiyat",
+    "website": "https://gruporubaiyat.com",
+    "city": "SP",
+    "is_builtin": true
+  },
+  {
+    "name": "Varanda Grill",
+    "neighborhood": "Itaim Bibi",
+    "cuisine": "Carnes",
+    "type": "steakhouse",
+    "chef": "—",
+    "price": 3,
+    "status": "want",
+    "occasions": [
+      "biz",
+      "impress"
+    ],
+    "vibe": "Cortes Angus e Wagyu rastreáveis, omakase da carne com chef Fabio Lazzarini.",
+    "instagram": "varandagrill",
+    "website": "https://varandagrill.com.br",
+    "city": "SP",
+    "is_builtin": true
+  },
+  {
+    "name": "Templo da Carne",
+    "neighborhood": "Itaim Bibi",
+    "cuisine": "Carnes",
+    "type": "steakhouse",
+    "chef": "—",
+    "price": 4,
+    "status": "want",
+    "occasions": [
+      "impress"
+    ],
+    "vibe": "Cortes curados e maturados por até 60 dias num ritual que transforma carne em experiência — selecionado Michelin e VEJA como templo da charcutaria premium.",
+    "instagram": "templo_da_carne",
+    "city": "SP",
+    "is_builtin": true
+  },
+  {
+    "name": "Novilho de Prata",
+    "neighborhood": "Jardins",
+    "cuisine": "Carnes",
+    "type": "steakhouse",
+    "chef": "—",
+    "price": 3,
+    "status": "want",
+    "occasions": [
+      "biz"
+    ],
+    "vibe": "Tradição em carnes em Jardins — cortes maturados com excelência, selecionado Michelin e eleito pela VEJA.",
+    "website": "https://novilhodeprata.com.br",
+    "city": "SP",
+    "is_builtin": true
+  },
+  {
+    "name": "Rodeio",
+    "neighborhood": "Jardim América",
+    "cuisine": "Carnes",
+    "type": "steakhouse",
+    "chef": "—",
+    "price": 3,
+    "status": "want",
+    "occasions": [
+      "impress",
+      "biz"
+    ],
+    "vibe": "O melhor churrasco brasileiro clássico de SP — old-school com classe, eleito pelo VEJA.",
+    "instagram": "rodeiosteak",
+    "website": "https://rodeiosp.com.br",
+    "city": "SP",
+    "is_builtin": true
+  },
+  {
+    "name": "Charcoal",
+    "neighborhood": "Itaim Bibi",
+    "cuisine": "Carnes",
+    "type": "steakhouse",
+    "chef": "—",
+    "price": 4,
+    "status": "want",
+    "occasions": [
+      "impress"
+    ],
+    "vibe": "Fogo como linguagem — cortes premium defumados e braseados, luxo e rusticidade.",
+    "city": "SP",
+    "is_builtin": true
+  },
+  {
+    "name": "Baires",
+    "neighborhood": "Sunny Isles",
+    "cuisine": "Carnes",
+    "type": "steakhouse",
+    "chef": "—",
+    "price": 3,
+    "status": "visited",
+    "occasions": [
+      "biz"
+    ],
+    "vibe": "Buenos Aires em Miami — cortes portenhos premium, Malbec e alma argentina.",
+    "instagram": "bairesmiami",
+    "website": "https://www.bairesgrill.com",
+    "city": "MIA",
+    "is_builtin": true
+  },
+  {
+    "name": "Baretto",
+    "neighborhood": "Jardins",
+    "cuisine": "Bar",
+    "type": "bar",
+    "chef": "Fasano Group",
+    "price": 3,
+    "status": "visited",
+    "occasions": [
+      "late",
+      "date"
+    ],
+    "vibe": "O bar do Fasano — coquetéis e o see-and-be-seen da elite paulistana.",
+    "instagram": "barettorestaurante",
+    "website": "https://fasano.com.br/en/gastronomia/baretto/",
+    "city": "SP",
+    "is_builtin": true
+  },
+  {
+    "name": "Guilhotina Bar",
+    "neighborhood": "Pinheiros",
+    "cuisine": "Bar",
+    "type": "bar",
+    "chef": "—",
+    "price": 2,
+    "status": "visited",
+    "occasions": [
+      "late"
+    ],
+    "vibe": "Laboratório de cocktails que não tem medo de experimentar.",
+    "instagram": "guilhotinabar",
+    "city": "SP",
+    "is_builtin": true
+  },
+  {
+    "name": "Bar Astor",
+    "neighborhood": "Vila Madalena",
+    "cuisine": "Bar",
+    "type": "bar",
+    "chef": "—",
+    "price": 2,
+    "status": "want",
+    "occasions": [
+      "late"
+    ],
+    "vibe": "Instituição dos coquetéis de SP desde os anos 90.",
+    "instagram": "barastor",
+    "city": "SP",
+    "is_builtin": true
+  },
+  {
+    "name": "Sub Astor",
+    "neighborhood": "Vila Madalena",
+    "cuisine": "Bar",
+    "type": "bar",
+    "chef": "—",
+    "price": 2,
+    "status": "want",
+    "occasions": [
+      "late",
+      "hidden"
+    ],
+    "vibe": "Escada secreta para um underground de cocktails.",
+    "instagram": "subastor",
+    "website": "https://subastor.com.br/",
+    "city": "SP",
+    "is_builtin": true
+  },
+  {
+    "name": "Mila",
+    "neighborhood": "South Beach",
+    "cuisine": "Bar",
+    "type": "bar",
+    "chef": "—",
+    "price": 4,
+    "status": "want",
+    "occasions": [
+      "late"
+    ],
+    "vibe": "Restaurante que se transforma em teatro noturno — o Mila é espetáculo.",
+    "instagram": "milamiami",
+    "website": "https://mila-miami.com/",
+    "city": "MIA",
+    "is_builtin": true
+  },
+  {
+    "name": "Liv",
+    "neighborhood": "Miami Beach",
+    "cuisine": "Bar",
+    "type": "bar",
+    "chef": "Fontainebleau",
+    "price": 4,
+    "status": "want",
+    "occasions": [
+      "late"
+    ],
+    "vibe": "O clube que definiu o nightlife de Miami.",
+    "instagram": "livnightclub",
+    "website": "https://www.livnightclub.com/miami/",
+    "city": "MIA",
+    "is_builtin": true
+  },
+  {
+    "name": "Mynt",
+    "neighborhood": "South Beach",
+    "cuisine": "Bar",
+    "type": "bar",
+    "chef": "—",
+    "price": 3,
+    "status": "want",
+    "occasions": [
+      "late"
+    ],
+    "vibe": "South Beach classic — elegante e energético.",
+    "instagram": "mynt_lounge",
+    "website": "https://myntlounge.com/",
+    "city": "MIA",
+    "is_builtin": true
+  },
+  {
+    "name": "Space",
+    "neighborhood": "Downtown MIA",
+    "cuisine": "Bar",
+    "type": "bar",
+    "chef": "—",
+    "price": 2,
+    "status": "want",
+    "occasions": [
+      "late"
+    ],
+    "vibe": "Warehouse de techno com licença 24h.",
+    "instagram": "clubspacemiami",
+    "website": "https://www.clubspace.com/",
+    "city": "MIA",
+    "is_builtin": true
+  },
+  {
+    "name": "Tan Tan",
+    "neighborhood": "Jardins",
+    "cuisine": "Bar",
+    "type": "bar",
+    "chef": "—",
+    "price": 2,
+    "status": "visited",
+    "occasions": [
+      "late",
+      "date"
+    ],
+    "vibe": "Laboratório de coquetéis criativos num espaço íntimo em Jardins.",
+    "instagram": "tantannb",
+    "website": "https://www.tantannb.com.br/",
+    "city": "SP",
+    "is_builtin": true
+  },
+  {
+    "name": "Sarau Bar",
+    "neighborhood": "Pinheiros",
+    "cuisine": "Bar",
+    "type": "bar",
+    "chef": "—",
+    "price": 2,
+    "status": "visited",
+    "occasions": [
+      "late"
+    ],
+    "vibe": "Música ao vivo e cultura num bar de Pinheiros — onde você vai para ouvir e beber.",
+    "instagram": "sarau_bar",
+    "website": "https://www.pulsohotel.com/en/sarau-bar",
+    "city": "SP",
+    "is_builtin": true
+  },
+  {
+    "name": "Vicio",
+    "neighborhood": "Pinheiros",
+    "cuisine": "Bar",
+    "type": "bar",
+    "chef": "—",
+    "price": 2,
+    "bib": 1,
+    "status": "want",
+    "occasions": [
+      "casual",
+      "late"
+    ],
+    "vibe": "Boteco clássico em Pinheiros desde 1985, petiscos e ambiente Bib Gourmand.",
+    "city": "SP",
+    "is_builtin": true
+  },
+  {
+    "name": "Bar do Juarez",
+    "neighborhood": "Pinheiros",
+    "cuisine": "Bar",
+    "type": "bar",
+    "chef": "—",
+    "price": 2,
+    "bib": 1,
+    "status": "want",
+    "occasions": [
+      "casual",
+      "late"
+    ],
+    "vibe": "Bar com 25 anos, carnes na brasa, chopp e petiscos em Pinheiros, Bib.",
+    "instagram": "bardojuarez",
+    "website": "https://www.bardojuarez.com.br",
+    "city": "SP",
+    "is_builtin": true
+  },
+  {
+    "name": "Resid Bar",
+    "neighborhood": "Jardins",
+    "cuisine": "Bar",
+    "type": "bar",
+    "chef": "—",
+    "price": 2,
+    "status": "want",
+    "occasions": [
+      "late",
+      "hidden"
+    ],
+    "vibe": "Atmosfera residencial numa cave aconchegante de Jardins — coquetéis cuidadosos.",
+    "instagram": "resid.bar",
+    "website": "https://resid.club/resid-bar/",
+    "city": "SP",
+    "is_builtin": true
+  },
+  {
+    "name": "Kotchi Bar",
+    "neighborhood": "Itaim Bibi",
+    "cuisine": "Bar",
+    "type": "bar",
+    "chef": "—",
+    "price": 2,
+    "status": "want",
+    "occasions": [
+      "late"
+    ],
+    "vibe": "Cultura de cocktails japonesa no Itaim — destilados nipônicos e highballs com precisão.",
+    "instagram": "kotchibar",
+    "city": "SP",
+    "is_builtin": true
+  },
+  {
+    "name": "The Liquor Store",
+    "neighborhood": "Jardins",
+    "cuisine": "Bar",
+    "type": "bar",
+    "chef": "—",
+    "price": 2,
+    "status": "want",
+    "occasions": [
+      "late"
+    ],
+    "vibe": "Curadoria premium de destilados — ambiente relaxado para quem sabe o que quer beber.",
+    "instagram": "theliquorstore.sp",
+    "city": "SP",
+    "is_builtin": true
+  },
+  {
+    "name": "Oculto",
+    "neighborhood": "Vila Madalena",
+    "cuisine": "Bar",
+    "type": "bar",
+    "chef": "—",
+    "price": 2,
+    "status": "want",
+    "occasions": [
+      "late",
+      "hidden"
+    ],
+    "vibe": "Entrada secreta, ritual de speakeasy — a Vila Madalena que não está no Google Maps.",
+    "instagram": "castelooculto",
+    "city": "SP",
+    "is_builtin": true
+  },
+  {
+    "name": "Gioia",
+    "neighborhood": "Jardins",
+    "cuisine": "Bar",
+    "type": "bar",
+    "chef": "—",
+    "price": 2,
+    "status": "want",
+    "occasions": [
+      "late"
+    ],
+    "vibe": "Aperitivo italiano, Campari e Negroni — a filosofia do aperitivo antes da vita.",
+    "instagram": "gioiasaopaulo",
+    "website": "https://gioiasaopaulo.com/",
+    "city": "SP",
+    "is_builtin": true
+  },
+  {
+    "name": "Matiz Bar",
+    "neighborhood": "Jardins",
+    "cuisine": "Bar",
+    "type": "bar",
+    "chef": "—",
+    "price": 2,
+    "status": "want",
+    "occasions": [
+      "late",
+      "date"
+    ],
+    "vibe": "Pequenos produtores, vinhos naturais e bistronomia — um dos melhores wine bars de SP.",
+    "instagram": "matizbarsp",
+    "city": "SP",
+    "is_builtin": true
+  },
+  {
+    "name": "Bar Lágrima",
+    "neighborhood": "Pinheiros",
+    "cuisine": "Bar",
+    "type": "bar",
+    "chef": "—",
+    "price": 2,
+    "status": "want",
+    "occasions": [
+      "late",
+      "hidden"
+    ],
+    "vibe": "Emoção aplicada à bartending — experiência pessoal e marcante que fica na memória.",
+    "instagram": "lagrima.bar",
+    "city": "SP",
+    "is_builtin": true
+  },
+  {
+    "name": "Exímia Bar",
+    "neighborhood": "Jardins",
+    "cuisine": "Bar",
+    "type": "bar",
+    "chef": "—",
+    "price": 2,
+    "status": "want",
+    "occasions": [
+      "late",
+      "hidden"
+    ],
+    "vibe": "Excelência como padrão — programa de cocktails rigoroso que valoriza o ofício da bartending.",
+    "instagram": "eximiabar",
+    "city": "SP",
+    "is_builtin": true
+  },
+  {
+    "name": "Beverino Vinhos",
+    "neighborhood": "Jardins",
+    "cuisine": "Bar",
+    "type": "bar",
+    "chef": "—",
+    "price": 2,
+    "status": "want",
+    "occasions": [
+      "date",
+      "late"
+    ],
+    "vibe": "Garrafas naturais e clássicas num ambiente que convida a ficar mais uma hora.",
+    "instagram": "beverino.vinhos",
+    "city": "SP",
+    "is_builtin": true
+  },
+  {
+    "name": "Maison Dodoma",
+    "neighborhood": "Jardins",
+    "cuisine": "Bar",
+    "type": "bar",
+    "chef": "—",
+    "price": 2,
+    "status": "want",
+    "occasions": [
+      "late",
+      "hidden"
+    ],
+    "vibe": "Tanzânia encontra Paris — o endereço mais inesperado e fascinante da cena noturna de SP.",
+    "instagram": "maisondodoma",
+    "city": "SP",
+    "is_builtin": true
+  },
+  {
+    "name": "Must Bar",
+    "neighborhood": "Jardim Europa",
+    "cuisine": "Bar",
+    "type": "bar",
+    "chef": "Tivoli Hotel",
+    "price": 3,
+    "status": "want",
+    "occasions": [
+      "late",
+      "biz"
+    ],
+    "vibe": "O bar do Tivoli Hotel — whisky premium e a clientela que faz acontecer.",
+    "website": "https://www.tivolihotels.com/en/tivoli-mofarrej-sao-paulo/restaurants/must-restaurant",
+    "city": "SP",
+    "is_builtin": true
+  },
+  {
+    "name": "Sern",
+    "neighborhood": "Jardim Europa",
+    "cuisine": "Bar",
+    "type": "bar",
+    "chef": "Tivoli Hotel",
+    "price": 3,
+    "status": "want",
+    "occasions": [
+      "late"
+    ],
+    "vibe": "A experiência de cocktails assinada do Tivoli — sofisticação hoteleira.",
+    "city": "SP",
+    "is_builtin": true
+  },
+  {
+    "name": "Cava Bar",
+    "neighborhood": "Jardins",
+    "cuisine": "Bar",
+    "type": "bar",
+    "chef": "—",
+    "price": 2,
+    "status": "want",
+    "occasions": [
+      "date",
+      "late"
+    ],
+    "vibe": "Espumantes e cavas — o lugar certo quando há algo para comemorar.",
+    "instagram": "cavabarsp",
+    "city": "SP",
+    "is_builtin": true
+  },
+  {
+    "name": "Aramo",
+    "neighborhood": "Jardim Europa",
+    "cuisine": "Bar",
+    "type": "bar",
+    "chef": "—",
+    "price": 2,
+    "status": "want",
+    "occasions": [
+      "date",
+      "late",
+      "hidden"
+    ],
+    "vibe": "Vinhos naturais e petiscos precisos — Jardim Europa revelando seus melhores segredos.",
+    "city": "SP",
+    "is_builtin": true
+  },
+  {
+    "name": "Tanin",
+    "neighborhood": "Pinheiros",
+    "cuisine": "Bar",
+    "type": "bar",
+    "chef": "—",
+    "price": 2,
+    "status": "want",
+    "occasions": [
+      "date",
+      "late",
+      "hidden"
+    ],
+    "vibe": "Taninos e terroar — bistrô de vinho natural em Pinheiros com menu sazonal.",
+    "city": "SP",
+    "is_builtin": true
+  },
+  {
+    "name": "Cepa",
+    "neighborhood": "Jardins",
+    "cuisine": "Bar",
+    "type": "bar",
+    "chef": "—",
+    "price": 2,
+    "status": "visited",
+    "occasions": [
+      "date"
+    ],
+    "vibe": "Adega moderna com lista curada — wine dining que prioriza o vinho sem esquecer a comida.",
+    "instagram": "restaurante.cepa",
+    "city": "SP",
+    "is_builtin": true
+  },
+  {
+    "name": "Clos",
+    "neighborhood": "Jardim Europa",
+    "cuisine": "Bar",
+    "type": "bar",
+    "chef": "—",
+    "price": 3,
+    "status": "want",
+    "occasions": [
+      "date"
+    ],
+    "vibe": "Cave francesa encontra fine dining — vinhos naturais e cozinha com igual elegância.",
+    "instagram": "clos_winebar",
+    "website": "https://closwinebar.com.br/",
+    "city": "SP",
+    "is_builtin": true
+  },
+  {
+    "name": "Bela Vista Bar",
+    "neighborhood": "Bela Vista",
+    "cuisine": "Bar",
+    "type": "bar",
+    "chef": "—",
+    "price": 2,
+    "status": "want",
+    "occasions": [
+      "late"
+    ],
+    "vibe": "Vista panorâmica e cocktails — o bar de bairro que cresce com a cena ao redor da Paulista.",
+    "instagram": "rosewoodsaopaulo",
+    "website": "https://www.rosewoodhotels.com/en/sao-paulo/dining/bela-vista-bar",
+    "city": "SP",
+    "is_builtin": true
+  },
+  {
+    "name": "Starlane",
+    "neighborhood": "Jardins",
+    "cuisine": "Bar",
+    "type": "bar",
+    "chef": "—",
+    "price": 3,
+    "status": "want",
+    "occasions": [
+      "late"
+    ],
+    "vibe": "Experiência estelar de bar — um espaço premium em Jardins.",
+    "instagram": "starlane.sp",
+    "city": "SP",
+    "is_builtin": true
+  },
+  {
+    "name": "Santana Bar",
+    "neighborhood": "Jardins",
+    "cuisine": "Bar",
+    "type": "bar",
+    "chef": "—",
+    "price": 2,
+    "status": "want",
+    "occasions": [
+      "late"
+    ],
+    "vibe": "Bairro cool e cocktails criativos — neighborhood bar com sempre o drinque certo.",
+    "instagram": "_santanabar",
+    "city": "SP",
+    "is_builtin": true
+  },
+  {
+    "name": "Spaniard",
+    "neighborhood": "West Village",
+    "cuisine": "Bar",
+    "type": "bar",
+    "chef": "—",
+    "price": 2,
+    "status": "want",
+    "occasions": [
+      "date",
+      "late"
+    ],
+    "vibe": "Pintxos e vinhos naturais no West Village — o bar espanhol mais querido de Manhattan.",
+    "instagram": "spaniard_nyc",
+    "website": "https://www.thespaniardnyc.com/",
+    "city": "NY",
+    "is_builtin": true
+  },
+  {
+    "name": "Mr Purple",
+    "neighborhood": "LES",
+    "cuisine": "Bar",
+    "type": "bar",
+    "chef": "Hotel Indigo",
+    "price": 2,
+    "status": "want",
+    "occasions": [
+      "late"
+    ],
+    "vibe": "Rooftop no Lower East Side com o skyline de Manhattan como fundo.",
+    "instagram": "mrpurplenyc",
+    "website": "https://www.mrpurplenyc.com/",
+    "city": "NY",
+    "is_builtin": true
+  },
+  {
+    "name": "Le Bain",
+    "neighborhood": "Chelsea",
+    "cuisine": "Bar",
+    "type": "bar",
+    "chef": "The Standard High Line",
+    "price": 3,
+    "status": "want",
+    "occasions": [
+      "late"
+    ],
+    "vibe": "Rooftop do The Standard High Line sobre o Hudson — bar-club que parece um loft europeu.",
+    "instagram": "lebainnyc",
+    "website": "https://www.lebainnewyork.com/",
+    "city": "NY",
+    "is_builtin": true
+  },
+  {
+    "name": "Marena",
+    "neighborhood": "Jardins",
+    "cuisine": "Mediterrânea",
+    "type": "mediterranean",
+    "chef": "—",
+    "price": 3,
+    "status": "visited",
+    "occasions": [
+      "impress",
+      "date",
+      "hidden"
+    ],
+    "vibe": "Mediterrânea que surpreende — uma das joias escondidas de SP.",
+    "instagram": "marenacucina",
+    "city": "SP",
+    "is_builtin": true
+  },
+  {
+    "name": "Tanit",
+    "neighborhood": "Jardins",
+    "cuisine": "Mediterrânea",
+    "type": "mediterranean",
+    "chef": "—",
+    "price": 3,
+    "status": "want",
+    "occasions": [
+      "date"
+    ],
+    "vibe": "Ibiza transplantada para SP — leveza e alegria mediterrânea.",
+    "instagram": "restaurantetanit",
+    "city": "SP",
+    "is_builtin": true
+  },
+  {
+    "name": "Pergolato",
+    "neighborhood": "Jardim Paulista",
+    "cuisine": "Mediterrânea",
+    "type": "mediterranean",
+    "chef": "—",
+    "price": 2,
+    "status": "want",
+    "occasions": [
+      "date",
+      "hidden"
+    ],
+    "vibe": "Vinha que cobre a pérgola num jantar de verão.",
+    "instagram": "pergolasaopaulo",
+    "city": "SP",
+    "is_builtin": true
+  },
+  {
+    "name": "Tradição Portuguesa",
+    "neighborhood": "Bixiga",
+    "cuisine": "Internacional",
+    "type": "international",
+    "chef": "—",
+    "price": 3,
+    "michelin": 1,
+    "status": "want",
+    "occasions": [
+      "date",
+      "impress"
+    ],
+    "vibe": "Um clássico português no coração do Bixiga italiano — bacalhau confitado em azeite, pastéis de nata e a ironia deliciosa de uma estrela Michelin numa travessa histórica.",
+    "city": "SP",
+    "is_builtin": true
+  },
+  {
+    "name": "Adega Santiago",
+    "neighborhood": "Jardins",
+    "cuisine": "Internacional",
+    "type": "international",
+    "chef": "—",
+    "price": 2,
+    "status": "visited",
+    "occasions": [
+      "date"
+    ],
+    "vibe": "Adega lisboeta em Jardins — vinhos do Douro e petiscos.",
+    "instagram": "adegasantiago",
+    "website": "https://www.adegasantiago.com.br",
+    "city": "SP",
+    "is_builtin": true
+  },
+  {
+    "name": "Metzi",
+    "neighborhood": "Jardins",
+    "cuisine": "Internacional",
+    "type": "international",
+    "chef": "—",
+    "price": 2,
+    "status": "want",
+    "occasions": [
+      "date",
+      "late"
+    ],
+    "vibe": "Tacos premium e mezcal criativo.",
+    "instagram": "metzirestaurant",
+    "website": "https://www.metzi.com.br/en",
+    "city": "SP",
+    "is_builtin": true
+  },
+  {
+    "name": "Corrutella",
+    "neighborhood": "Vila Madalena",
+    "cuisine": "Internacional",
+    "type": "international",
+    "chef": "—",
+    "price": 2,
+    "status": "want",
+    "occasions": [
+      "date",
+      "hidden"
+    ],
+    "vibe": "Menu sazonal e vinhos naturais.",
+    "instagram": "corrutela",
+    "city": "SP",
+    "is_builtin": true
+  },
+  {
+    "name": "Bar Europa",
+    "neighborhood": "Jardins",
+    "cuisine": "Internacional",
+    "type": "international",
+    "chef": "—",
+    "price": 2,
+    "status": "want",
+    "occasions": [
+      "biz"
+    ],
+    "vibe": "Grand café europeu em Jardins.",
+    "instagram": "bareuropa_sp",
+    "website": "https://www.casaeuropa.com.br",
+    "city": "SP",
+    "is_builtin": true
+  },
+  {
+    "name": "Marakuthai",
+    "neighborhood": "Itaim Bibi",
+    "cuisine": "Internacional",
+    "type": "international",
+    "chef": "Renata Vanzetto",
+    "price": 3,
+    "status": "want",
+    "occasions": [
+      "date",
+      "impress"
+    ],
+    "vibe": "Renata Vanzetto — tailandesa autoral, ceviche Megusta premiado, VEJA.",
+    "instagram": "marakuthai",
+    "website": "https://marakuthai.com.br",
+    "city": "SP",
+    "is_builtin": true
+  },
+  {
+    "name": "Amazonico",
+    "neighborhood": "Design District",
+    "cuisine": "Internacional",
+    "type": "international",
+    "chef": "—",
+    "price": 3,
+    "status": "want",
+    "occasions": [
+      "impress"
+    ],
+    "vibe": "A selva amazônica levada ao Design District de Miami.",
+    "instagram": "amazonicorestaurant",
+    "city": "MIA",
+    "is_builtin": true
+  },
+  {
+    "name": "Kote",
+    "neighborhood": "Brickell",
+    "cuisine": "Internacional",
+    "type": "international",
+    "chef": "—",
+    "price": 3,
+    "status": "visited",
+    "occasions": [
+      "date"
+    ],
+    "vibe": "Inspiração colombiana criativa em Brickell — cocktails inventivos e cozinha latino-americana.",
+    "city": "MIA",
+    "is_builtin": true
+  },
+  {
+    "name": "Sunnys",
+    "neighborhood": "Wynwood",
+    "cuisine": "Internacional",
+    "type": "international",
+    "chef": "—",
+    "price": 2,
+    "status": "visited",
+    "occasions": [
+      "date"
+    ],
+    "vibe": "Almoço e jantar ao sol de Wynwood — casual premium com energia artística.",
+    "instagram": "sunnysmia",
+    "website": "https://sunnysmia.com",
+    "city": "MIA",
+    "is_builtin": true
+  },
+  {
+    "name": "Mojo East",
+    "neighborhood": "LES",
+    "cuisine": "Internacional",
+    "type": "international",
+    "chef": "—",
+    "price": 2,
+    "status": "want",
+    "occasions": [
+      "date"
+    ],
+    "vibe": "Oriente encontra downtown NYC — asiática-americana casual e criativa no Lower East Side.",
+    "instagram": "mojoeastnyc",
+    "city": "NY",
+    "is_builtin": true
+  },
+  {
+    "name": "Aya",
+    "neighborhood": "Pinheiros",
+    "cuisine": "Japonesa",
+    "type": "japanese",
+    "chef": "—",
+    "price": 3,
+    "status": "visited",
+    "occasions": [
+      "date",
+      "impress"
+    ],
+    "vibe": "Culinária japonesa autoral em Pinheiros.",
+    "instagram": "restauranteaya",
+    "website": "https://restauranteaya.com.br",
+    "city": "SP",
+    "is_builtin": true
+  },
+  {
+    "name": "Così",
+    "neighborhood": "Jardins",
+    "cuisine": "Italiana",
+    "type": "italian",
+    "chef": "—",
+    "price": 3,
+    "status": "visited",
+    "occasions": [
+      "date"
+    ],
+    "vibe": "Italiana contemporânea em Jardins.",
+    "instagram": "restaurantecosi",
+    "website": "https://restaurantecosi.com.br",
+    "city": "SP",
+    "is_builtin": true
+  },
+  {
+    "name": "Trè",
+    "neighborhood": "Jardins",
+    "cuisine": "Italiana",
+    "type": "italian",
+    "chef": "—",
+    "price": 3,
+    "status": "visited",
+    "occasions": [
+      "date"
+    ],
+    "vibe": "Restaurante italiano em Jardins.",
+    "city": "SP",
+    "is_builtin": true
+  },
+  {
+    "name": "Rabo di Galo",
+    "neighborhood": "Bela Vista",
+    "cuisine": "Bar",
+    "type": "bar",
+    "chef": "—",
+    "price": 2,
+    "status": "visited",
+    "occasions": [
+      "late",
+      "date"
+    ],
+    "vibe": "Bar de coquetéis clássico em Bela Vista — o rabo de galo elevado a ritual.",
+    "instagram": "rabodegalobar",
+    "website": "https://rabodegalobar.com.br",
+    "city": "SP",
+    "is_builtin": true
+  },
+  {
+    "name": "Piu",
+    "neighborhood": "Pinheiros",
+    "cuisine": "Italiana",
+    "type": "italian",
+    "chef": "—",
+    "price": 3,
+    "status": "visited",
+    "occasions": [
+      "date"
+    ],
+    "vibe": "Italiana contemporânea em Pinheiros.",
+    "instagram": "piu_restaurante",
+    "website": "https://www.piurestaurante.com.br",
+    "city": "SP",
+    "is_builtin": true
+  },
+  {
+    "name": "Osteria Zucco",
+    "neighborhood": "Moema",
+    "cuisine": "Italiana",
+    "type": "italian",
+    "chef": "—",
+    "price": 3,
+    "status": "visited",
+    "occasions": [
+      "date"
+    ],
+    "vibe": "Osteria italiana em Moema, do grupo Zucco.",
+    "instagram": "zuccorestaurantes",
+    "website": "https://osteria.zucco.com.br",
+    "city": "SP",
+    "is_builtin": true
+  },
+  {
+    "name": "Holy Tavern",
+    "neighborhood": "Vila Buarque",
+    "cuisine": "Bar",
+    "type": "bar",
+    "chef": "—",
+    "price": 2,
+    "status": "want",
+    "occasions": [
+      "late",
+      "hidden"
+    ],
+    "vibe": "Bar íntimo estilo speakeasy em Vila Buarque.",
+    "instagram": "holytavern",
+    "city": "SP",
+    "is_builtin": true
+  },
+  {
+    "name": "Varanda Dinner",
+    "neighborhood": "Jardins",
+    "cuisine": "Contemporânea",
+    "type": "contemporary",
+    "chef": "—",
+    "price": 3,
+    "status": "want",
+    "occasions": [
+      "date",
+      "impress"
+    ],
+    "vibe": "Experiência de jantar autoral em Jardins.",
+    "city": "SP",
+    "is_builtin": true
+  },
+  {
+    "name": "Pao",
+    "neighborhood": "Miami Beach",
+    "cuisine": "Internacional",
+    "type": "international",
+    "chef": "Paul Qui",
+    "price": 4,
+    "status": "visited",
+    "occasions": [
+      "date",
+      "impress"
+    ],
+    "vibe": "Chef Paul Qui — fusão asiática-americana no icônico Faena Hotel em Miami Beach.",
+    "instagram": "paofaena",
+    "website": "https://www.faena.com/miami-beach/dining/pao-by-paul-qui",
+    "city": "MIA",
+    "is_builtin": true
+  },
+  {
+    "name": "Carpaccio",
+    "neighborhood": "Bal Harbour",
+    "cuisine": "Italiana",
+    "type": "italian",
+    "chef": "—",
+    "price": 4,
+    "status": "visited",
+    "occasions": [
+      "impress",
+      "biz"
+    ],
+    "vibe": "Clássico italiano em Bal Harbour — um dos restaurantes mais elegantes de Miami.",
+    "instagram": "carpacciobalhabour",
+    "website": "https://carpaccioatbalharbour.com",
+    "city": "MIA",
+    "is_builtin": true
+  },
+  {
+    "name": "The Breakers",
+    "neighborhood": "Palm Beach",
+    "cuisine": "Frutos do Mar",
+    "type": "seafood",
+    "chef": "—",
+    "price": 4,
+    "status": "visited",
+    "occasions": [
+      "impress"
+    ],
+    "vibe": "O grande resort de Palm Beach — gastronomia de hotel de luxo atemporal.",
+    "instagram": "thebreakers",
+    "website": "https://www.thebreakers.com/dining",
+    "city": "PB",
+    "is_builtin": true
+  },
+  {
+    "name": "Carbone Vino",
+    "neighborhood": "Coconut Grove",
+    "cuisine": "Bar",
+    "type": "bar",
+    "chef": "MAJOR Group",
+    "price": 3,
+    "status": "visited",
+    "occasions": [
+      "late",
+      "date"
+    ],
+    "vibe": "Wine bar do grupo Carbone em Coconut Grove — vinhos italianos e a energia da marca.",
+    "instagram": "carbonevino",
+    "website": "https://carbonevino.com",
+    "city": "MIA",
+    "is_builtin": true
+  },
+  {
+    "name": "Cipriani",
+    "neighborhood": "Downtown Miami",
+    "cuisine": "Italiana",
+    "type": "italian",
+    "chef": "Cipriani Group",
+    "price": 4,
+    "status": "want",
+    "occasions": [
+      "impress",
+      "biz"
+    ],
+    "vibe": "A elegância do grupo Cipriani transplantada para o Downtown de Miami.",
+    "instagram": "cipriani",
+    "website": "https://www.cipriani.com/cipriani-downtown-miami",
+    "city": "MIA",
+    "is_builtin": true
+  },
+  {
+    "name": "Harry Cipriani",
+    "neighborhood": "Midtown",
+    "cuisine": "Italiana",
+    "type": "italian",
+    "chef": "Cipriani Group",
+    "price": 4,
+    "status": "visited",
+    "occasions": [
+      "impress",
+      "biz"
+    ],
+    "vibe": "O lendário Harry's Bar em Nova York — o original do grupo Cipriani no Sherry-Netherland.",
+    "instagram": "cipriani",
+    "website": "https://www.cipriani.com/harry-cipriani",
+    "city": "NY",
+    "is_builtin": true
+  },
+  {
+    "name": "Lavva",
+    "neighborhood": "Bela Vista",
+    "cuisine": "Coreana",
+    "type": "international",
+    "chef": "Paulo Shin",
+    "price": 3,
+    "status": "want",
+    "occasions": [
+      "impress",
+      "date"
+    ],
+    "vibe": "Casa de carnes que une a tradição do Korean Barbecue com a paixão brasileira pelo churrasco. Chef Paulo Shin, filho de imigrantes coreanos, no complexo Cidade Matarazzo.",
+    "instagram": "restaurante.lavva",
+    "notes": "Inaugurado em 2025 no Mata São Paulo.",
+    "city": "SP",
+    "is_builtin": true
+  },
+  {
+    "name": "Bodega Pepito",
+    "neighborhood": "Jardins",
+    "cuisine": "Espanhola",
+    "type": "international",
+    "chef": "Oscar Bosch",
+    "price": 3,
+    "status": "want",
+    "occasions": [
+      "date",
+      "late"
+    ],
+    "vibe": "Bar-restaurante do chef catalão Oscar Bosch inspirado nas bodegas tradicionais da Espanha — pratos na brasa, ambiente acolhedor e descontraído.",
+    "instagram": "bodega_pepito",
+    "notes": "Aberto no fim de 2025.",
+    "city": "SP",
+    "is_builtin": true
+  },
+  {
+    "name": "Ecco",
+    "neighborhood": "Jardim Europa",
+    "cuisine": "Contemporânea",
+    "type": "contemporary",
+    "chef": "João Paulo Diniz, Pedro Paulo Diniz, Mary Nigri, Sergio Cusin, João Armentano",
+    "price": 3,
+    "status": "want",
+    "occasions": [
+      "date",
+      "casual"
+    ],
+    "vibe": "Badalado restaurante na linha casual dos sócios Diniz — combinação perfeita de restaurante e pizzaria na Rua Amauri, com cozinha contemporânea e toque brasileiro.",
+    "instagram": "ecco.amauri",
+    "notes": "Rua Amauri, 282 - Jardim Paulistano.",
+    "city": "SP",
+    "is_builtin": true
+  }
+]
