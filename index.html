@@ -357,25 +357,27 @@ async function loadFromSupabase() {
   try {
     const [rRes, dRes] = await Promise.all([
       sbFetch('/restaurants?select=*'),
-      sbFetch('/restaurant_deletions?select=restaurant_name')
+      sbFetch('/restaurant_deletions?select=name')
     ]);
     const rows = await rRes.json();
     const deletions = await dRes.json();
     if (!Array.isArray(rows) || rows.length === 0) return false;
     // Map Supabase schema -> app schema
     const mapped = rows.map(r => ({
-      n: r.name, h: r.location || '', c: r.category || '', t: 'contemporary',
-      ch: r.status || '', p: parseInt(r.price) || 2,
-      st: (r.rating || 'want').toLowerCase(),
+      n: r.name, h: r.neighborhood || '', c: r.cuisine || '', t: r.type || 'contemporary',
+      ch: r.chef || '', p: parseInt(r.price) || 2,
+      st: (r.status || 'want').toLowerCase(),
       ig: r.instagram || '', tel: r.phone || '', site: r.website || '',
-      vb: r.description || '', notes: r.notes || '',
-      mi: r.awards?.includes('Michelin') ? 1 : undefined,
-      bib: r.awards?.includes('Bib') ? 1 : undefined,
+      vb: r.vibe || '', notes: r.notes || '',
+      mi: r.michelin || undefined,
+      bib: r.bib || undefined,
+      l50: r.latam50 || undefined,
+      w50: r.world50 || undefined,
       _supabase: true
     }));
     RESTAURANTS.length = 0;
     mapped.forEach(x => RESTAURANTS.push(x));
-    DELETED_NATIVES = deletions.map(d => d.restaurant_name);
+    DELETED_NATIVES = deletions.map(d => d.name);
     SUPABASE_AVAILABLE = true;
     return true;
   } catch (e) {
