@@ -433,7 +433,7 @@ async function syncDeletionToSupabase(name) {
   try {
     await sbFetch('/restaurant_deletions', {
       method: 'POST',
-      body: JSON.stringify({ restaurant_name: name }),
+      body: JSON.stringify({ name: name }),
       headers: { 'Prefer': 'resolution=ignore-duplicates' }
     });
     return true;
