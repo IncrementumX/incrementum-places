@@ -383,10 +383,10 @@ async function loadFromSupabase() {
     // MERGE: aplicar overrides e deleções do localStorage por cima do Supabase
     // Isso garante que deleções locais (ainda não syncadas) sejam preservadas
     const loaded = loadPersisted();
-    if (loaded) {
-      DELETED_NATIVES = [...new Set([...DELETED_NATIVES, ...BUILTIN_DELETED])];
-      filterDeleted();
-    }
+    // SEMPRE aplicar deleções, mesmo que loadPersisted falhe
+    // Combina deleções do Supabase + localStorage + builtin
+    DELETED_NATIVES = [...new Set([...DELETED_NATIVES, ...BUILTIN_DELETED])];
+    filterDeleted();
     
     return true;
   } catch (e) {
