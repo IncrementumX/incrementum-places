@@ -135,10 +135,14 @@ body{background:var(--bg);color:var(--text);font-family:var(--font);font-size:14
 /* MODAL */
 .modal-overlay{position:fixed;inset:0;z-index:300;background:rgba(0,0,0,.45);display:flex;align-items:center;justify-content:center;padding:20px;backdrop-filter:blur(4px)}
 .modal{background:var(--card);border-radius:12px;max-width:520px;width:100%;max-height:82vh;overflow-y:auto;padding:28px;box-shadow:var(--shadow-modal);border:none}
+.awards-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:6px}
+.award-check{display:flex;align-items:center;gap:8px;font-size:13px;cursor:pointer;padding:10px 12px;border-radius:8px;border:1px solid var(--border);background:var(--bg);min-height:44px;transition:background var(--t)}
+.award-check:hover{background:var(--accent-soft)}
+.award-check input[type=checkbox]{width:18px;height:18px;flex-shrink:0;accent-color:var(--accent);cursor:pointer}
 .modal h2{font-size:20px;font-weight:600;margin-bottom:20px;letter-spacing:-.28px;color:var(--text)}
 .form-group{margin-bottom:14px}
 .form-group label{display:block;font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.07em;color:var(--text-muted);margin-bottom:4px}
-.form-group input,.form-group textarea,.form-group select{width:100%;padding:8px 12px;border:1px solid var(--border);border-radius:var(--r-sm);font-size:13px;font-family:var(--font);background:var(--bg);color:var(--text);outline:none;transition:border-color var(--t),box-shadow var(--t);letter-spacing:-.01em}
+.form-group input,.form-group textarea,.form-group select{width:100%;padding:10px 12px;border:1px solid var(--border);border-radius:var(--r-sm);font-size:14px;font-family:var(--font);background:var(--bg);color:var(--text);outline:none;transition:border-color var(--t),box-shadow var(--t);letter-spacing:-.01em;min-height:44px;box-sizing:border-box}
 .form-group input:focus,.form-group textarea:focus,.form-group select:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(0,113,227,0.12)}
 .form-group textarea{resize:vertical;min-height:64px}
 .form-row{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px}
@@ -365,6 +369,9 @@ async function loadFromSupabase() {
       st: (r.status || 'want').toLowerCase(),
       ig: r.instagram || '', tel: r.phone || '', site: r.website || '',
       vb: r.vibe || '', notes: r.notes || '',
+      reserva: r.reservation || '',
+      oc: r.occasions || [],
+      city: r.city || 'SP',
       mi: r.michelin || undefined,
       bib: r.bib || undefined,
       l50: r.latam50 || undefined,
@@ -400,16 +407,24 @@ async function saveToSupabase() {
       if (r._user) continue; // skip user-added for now
       const body = {
         name: r.n,
-        category: r.c,
-        status: r.ch,
-        price: String(r.p),
-        rating: r.st,
-        location: r.h,
+        neighborhood: r.h,
+        cuisine: r.c,
+        type: r.t,
+        chef: r.ch,
+        price: r.p,
+        status: r.st,
         instagram: r.ig,
-        phone: r.tel,
-        website: r.site,
-        description: r.vb,
-        notes: r.notes
+        phone: r.tel || '',
+        website: r.site || '',
+        reservation: r.reserva || '',
+        vibe: r.vb || '',
+        notes: r.notes || '',
+        city: r.city || 'SP',
+        occasions: r.oc || [],
+        michelin: r.mi || null,
+        bib: r.bib || null,
+        latam50: r.l50 || null,
+        world50: r.w50 || null,
       };
       await sbFetch('/restaurants', {
         method: 'POST',
@@ -988,13 +1003,13 @@ function showModal(idx, title, data) {
     </select></div>
   </div>
   <div class="form-group"><label>Distinções</label>
-  <div class="awards-grid" style="display:flex;flex-wrap:wrap;gap:8px;margin-top:4px;">
-    <label style="display:flex;align-items:center;gap:4px;font-size:12px;cursor:pointer;"><input type="checkbox" id="mf-mi1" ${data.mi===1?'checked':''}> ★ Michelin</label>
-    <label style="display:flex;align-items:center;gap:4px;font-size:12px;cursor:pointer;"><input type="checkbox" id="mf-mi2" ${data.mi===2?'checked':''}> ★★ Michelin</label>
-    <label style="display:flex;align-items:center;gap:4px;font-size:12px;cursor:pointer;"><input type="checkbox" id="mf-mi3" ${data.mi===3?'checked':''}> ★★★ Michelin</label>
-    <label style="display:flex;align-items:center;gap:4px;font-size:12px;cursor:pointer;"><input type="checkbox" id="mf-bib" ${data.bib?'checked':''}> Bib Gourmand</label>
-    <label style="display:flex;align-items:center;gap:4px;font-size:12px;cursor:pointer;"><input type="checkbox" id="mf-l50" ${data.l50?'checked':''}> LatAm 50 Best</label>
-    <label style="display:flex;align-items:center;gap:4px;font-size:12px;cursor:pointer;"><input type="checkbox" id="mf-w50" ${data.w50?'checked':''}> World's 50 Best</label>
+  <div class="awards-grid">
+    <label class="award-check"><input type="checkbox" id="mf-mi1" ${data.mi===1?'checked':''}> ★ Michelin</label>
+    <label class="award-check"><input type="checkbox" id="mf-mi2" ${data.mi===2?'checked':''}> ★★ Michelin</label>
+    <label class="award-check"><input type="checkbox" id="mf-mi3" ${data.mi===3?'checked':''}> ★★★ Michelin</label>
+    <label class="award-check"><input type="checkbox" id="mf-bib" ${data.bib?'checked':''}> Bib Gourmand</label>
+    <label class="award-check"><input type="checkbox" id="mf-l50" ${data.l50?'checked':''}> LatAm 50 Best</label>
+    <label class="award-check"><input type="checkbox" id="mf-w50" ${data.w50?'checked':''}> World's 50 Best</label>
   </div></div>
   <div class="form-group"><label>Instagram</label><input id="mf-ig" value="${escHtml(data.ig||'')}" placeholder="@username"></div>
   <div class="form-row">
